@@ -62,7 +62,7 @@ class CarsList extends Component
 					  'car_Transmission'=>$this->transmission,
 					  'car_Description'=>$this->description]);
         session()->flash('success', 'Edit successful');
-        $this->reset();
+        $this->resetExcept('brand');
         $this->updateMode = false;
     }
 
@@ -70,6 +70,7 @@ class CarsList extends Component
     {
         Car::findOrFail($id)->delete();
         session()->flash('success', 'Delete successful');
+		$this->resetExcept('brand');
     }
     public function mount($brand)
     {
