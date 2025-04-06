@@ -1,96 +1,159 @@
-<div>
-        <h2>Brand's Car List  {{ $brand->brand_Name }}</h2>
+<!-- resources/views/livewire/car-listing.blade.php -->
+<div class="container mx-auto px-4 py-8">
+    <!-- Filter Controls -->
+    <div class="mb-8 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+        <div class="flex flex-wrap items-center gap-3">
+            <!-- Filter Dropdown Button -->
+            <div class="relative">
+                <button 
+                    wire:click="$toggle('showFilterDropdown')"
+                    class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition"
+                >
+                    <i class="fas fa-plus"></i>
+                    <span>Add Filter</span>
+                </button>
+                
+                <!-- Filter Selection Dropdown -->
+                @if($showFilterDropdown)
+					
+                    <div 
+                        class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 border border-gray-200"
+                        wire:click.away="showFilterDropdown = false"
+                    >
+                        <div class="py-1">
+                            @foreach($availableFilters as $key => $filter)
+							
+                                <button
+                                    wire:click="toggleFilter('{{ $key }}')"
+                                    class="w-full flex items-center gap-2 px-4 py-2 text-left hover:bg-gray-100"
+                                    :class="{ 'bg-blue-50': @this.isActive('{{ $key }}') }"
+                                >
+                                    <i class="fas {{ $filter['icon'] ?? 'fa-question' }}"></i>
+                                    <span>{{ $filter['name'] ?? 'not found'}}</span>
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            </div>
+            
+            <!-- Active Filter Badges -->
+            @foreach($activeFilters as $filterKey)
+                <div class="flex items-center gap-2 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                    <i class="fas {{ $availableFilters[$filterKey]['icon'] }}"></i>
+                    <span>{{ $availableFilters[$filterKey]['name'] }}</span>
+                    <button wire:click="removeFilter('{{ $filterKey }}')" class="text-blue-500 hover:text-blue-700">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                </div>
+            @endforeach
+        </div>
+        
+        <!-- Filter Inputs Section -->
+        @if(count($activeFilters) > 0)
+            <div class="mt-4 space-y-3">
+                @foreach($activeFilters as $filterKey)
+                    @php $filter = $availableFilters[$filterKey]; @endphp
+                    
+                    <div class="flex items-center gap-3 p-3 bg-gray-50 rounded border border-gray-200">
+                        <div class="font-medium flex items-center gap-2 min-w-[120px]">
+                            <i class="fas {{ $filter['icon'] }}"></i>
+                            <span>{{ $filter['name'] }}</span>
+                        </div>
+                        
+                        <!-- Select Input -->
+                        @if($filter['type'] === 'select')
+                            <select 
+                                wire:model="filterValues.{{ $filterKey }}"
+                                class="flex-1 px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            >
+                                <option value="">Select {{ $filter['name'] }}</option>
+                                @foreach($filter['options'] as $option)
+                                    <option value="{{ $option }}">{{ $option }}</option>
+                                @endforeach
+                            </select>
+                        @endif
+                        
+                        <!-- Range Input -->
+						@if($filter['type'] === 'input')
+                            <div class="flex-1 flex items-center gap-3">
+                               
+                                <input 
+                                    type="text" 
+                                    wire:model="filterValues.{{ $filterKey }}"
+                                    placeholder="Brand" 
+                                    class="w-1/2 px-3 py-2 border rounded"
+                                >
+                            </div>
+                        @endif
+						
+                        @if($filter['type'] === 'range')
+                            <div class="flex-1 flex items-center gap-3">
+                                <input 
+                                    type="number" 
+                                    wire:model="filterValues.{{ $filterKey }}_min"
+                                    placeholder="Min" 
+                                    class="w-1/2 px-3 py-2 border rounded"
+                                    min="{{ $filter['min'] }}"
+                                    max="{{ $filter['max'] }}"
+                                >
+                                <span>to</span>
+                                <input 
+                                    type="number" 
+                                    wire:model="filterValues.{{ $filterKey }}_max"
+                                    placeholder="Max" 
+                                    class="w-1/2 px-3 py-2 border rounded"
+                                    min="{{ $filter['min'] }}"
+                                    max="{{ $filter['max'] }}"
+                                >
+                            </div>
+                        @endif
+                        
+                        <button wire:click="removeFilter('{{ $filterKey }}')" class="text-gray-500 hover:text-red-500">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
+    
+    <!-- Cars Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        @foreach($cars as $car)
 		
-		@if (session()->has('success'))
-			<div class="alert alert-success" role="alert">
-			  <h5 class="alert-heading">{{ session('success') }}</h5>
-			</div>
-		@endif
-		
-		<form class="form-inline" wire:submit.prevent="{{ $updateMode ? 'updateCar' : 'addCar' }}">
-			<label class="sr-only" for="name">Car name:</label>
-			<input type="text" class="form-control mb-2 mr-sm-2" id="name" wire:model="name">
-			@error('name') <span style="color: red;">{{ $message }}</span> @enderror
-
-	<br/>
-			
-			<label class="sr-only" for="model_Year">Model Year  :</label>
-			<input type="number" class="form-control mb-2 mr-sm-2" id="model_Year" wire:model="model_Year">
-			@error('model_Year') <span style="color: red;">{{ $message }}</span> @enderror
-			<br/>
-			<label class="sr-only" for="fuel_Type">Fuel Type :</label>
-			<select class="form-select" id="fuel_Type" wire:model="fuel_Type">
-				<option value="">-------</option>
-					<option value="Gasoline">Gasoline</option>				
-					<option value="Diesel">Diesel</option>				
-					<option value="electricity">Electricity</option>
-			</select>
-			@error('fuel_Type') <span style="color: red;">{{ $message }}</span> @enderror
-<br/>
-			<label class="sr-only" for="transmission">Transmission :</label>
-			<select class="form-select" id="transmission" wire:model="transmission">
-				<option value="">--------</option>
-					<option value="Manual">Manual</option>				
-					<option value="automatic">Automatic</option>
-				
-			</select>
-			@error('transmission') <span style="color: red;">{{ $message }}</span> @enderror
-			<label class="sr-only" for="price">Price :</label>
-			<input type="number" class="form-control mb-2 mr-sm-2" id="price" wire:model="price">
-			@error('price') <span style="color: red;">{{ $message }}</span> @enderror
-			<br/>
-			<label class="sr-only" for="description">Description:</label>
-			<input type="text" class="form-control mb-2 mr-sm-2" id="description" wire:model="description">
-			@error('description') <span style="color: red;">{{ $message }}</span> @enderror
-			<button type="submit" class="btn btn-primary mb-2"> {{ $updateMode ? 'Edit' : 'Add' }}</button>
-			@if($updateMode)
-				<button type="button" class="btn btn-outline-success mb-2" wire:click="resetFields()">Cancel</button>
-			@endif
-    </form>
-	<br/>
-	
-		@if($cars->isEmpty())
-			<div class="alert alert-danger" role="alert">
-			  <h6 class="alert-heading">No cars of this Brand</h6>
-			</div>
-			<p></p>
-		@else		
-			<div class="table-responsive-sm" style={width:400px} >
-				<table class="table table-striped table-hover " >
-					<thead>
-						<tr>
-							<th>Car Name</th>
-							<th>Model</th>
-							<th>Fuel Type</th>
-							<th>Transmission</th>
-							<th>Price</th>
-							<th>Description</th>
-							<th width="150px">Action</th>
-						</tr>
-					</thead>
-
-					<tbody>
-
-						@foreach($cars as $car)
-
-						<tr>
-
-							<td>{{ $car->car_Name }}</td>
-							<td>{{ $car->car_Model_Year }}</td>
-							<td>{{ $car->car_Fuel_Type }}</td>
-							<td>{{ $car->car_Transmission }}</td>
-							<td>{{ number_format($car->car_Price, 2) }} $</td>
-							<td>{{ $car->car_Description }}</td>
-							<td>
-								<button wire:click="editCar({{ $car->car_Id }})" class="btn btn-primary btn-sm">Edit</button>
-								<button wire:click="deleteCar({{ $car->car_Id }})" class="btn btn-danger btn-sm" onclick="confirm('Are you sure ??') || event.stopImmediatePropagation()">Delete</button>				
-							</td>
-						</tr>
-						@endforeach
-					</tbody>
-
-				</table>
-			</div>
-		@endif
-
+            <div wire:click="show({{$car->car_Id}})" class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 hover:shadow-md cursor-pointer transition">
+                <div class="h-48 bg-gradient-to-br from-blue-50 to-gray-100 flex items-center justify-center relative">
+                    
+                        <img 
+                            src="{{ asset('storage/'.explode(',', $car->car_Image)[0] ) }}" 
+                            alt="{{ $car->Brand }} {{ $car->car_Model }}"
+                            class="h-full w-full object-cover"
+                        >
+                    <div class="absolute top-2 right-2 bg-white/80 px-2 py-1 rounded text-sm">
+                        {{ $car->car_Year }}
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-lg">
+                        {{ $car->Brand }} {{ $car->car_Model }}
+                    </h3>
+                    <div class="flex justify-between items-center mt-2">
+                        <span class="text-blue-600 font-medium">${{ number_format($car->car_Price) }}</span>
+                        <div class="text-gray-500 text-sm">
+                            <i class="fas fa-gas-pump mr-1"></i>
+                            {{ $car->color }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    
+    <!-- Pagination -->
+    <div class="mt-8">
+        {{ $cars->links() }}
+    </div>
 </div>
+
+

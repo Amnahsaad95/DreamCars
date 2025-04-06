@@ -17,10 +17,18 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+	 
+	protected $primaryKey = 'user_Id';
+	
     protected $fillable = [
         'name',
         'email',
         'password',
+		'phone',
+		'city',
+		'country',
+		'profile_Image',
+		'Role'
     ];
 
     /**
@@ -45,4 +53,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+	
+	public function cars()
+	{
+		return $this->hasMany(Car::class,'user_Id');
+	}
 }

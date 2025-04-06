@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'Sakana';
+    src: url('Sakana-Regular.eot');
+    src: local('Sakana Regular'), local('Sakana-Regular'),
+        url('Sakana-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Sakana-Regular.woff2') format('woff2'),
+        url('Sakana-Regular.woff') format('woff'),
+        url('Sakana-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+.logo{
+font-family: 'Sakana', sans-serif;
+}

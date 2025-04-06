@@ -13,18 +13,20 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->increments('car_Id');
-			$table->string('car_Name');
-							  
-			$table->integer('car_Model_Year');
+			$table->string('Brand');							  
+			$table->string('car_Model');
+			$table->integer('car_Year');
 			$table->decimal('car_Price', 10, 2);
-			$table->enum('car_Fuel_Type', ['Gasoline', 'Diesel', 'electricity']);
-			$table->enum('car_Transmission', ['Manual', 'automatic']);
-			$table->string('car_Image')->nullable();
+			$table->string('car_Image')->nullable();			
+			$table->string('city');
+			$table->string('country');
+			$table->string('color');
+			$table->boolean('isSold')->default(false);
 			$table->text('car_Description')->nullable();
-			$table->unsignedInteger('brand_Id');
-			$table->foreign('brand_Id')
-				  ->references('brand_Id')
-				  ->on('brands')
+			$table->unsignedInteger('user_Id');
+			$table->foreign('user_Id')
+				  ->references('user_Id')
+				  ->on('users')
 				  ->nullable()
 				  ->onUpdate('cascade')
 				  ->onDelete('cascade');
@@ -40,6 +42,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('cars');
-		$table->dropForeign('cars_brands_id_foreign');
+		$table->dropForeign('cars_users_id_foreign');
     }
 };

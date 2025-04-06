@@ -1,40 +1,204 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<html lang="en" x-data="{ 
+    isArabic: false,
+    currentSlide: 0,
+    
+    navOpen: false,
+    profileDropdown: false,
+    
+    banners: [
+        'Special financing available!',
+        'Free inspection with every purchase',
+        'Limited-time trade-in bonus'
+    ],
+    currentBanner: 0,
+    init() {
+        setInterval(() => {
+            this.currentSlide = (this.currentSlide + 1) % 3;
+        }, 5000);
+        setInterval(() => {
+            this.currentBanner = (this.currentBanner + 1) % this.banners.length;
+        }, 8000);
+    }
+ }" x-init="init()">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <title>AutoMarket - Find Your Dream Car</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!--<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="{{ asset('font/stylesheet.css') }}" >
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50" :dir="isArabic ? 'rtl' : 'ltr'">
+    <!-- 1. Navigation Bar -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <!--<img src="https://via.placeholder.com/50" alt="AutoMarket Logo" class="h-10 mr-3">-->
+                <span class="logo text-xl font-bold text-primary">Dream Cars</span>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button @click="navOpen = !navOpen" class="text-gray-700">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-6" :class="{ 'space-x-reverse': isArabic }">
+                <a href="{{ url('/') }}" class="text-gray-700 hover:text-primary">Home</a>
+                <a href="{{ route('AllCar') }}" class="text-gray-700 hover:text-primary">Cars</a>
+                <a href="#" class="text-gray-700 hover:text-primary">Sell</a>
+                <a href="#" class="text-gray-700 hover:text-primary">About</a>
+                <a href="{{ route('ComplaintSuggestionForm') }}" class="text-gray-700 hover:text-primary">Contact</a>
+                
+                <!-- Profile Dropdown -->
+                <div class="relative">
+                    <button @click="profileDropdown = !profileDropdown" class="flex items-center">
+                        <img src="https://via.placeholder.com/40" alt="Profile" class="w-8 h-8 rounded-full">
+                    </button>
+                    <div x-show="profileDropdown" @click.away="profileDropdown = false" 
+                         class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 border border-gray-200"
+                         :class="{ 'right-auto left-0': isArabic }">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">My Profile</a>
+                        <a href="{{ route('carlists') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">My Listings</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Settings</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
+                    </div>
+                </div>
+                
+                <!-- Language Toggle -->
+                <button @click="isArabic = !isArabic" class="px-3 py-1 bg-gray-100 rounded-full text-sm">
+                    <span x-show="!isArabic">العربية</span>
+                    <span x-show="isArabic">English</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div x-show="navOpen" class="md:hidden bg-white py-2 px-4 border-t">
+            <a href="#" class="block py-2 text-gray-700">Home</a>
+            <a href="#" class="block py-2 text-gray-700">Cars</a>
+            <a href="#" class="block py-2 text-gray-700">Sell</a>
+            <a href="#" class="block py-2 text-gray-700">About</a>
+            <a href="#" class="block py-2 text-gray-700">Contact</a>
+            <div class="pt-2 border-t mt-2">
+                <button @click="isArabic = !isArabic" class="px-3 py-1 bg-gray-100 rounded-full text-sm">
+                    <span x-show="!isArabic">العربية</span>
+                    <span x-show="isArabic">English</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. Carousel -->
+    <div class="relative h-96 overflow-hidden">
+        <div class="absolute inset-0 flex transition-transform duration-1000" 
+             :style="`transform: translateX(-${currentSlide * 100}%)`">
+            <div class="w-full flex-shrink-0 bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white">
+                <div class="text-center px-8">
+                    <h2 class="text-4xl font-bold mb-4">Find Your Dream Car</h2>
+                    <p class="text-xl mb-6">Thousands of listings updated daily</p>
+                    <button class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
+                        Browse Inventory
+                    </button>
+                </div>
+            </div>
+            <div class="w-full flex-shrink-0 bg-gradient-to-r from-secondary to-primary flex items-center justify-center text-white">
+                <div class="text-center px-8">
+                    <h2 class="text-4xl font-bold mb-4">Sell Your Car Fast</h2>
+                    <p class="text-xl mb-6">Get top dollar with our premium service</p>
+                    <button class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
+                        List Your Vehicle
+                    </button>
+                </div>
+            </div>
+            <div class="w-full flex-shrink-0 bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white">
+                <div class="text-center px-8">
+                    <h2 class="text-4xl font-bold mb-4">Financing Available</h2>
+                    <p class="text-xl mb-6">Competitive rates for qualified buyers</p>
+                    <button onclick="window.location.href='{{ url('/addNewAds') }}'" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
+                        Add Your Ads
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+            <template x-for="i in 3" :key="i">
+                <button @click="currentSlide = i - 1" 
+                        class="w-3 h-3 rounded-full" 
+                        :class="currentSlide === i - 1 ? 'bg-white' : 'bg-white/50'"></button>
+            </template>
+        </div>
+    </div>
+
+    
+	
+	{{ $slot }}
 
     
 
-        <title>{{ $title ?? 'Page Title' }}</title>
-    </head>
-    <body>
-	<div class="container">
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  <a class="navbar-brand" href="#">Car Company</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	  </button>
-
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-		  <li class="nav-item active">
-			<a class="nav-link" href="{{ url('/') }}">Home </a>
-		  </li>
-		  <li class="nav-item">
-			<a class="nav-link" href="{{ route('brands') }}">Brand</a>
-		  </li>
-		  
-		  <li class="nav-item">
-			<a class="nav-link disabled" href="{{ route('contact') }}"> Contact Us </a>
-		  </li>
-		</ul>
-	  </div>
-	</nav>
-		
-	
-        {{ $slot }}
-		</div>
-    </body>
+    <!-- 9. Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">AutoMarket</h3>
+                    <p class="text-gray-400">Find your dream car with our extensive inventory and trusted sellers.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Browse Cars</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Sell Your Car</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Financing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact Us</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center"><i class="fas fa-phone-alt mr-2"></i> +123 456 7890</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> info@automarket.com</li>
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> 123 Main St, City</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Connect With Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in text-xl"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <button @click="isArabic = !isArabic" class="px-4 py-2 bg-gray-700 rounded-md text-sm">
+                            <span x-show="!isArabic">العربية</span>
+                            <span x-show="isArabic">English</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 AutoMarket. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
 </html>

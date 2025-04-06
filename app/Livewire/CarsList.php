@@ -4,97 +4,123 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Car;
-use App\Models\Brand;
-
+use Livewire\WithPagination;
 
 class CarsList extends Component
 {
-    
-	public $brand;
-	public $name, $brand_id, $price,$model_Year,$description,$fuel_Type,$transmission, $car_id; 
-    public $updateMode = false;
-
-    protected $rules = [
-        'name' => 'required|string',
-       // 'brand_id' => 'required|exists:brands,brand_Id',
-        'price' => 'required|numeric|min:1',
-		'model_Year' => 'required|numeric',
-		'description' => 'required|string',
+    // Available filters with configuration
+	use WithPagination;
+	
+    public array $availableFilters = [
+        'Brand' => [
+            'name' => 'Brand',
+            'type' => 'input',
+            'options' => [],
+            'icon' => 'fa-car'
+        ],
+        'price' => [
+            'name' => 'Price Range',
+            'type' => 'range',
+            'min' => 0,
+            'max' => 100000,
+            'icon' => 'fa-dollar-sign'
+        ],
+        'car_Year' => [
+            'name' => 'Year',
+            'type' => 'select',
+            'options' => [],
+            'icon' => 'fa-calendar'
+        ],
+        'color' => [
+            'name' => 'Fuel Type',
+            'type' => 'select',
+            'options' => ['Petrol', 'Diesel', 'Electric', 'Hybrid'],
+            'icon' => 'fa-gas-pump'
+        ]
     ];
 
-    public function addCar()
+    public array $activeFilters = [];
+    public array $filterValues = [];
+    public bool $showFilterDropdown = false;
+
+    public function mount()
     {
-        $this->validate();
-        Car::create(['car_Name' => $this->name, 
-					 'brand_Id' => $this->brand->brand_Id, 
-					 'car_Model_Year'=>$this->model_Year,
-					 'car_Price' => $this->price,
-					 'car_Fuel_Type'=>$this->fuel_Type,
-					 'car_Transmission'=>$this->transmission,
-					 'car_Description'=>$this->description]);
-        session()->flash('success', 'Add successful');
-        $this->resetExcept('brand');
+        // Load dynamic options from database
+       // $this->availableFilters['Brand']['options'] = Car::distinct()->pluck('Brand')->toArray();
+        $this->availableFilters['year']['options'] = range(date('Y'), 1990);
+		//dd($this->availableFilters);
     }
 
-    public function editCar($id)
+    public function toggleFilter(string $filterKey)
     {
-        $car = Car::findOrFail($id);
-        $this->car_id = $car->car_Id;
-        $this->name = $car->car_Name;
-        $this->brand->brand_Id = $car->brand_Id;
-		$this->model_Year = $car->car_Model_Year;
-        $this->price = $car->car_Price;
-		$this->fuel_Type = $car->car_Fuel_Type;
-		$this->transmission = $car->car_Transmission;
-		$this->description = $car->car_Description;
-        $this->updateMode = true;
+		//dd($availableFilters);
+        if ($this->isActive($filterKey)) {
+            $this->removeFilter($filterKey);
+        } else {
+            $this->addFilter($filterKey);
+        }
     }
 
-    public function updateCar()
+    public function addFilter(string $filterKey)
     {
-        $this->validate();
-        $car = Car::findOrFail($this->car_id);
-        $car->update(['car_Name' => $this->name, 
-					  'brand_Id' => $this->brand->brand_Id, 
-					  'car_Model_Year'=>$this->model_Year,
-					  'car_Price' => $this->price,
-					  'car_Fuel_Type'=>$this->fuel_Type,
-					  'car_Transmission'=>$this->transmission,
-					  'car_Description'=>$this->description]);
-        session()->flash('success', 'Edit successful');
-        $this->resetExcept('brand');
-        $this->updateMode = false;
+        if (!in_array($filterKey, $this->activeFilters)) {
+            $this->activeFilters[] = $filterKey;
+            $this->filterValues[$filterKey] = '';
+        }
     }
 
-    public function deleteCar($id)
+    public function removeFilter(string $filterKey)
     {
-        Car::findOrFail($id)->delete();
-        session()->flash('success', 'Delete successful');
-		$this->resetExcept('brand');
-    }
-    public function mount($brand)
-    {
-		
-       
-        $this->brand = Brand::findOrFail($brand);
-		
-		session()->flash('brand', $this->brand);
+        $this->activeFilters = array_diff($this->activeFilters, [$filterKey]);
+        unset($this->filterValues[$filterKey]);
     }
 
-	public function resetFields()
+    public function isActive(string $filterKey): bool
     {
-		$this->resetExcept('brand');
-		
-	}
+        return in_array($filterKey, $this->activeFilters);
+    }
+
+    public function getFilteredCars()
+    {
+        $query = Car::query();
+
+        foreach ($this->activeFilters as $filter) {
+            if (empty($this->filterValues[$filter])) continue;
+            switch ($filter) {
+                case 'price':
+                    if (!empty($this->filterValues['price_min'])) {
+                        $query->where('car_Price', '>=', $this->filterValues['price_min']);
+                    }
+                    if (!empty($this->filterValues['price_max'])) {
+						dd("maaax");
+                        $query->where('car_Price', '<=', $this->filterValues['price_max']);
+                    }
+                    break;
+					
+                case 'Brand' :
+					if(strlen($this->filterValues['Brand']) >=1){dd("brrrrrand");
+						$query->where('car_Name', 'like', '%' . $this->filterValues['Brand'] . '%');
+					}
+					break;
+					
+                default:
+                    $query->where($filter, $this->filterValues[$filter]);
+                    break;
+            }
+        }
+
+        return $query->paginate(12);
+    }
 	
-	public function render()
+	public function show($id){
+		return redirect()->route('CarDetail',$id);
+	}
 
+    public function render()
     {
-		
         return view('livewire.cars-list', [
-            'cars' => $this->brand->cars ,
-			'brand' => $this->brand
+            'cars' => $this->getFilteredCars()
         ]);
-
     }
 }
+
