@@ -109,7 +109,7 @@
                             </div>
                         @endif
                         
-                        <button wire:click="removeFilter('{{ $filterKey }}')" class="text-gray-500 hover:text-red-500">
+                        <button wire:click.live="removeFilter('{{ $filterKey }}')" class="text-gray-500 hover:text-red-500">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>

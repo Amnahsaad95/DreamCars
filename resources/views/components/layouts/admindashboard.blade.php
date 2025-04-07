@@ -56,19 +56,21 @@
                             <i class="fas fa-car-alt mr-3"></i>
                             Cars
                         </a>
-                        <a href="{{ route('ComplaintSuggestionManagement') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg text-indigo-200 hover:bg-indigo-700 hover:text-white">
-                            <i class="fas fa-comment-dots mr-3"></i>
-                            Complaint/Suggestion
-                        </a>
-                        <a href="{{ route('UsersManagement') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg text-indigo-200 hover:bg-indigo-700 hover:text-white">
-                            <i class="fas fa-users mr-3"></i>
-                            Users
-                        </a>
-                        <a href="{{ route('AdsManagement') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg text-indigo-200 hover:bg-indigo-700 hover:text-white">
-                            <i class="fas fa-tag mr-3"></i>
-                            Ads
-                        </a>
-                        <a href="#" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg text-indigo-200 hover:bg-indigo-700 hover:text-white">
+						@if(Auth::user()->Role == 1)
+							<a href="{{ route('ComplaintSuggestionManagement') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg text-indigo-200 hover:bg-indigo-700 hover:text-white">
+								<i class="fas fa-comment-dots mr-3"></i>
+								Complaint/Suggestion
+							</a>
+							<a href="{{ route('UsersManagement') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg text-indigo-200 hover:bg-indigo-700 hover:text-white">
+								<i class="fas fa-users mr-3"></i>
+								Users
+							</a>
+							<a href="{{ route('AdsManagement') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg text-indigo-200 hover:bg-indigo-700 hover:text-white">
+								<i class="fas fa-tag mr-3"></i>
+								Ads
+							</a>
+						@endif
+                        <a href="{{ route('Settings') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg text-indigo-200 hover:bg-indigo-700 hover:text-white">
                             <i class="fas fa-cog mr-3"></i>
                             Settings
                         </a>
@@ -108,7 +110,7 @@
                     </button>
                     <div class="flex items-center">
                         <img class="h-8 w-8 rounded-full" src="{{ asset('storage/' . Auth::user()->profile_Image) }}" alt="User avatar">
-                        <span class="ml-2 text-sm font-medium">John Doe</span>
+                        <span class="ml-2 text-sm font-medium">{{ Auth::user()->name }}</span>
                     </div>
                 </div>
             </header>

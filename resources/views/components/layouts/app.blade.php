@@ -25,11 +25,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-    <title>AutoMarket - Find Your Dream Car</title>
+    <title>{{$settings->site_name}} - Find Your Dream Car</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!--<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<link rel="stylesheet" href="{{ asset('font/stylesheet.css') }}" >
+	<link rel="shortcut icon" sizes="114x114" href="{{ asset('storage/' . $settings->site_icon) }}">
     <script>
         tailwind.config = {
             theme: {
@@ -50,7 +51,7 @@
             <!-- Logo -->
             <div class="flex items-center">
                 <!--<img src="https://via.placeholder.com/50" alt="AutoMarket Logo" class="h-10 mr-3">-->
-                <span class="logo text-xl font-bold text-primary">Dream Cars</span>
+                <span class="logo text-xl font-bold text-primary">{{$settings->site_name}}</span>
             </div>
             
             <!-- Mobile Menu Button -->
@@ -64,25 +65,28 @@
             <div class="hidden md:flex items-center space-x-6" :class="{ 'space-x-reverse': isArabic }">
                 <a href="{{ url('/') }}" class="text-gray-700 hover:text-primary">Home</a>
                 <a href="{{ route('AllCar') }}" class="text-gray-700 hover:text-primary">Cars</a>
-                <a href="#" class="text-gray-700 hover:text-primary">Sell</a>
                 <a href="#" class="text-gray-700 hover:text-primary">About</a>
                 <a href="{{ route('ComplaintSuggestionForm') }}" class="text-gray-700 hover:text-primary">Contact</a>
-                
-                <!-- Profile Dropdown -->
-                <div class="relative">
-                    <button @click="profileDropdown = !profileDropdown" class="flex items-center">
-                        <img src="https://via.placeholder.com/40" alt="Profile" class="w-8 h-8 rounded-full">
-                    </button>
-                    <div x-show="profileDropdown" @click.away="profileDropdown = false" 
-                         class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 border border-gray-200"
-                         :class="{ 'right-auto left-0': isArabic }">
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">My Profile</a>
-                        <a href="{{ route('carlists') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">My Listings</a>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Settings</a>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
-                    </div>
-                </div>
-                
+				
+                @auth
+					<!-- Profile Dropdown -->
+					<div class="relative">
+						<button @click="profileDropdown = !profileDropdown" class="flex items-center">
+							<img src="https://via.placeholder.com/40" alt="Profile" class="w-8 h-8 rounded-full">
+						</button>
+						<div x-show="profileDropdown" @click.away="profileDropdown = false" 
+							 class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 border border-gray-200"
+							 :class="{ 'right-auto left-0': isArabic }">
+							<a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">My Profile</a>
+							<a href="{{ route('carlists') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">My Listings</a>
+							<a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Settings</a>
+							<a href="{{route('logout')}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
+						</div>
+					</div>
+                @else						
+					<a href="{{ route('login') }}" class="text-gray-700 hover:text-primary">Login</a>
+					<a href="{{ route('register') }}" class="text-gray-700 hover:text-primary">SignUp</a>
+				@endauth	
                 <!-- Language Toggle -->
                 <button @click="isArabic = !isArabic" class="px-3 py-1 bg-gray-100 rounded-full text-sm">
                     <span x-show="!isArabic">العربية</span>
@@ -159,7 +163,7 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold mb-4">AutoMarket</h3>
+                    <h3 class="logo text-xl font-bold mb-4">{{$settings->site_name}}</h3>
                     <p class="text-gray-400">Find your dream car with our extensive inventory and trusted sellers.</p>
                 </div>
                 <div>
@@ -174,7 +178,7 @@
                 <div>
                     <h4 class="font-semibold mb-4">Contact Us</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li class="flex items-center"><i class="fas fa-phone-alt mr-2"></i> +123 456 7890</li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt mr-2"></i>{{$settings->whatsapp_number}}</li>
                         <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> info@automarket.com</li>
                         <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> 123 Main St, City</li>
                     </ul>
@@ -182,10 +186,9 @@
                 <div>
                     <h4 class="font-semibold mb-4">Connect With Us</h4>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in text-xl"></i></a>
+                        <a href="{{$settings->facebook_url}}" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="{{$settings->whatsapp_number}}" class="text-gray-400 hover:text-white"><i class="fab fa-whatsapp text-xl"></i></a>
+                        <a href="{{$settings->instagram_url}}" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
                     </div>
                     <div class="mt-4">
                         <button @click="isArabic = !isArabic" class="px-4 py-2 bg-gray-700 rounded-md text-sm">
@@ -196,7 +199,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2023 AutoMarket. All rights reserved.</p>
+                <p>&copy; 2025 {{$settings->site_name}} . All rights reserved.</p>
             </div>
         </div>
     </footer>

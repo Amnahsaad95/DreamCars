@@ -8,6 +8,8 @@ use Livewire\WithFileUploads;
 use App\Models\Car;
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Auth;
+
 class Lists extends Component
 {
     use WithPagination;
@@ -39,15 +41,31 @@ class Lists extends Component
 
     public function render()
     {
-        $cars = Car::query()
-            ->when($this->search, function ($query) {
-                $query->where(function ($q) {
-                    $q->where('Brand', 'like', '%' . $this->search . '%')
-                      ->orWhere('car_Model', 'like', '%' . $this->search . '%');
-                });
-            })
-            ->orderBy($this->sortBy, $this->sortDirection)
-            ->paginate(10);
+        $cars;
+		$user = Auth::user();
+		if($user->Role == 1){
+			$cars = Car::query()->when($this->search, function ($query) {
+										$query->where(function ($q) {
+											$q->where('Brand', 'like', '%' . $this->search . '%')
+											  ->orWhere('car_Model', 'like', '%' . $this->search . '%');
+										});
+									})
+									->orderBy($this->sortBy, $this->sortDirection)
+									->paginate(10);
+		}
+		else{
+			$cars = Car::query()->where('user_Id',$user->user_Id)
+									->when($this->search, function ($query) {
+										$query->where(function ($q) {
+											$q->where('Brand', 'like', '%' . $this->search . '%')
+											  ->orWhere('car_Model', 'like', '%' . $this->search . '%');
+										});
+									})
+									->orderBy($this->sortBy, $this->sortDirection)
+									->paginate(10);;
+		}
+		
+            
 
         return view('livewire.car.lists', [
             'cars' => $cars,
@@ -74,11 +92,9 @@ class Lists extends Component
         $this->isModalOpen = true;
     }
 
-    public function openViewModal($id)
+    public function View($id)
     {
-		
-        $this->viewCar = Car::findOrFail($id);
-        $this->isViewModalOpen = true;
+		return redirect()->route('update',$id);
     }
 
     public function edit($id)

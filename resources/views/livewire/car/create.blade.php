@@ -1,203 +1,115 @@
+<div class="flex-grow overflow-auto container mx-auto px-4 py-8">
+    
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Add New Car</h1>
+            
+        </div>
+		@if (session('success'))
+            <div class="mb-4 p-4 bg-green-100 text-green-700 rounded">
+                {{ session('success') }}
+            </div>
+        @endif
 
-<div class="flex-grow  overflow-auto container mx-auto px-4 py-8 bg-white">
-	<h2 class="text-2xl mb-4 text-center">Add New Car</h2> 
-	
-	
-    <!-- Author: FormBold Team -->
-    <div class="mx-auto float-left ml-6 w-full max-w-[550px] bg-white">
-		@if (session()->has('success'))
-			
-			<div role="alert">
-			  <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
-				Success
-			  </div>
-			  <div class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-700">
-				<p>{{ session('success') }}</p>
-			  </div>
-			</div>
-		@endif
-        <form>
-            <div class="mb-5">
-                <label for="brand" class="mb-3 block text-base font-medium text-[#07074D]">
-                    Brand
-                </label>
-                <input type="text" name="brand" id="brand" placeholder="Enter Brand" wire:model="brand"
-                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-				@error('brand') <span style="color: red;">{{ $message }}</span> @enderror
-			</div>           
-            <div class="-mx-3 flex flex-wrap">
-                <div class="w-full px-3 sm:w-1/2">
-                    <div class="mb-5">
-                        <label for="model" class="mb-3 block text-base font-medium text-[#07074D]">
-                            Model
-                        </label>
-                        <input type="text" name="model" id="model" placeholder="Enter Model" wire:model="model"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-						@error('model') <span style="color: red;">{{ $message }}</span> @enderror
+        <form wire:submit.prevent="save" class="bg-white rounded-xl shadow-md overflow-hidden p-6">
+            <!-- Car Images Edit -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold mb-4">Car Images</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    @foreach([0, 1, 2] as $index)
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-4">
+                        @if(isset($car_Image[$index]))
+                            <img src="{{ $car_Image[$index]->temporaryUrl() }}" 
+                                 alt="Preview" 
+                                 class="w-full h-48 object-cover mb-3 rounded hover:scale-105 transition-transform">
+                        
+						
+                        @endif
+                        
+                        <input type="file" wire:model.live="car_Image.{{ $index }}" 
+                               class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        @error('car_Image.'.$index) <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>
-                </div>
-                <div class="w-full px-3 sm:w-1/2">
-                    <div class="mb-5">
-                        <label for="year" class="mb-3 block text-base font-medium text-[#07074D]">
-                            Year
-                        </label>
-                        <input type="number" name="year" id="year" placeholder="Enter Year" wire:model="year"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-						@error('year') <span style="color: red;">{{ $message }}</span> @enderror
-				   </div>
+                    @endforeach
                 </div>
             </div>
-			<div class="-mx-3 flex flex-wrap">                
-                <div class="w-full px-3 sm:w-1/2">
-                    <div class="mb-5">
-                        <label for="price" class="mb-3 block text-base font-medium text-[#07074D]">
-                            Price
-                        </label>
-                        <input type="number" name="price" id="price" placeholder="Enter Price" wire:model="price"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-						@error('price') <span style="color: red;">{{ $message }}</span> @enderror
-					</div>
-                </div>
-				<div class="w-full px-3 sm:w-1/2">
-                    <div class="mb-5">
-                        <label for="color" class="mb-3 block text-base font-medium text-[#07074D]">
-                            Color
-                        </label>
-						<input type="color" name="color" id="color" value="#ff0000" wire:model="color"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 h-12 cursor-pointer outline-none focus:border-[#6A64F1] focus:shadow-md" />
+
+            <!-- Car Details Edit -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h2 class="text-xl font-semibold mb-4">Basic Information</h2>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Car Brand</label>
+                        <input type="text" wire:model="Brand" class="w-full p-2 border rounded">
+                        @error('Brand') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Description</label>
+                        <textarea wire:model="car_Description" class="w-full p-2 border rounded h-32"></textarea>
+                        @error('car_Description') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+						<div class="mb-4">
+                            <label class="block text-gray-700 mb-2">City</label>
+                            <input type="text" step="0.01" wire:model="city" class="w-full p-2 border rounded">
+                            @error('city') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+						<div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Country</label>
+                            <input type="text" step="0.01" wire:model="country" class="w-full p-2 border rounded">
+                            @error('country') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+                        
                     </div>
                 </div>
-            </div>		
 
-            <div class="mb-5 pt-3">
-                <label class="mb-5 block text-base font-semibold text-[#07074D] sm:text-xl">
-                    Address Details
-                </label>
-                <div class="-mx-3 flex flex-wrap">
-                    <div class="w-full px-3 sm:w-1/2">
-                        <div class="mb-5">
-                            <input type="text" name="city" id="city" placeholder="Enter City" wire:model="city"
-                                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-							@error('city') <span style="color: red;">{{ $message }}</span> @enderror
-						</div>
-                    </div>
-                    <div class="w-full px-3 sm:w-1/2">
-                        <div class="mb-5">
-                            <input type="text" name="country" id="country" placeholder="Enter Country" wire:model="country"
-                                class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-							@error('country') <span style="color: red;">{{ $message }}</span> @enderror
-					   </div>
-                    </div>                    
-                </div>
-            </div>
-			
-			<div class="mb-5">
-                <label for="image" class="mb-3 block text-base font-medium text-[#07074D]">
-                    Car Image
-                </label>
-				<div class="max-w-4xl mx-auto p-6">
-				<!-- Drop Zone -->
-				<div 
-					x-data="{ isDragging: false }"
-					x-on:drop.prevent=" 						
-					isDragging = false;
-					if($refs.input){
-						$refs.input.files = $event.dataTransfer.files;
-						$refs.input.dispatchEvent(new Event('change'));
-					}"
-					x-on:dragover.prevent="isDragging = true"
-					x-on:dragleave.prevent="isDragging = false"
-					x-bind:class="isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300'"
-					class="border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors duration-200 bg-white"
-					
-				>
-					<div class="flex flex-col items-center justify-center space-y-2">
-						<svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-						</svg>
-						<p class="text-gray-600">Drag & drop files here or click to browse</p>
-						<p class="text-sm text-gray-500">Supports: JPG, PNG, GIF (Max: 5MB each)</p>
-						<input 
-							type="file" 
-							id="fileInput" 
-							class="hidden" 
-							wire:model.live="images" 
-							x-ref="input"
-							multiple
-						>
-						<label for="fileInput" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 cursor-pointer">
-							Select Files
-						</label>
-					</div>
-				</div>
-
-				<!-- Preview Area -->
-				<div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-					@foreach($uploadedImages as $index => $file)
-						<div class="relative group rounded-lg overflow-hidden border border-gray-200">
-							<img src="{{ $file['preview'] }}" alt="{{ $file['name'] }}" class="w-full h-32 object-cover">
-							<div class="p-2">
-								<p class="text-sm font-medium text-gray-900 truncate">{{ $file['name'] }}</p>
-								<p class="text-xs text-gray-500">{{ $this->formatFileSize($file['size']) }}</p>
-							</div>
-							<button 
-								wire:click="removeFile({{ $index }})"
-								class="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-							>
-								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-								</svg>
-							</button>
-						</div>
-					@endforeach
-				</div>
-				@error('images.*') 
-					<span class="text-red-500 text-sm">{{ $message }}</span> 
-				@enderror
-
-				<!-- Actions -->
-				<div class="mt-6 flex justify-end space-x-3">
-					<button 
-						wire:click="clearAll"
-						class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 {{ count($uploadedImages) ? '' : 'opacity-50 cursor-not-allowed' }}"
-						@if(!count($uploadedImages)) disabled @endif
-					>
-						Clear All
-					</button>
-				</div>
-
-			</div>
-				
+                <div>
+                    <h2 class="text-xl font-semibold mb-4">Features</h2>
+                    <div class="grid grid-cols-2 gap-4">
+						<div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Model </label>
+                            <input type="text" wire:model="car_Model" class="w-full p-2 border rounded">
+                            @error('car_Model') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Year </label>
+                            <input type="number" wire:model="car_Year" class="w-full p-2 border rounded">
+                            @error('car_Year') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Price</label>
+                            <input type="number" step="0.01" wire:model="car_Price" class="w-full p-2 border rounded">
+                            @error('car_Price') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Available </label>
+							<label class="relative inline-flex items-center cursor-pointer">
+								<input type="checkbox" wire:model="isSold" class="sr-only peer" @checked(!$isSold)>
+								<div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-red-500 transition-all"></div>
+								<div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full peer-checked:translate-x-full transition-all"></div>
+							</label>
 							
-			</div> 
-			
-			<div class="mb-5">
-                <label for="name" class="mb-3 block text-base font-medium text-[#07074D]">
-                    Description
-                </label>
-                <input type="text" name="description" id="description" placeholder="Enter Description" wire:model="description"
-                    class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
-				@error('description') <span style="color: red;">{{ $message }}</span> @enderror
-			</div> 
+                            @error('isSold') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Color </label>
+                            <input type="color" wire:model="color" class="w-full p-2 h-10 border rounded">
+                            @error('color') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
 
-            <div>
-                <button wire:click.prevent="save()"
-                    class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                    Create Car
+            <div class="flex justify-end space-x-4">
+                
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                    Save Changes
                 </button>
             </div>
         </form>
-    </div>
+ 
+
 </div>
-@push('scripts')
-<script>
-    // Helper function to format file size
-    function formatFileSize(bytes) {
-        if (bytes === 0) return '0 Bytes';
-        const k = 1024;
-        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-    }
-</script>
-@endpush

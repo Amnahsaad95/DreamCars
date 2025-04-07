@@ -4,11 +4,14 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Car;
+use App\Models\User;
 
 class CarDetail extends Component
 {
 	public $car;
     public $mainImage;
+    public $phone;
+    public $isSold;
     public $comments;
     public $newComment = '';
     public $rating = 0;
@@ -17,6 +20,8 @@ class CarDetail extends Component
     public function mount($id)
     {
         $this->car = Car::findOrFail($id);
+		$this->phone = $this->car->user->phone;
+		$this->isSold = $this->car->isSold;
         $this->mainImage = explode(',', $this->car->car_Image)[0] ;
     }
 
