@@ -35,6 +35,7 @@ class Settings extends Component
     public $site_logo;
     public $site_icon;
     public $oldlogo;
+    public $sitemail="DreamCars@gmail.com" ;
     public $facebook_url ;
     public $whatsapp_number ;
     public $instagram_url ;
@@ -44,10 +45,15 @@ class Settings extends Component
     public $oldimage1;
     public $oldimage2 ;
     public $oldimage3 ;
+    public $title1 = "Title  1" ;
     public $intro1 ;
+    public $title2 = "Title  2"  ;
     public $intro2 ;
+    public $title3 = "Title  3" ;
     public $intro3 ;
-    public $editingSite = false;
+	public $viewMode = true;
+	public $viewProfileMode = true;
+	public $siteDescription ="Welcome to our amazing platform!";
 
 	public function mount()
 	{
@@ -75,22 +81,17 @@ class Settings extends Component
 		$this->intro3 = $this->settings->intro_text_3;
 		
 	}
-    public function switchTab($tab)
+    
+	public function toggleEdit()
     {
-        $this->activeTab = $tab;
-        $this->editingProfile = false;
-        $this->editingSite = false;
+        $this->viewMode = !$this->viewMode;
+    }
+	
+	public function profileEdit()
+    {
+        $this->viewProfileMode = !$this->viewMode;
     }
 
-    public function editProfile()
-    {
-        $this->editingProfile = true;
-    }
-
-    public function cancelProfileEdit()
-    {
-        $this->editingProfile = false;
-    }
 
     public function saveProfile()
     {
@@ -118,19 +119,11 @@ class Settings extends Component
 		
 		auth()->user()->update($validated);
 		//dd($validated);
-        $this->editingProfile = false;
+        $this->viewProfileMode = true;
         session()->flash('message', 'Profile updated successfully!');
     }
 
-    public function editSite()
-    {
-        $this->editingSite = true;
-    }
-
-    public function cancelSiteEdit()
-    {
-        $this->editingSite = false;
-    }
+    
 
     public function saveSite()
     {
@@ -212,7 +205,7 @@ class Settings extends Component
 		}
 		$this->settings->update($validated);		
 		$this->settings = Setting::first();
-        $this->editingSite = false;  
+        $this->viewMode = true; 
         session()->flash('message', 'Site information updated successfully!');
     }
 

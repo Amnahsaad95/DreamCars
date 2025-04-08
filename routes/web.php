@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\BrandsList;
+use App\Livewire\CarsMarket;
 use App\Livewire\CarsList;
 use App\Livewire\CarDetail;
 use App\Livewire\Car\Create;
@@ -28,7 +29,8 @@ Route::get('/brands', BrandsList::class)->name('brands');
 Route::get('/carCreat', Create::class)->name('carCreat');
 
 
-Route::get('/AllCar', CarsList::class)->name('AllCar');
+Route::get('/AllCar', CarsMarket::class)->name('AllCar');
+//Route::get('/AllCar', CarsList::class)->name('AllCar');
 Route::get('/CarDetail/{id}', CarDetail::class)->name('CarDetail');
 
 
