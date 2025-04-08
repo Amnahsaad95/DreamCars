@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\Setting;
 
@@ -35,7 +36,7 @@ class Settings extends Component
     public $site_logo;
     public $site_icon;
     public $oldlogo;
-    public $sitemail="DreamCars@gmail.com" ;
+    public $sitemail ;
     public $facebook_url ;
     public $whatsapp_number ;
     public $instagram_url ;
@@ -45,15 +46,21 @@ class Settings extends Component
     public $oldimage1;
     public $oldimage2 ;
     public $oldimage3 ;
-    public $title1 = "Title  1" ;
-    public $intro1 ;
-    public $title2 = "Title  2"  ;
-    public $intro2 ;
-    public $title3 = "Title  3" ;
-    public $intro3 ;
+    public $intro_title_1  ;
+    public $intro_text_1 ;
+    public $intro_title_2   ;
+    public $intro_text_2 ;
+    public $intro_title_3  ;
+    public $site_location  ;
+    public $intro_text_3 ;
 	public $viewMode = true;
+	public $changePasswordMode = false;
 	public $viewProfileMode = true;
-	public $siteDescription ="Welcome to our amazing platform!";
+	public $siteDescription ;
+	// Password fields
+	public $current_password;
+    public $new_password;
+    public $new_password_confirmation;
 
 	public function mount()
 	{
@@ -70,15 +77,21 @@ class Settings extends Component
 		$this->siteName = $this->settings->site_name;
 		$this->oldicon =$this->settings->site_icon;
 		$this->oldlogo = $this->settings->site_logo;
+		$this->site_location = $this->settings->site_location ;
+		$this->siteDescription = $this->settings->siteDescription ;
+		$this->sitemail = $this->settings->sitemail ;
 		$this->facebook_url = $this->settings->facebook_url ;
 		$this->whatsapp_number = $this->settings->whatsapp_number;
 		$this->instagram_url = $this->settings->instagram_url;
 		$this->oldimage1 = $this->settings->intro_image_1;
 		$this->oldimage2 = $this->settings->intro_image_2;
 		$this->oldimage3 = $this->settings->intro_image_3;
-		$this->intro1 = $this->settings->intro_text_1;
-		$this->intro2 = $this->settings->intro_text_2;
-		$this->intro3 = $this->settings->intro_text_3;
+		$this->intro_text_1 = $this->settings->intro_text_1;
+		$this->intro_text_2 = $this->settings->intro_text_2;
+		$this->intro_text_3 = $this->settings->intro_text_3;
+		$this->intro_title_1 = $this->settings->intro_title_1;
+		$this->intro_title_2 = $this->settings->intro_title_2;
+		$this->intro_title_3 = $this->settings->intro_title_3;
 		
 	}
     
@@ -89,11 +102,31 @@ class Settings extends Component
 	
 	public function profileEdit()
     {
-        $this->viewProfileMode = !$this->viewMode;
+        $this->viewProfileMode = !$this->viewProfileMode;
+    }
+	
+	public function cancelSiteEdit()
+    {
+        $this->viewMode = !$this->viewMode;
+    }
+	
+	public function cancelProfileEdit()
+    {
+        $this->viewProfileMode = !$this->viewProfileMode;
     }
 
 
-    public function saveProfile()
+	public function passwordEdit()
+    {
+        $this->changePasswordMode = !$this->changePasswordMode;
+    }
+	
+	public function cancelPasswordEdit()
+    {
+        $this->changePasswordMode = !$this->changePasswordMode;
+    }
+    
+	public function saveProfile()
     {
         $validated = $this->validate([
 			'name' => 'required|string|max:255',
@@ -116,6 +149,9 @@ class Settings extends Component
 
 			$validated['profile_Image'] = $path;
 		}
+		else{
+			$validated['profile_Image'] = $this->oldimage;
+		}
 		
 		auth()->user()->update($validated);
 		//dd($validated);
@@ -132,15 +168,21 @@ class Settings extends Component
 			'siteName' => 'required|string|max:255',
 			'site_icon' => 'nullable|image|max:2048',
 			'site_logo' => 'nullable|image|max:2048',
+			'site_location' => 'nullable|string|max:255',
+			'siteDescription' => 'nullable|string|max:255',
+			'sitemail' => 'nullable|string|max:255',
 			'facebook_url' => 'nullable|string|max:255',
 			'whatsapp_number' => 'nullable|string|max:255',
 			'instagram_url' => 'nullable|string|max:255',
 			'intro_image_1' => 'nullable|image|max:2048',
 			'intro_image_2' => 'nullable|image|max:2048',
 			'intro_image_3' => 'nullable|image|max:2048',
-			'intro1' => 'nullable|string|max:255',
-			'intro2' => 'nullable|string|max:255',
-			'intro3' => 'nullable|string|max:255',
+			'intro_text_1' => 'nullable|string|max:255',
+			'intro_text_2' => 'nullable|string|max:255',
+			'intro_text_3' => 'nullable|string|max:255',
+			'intro_title_1' => 'nullable|string|max:255',
+			'intro_title_2' => 'nullable|string|max:255',
+			'intro_title_3' => 'nullable|string|max:255',
 			
 		]);
 		if ($this->intro_image_1) {
@@ -207,6 +249,41 @@ class Settings extends Component
 		$this->settings = Setting::first();
         $this->viewMode = true; 
         session()->flash('message', 'Site information updated successfully!');
+    }
+	
+	public function updatePassword()
+    {
+        $user = Auth::user();
+
+        // Check old password
+        if (!Hash::check($this->current_password, $user->password)) {
+            return session()->flash('error', 'Current password is incorrect.');
+        }
+
+        // Validate new password
+        $this->validate([
+            'new_password' => [
+                'required',
+                'min:8',
+                'confirmed',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&]).+$/'
+            ],
+        ], [
+            'new_password.regex' => 'Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.',
+        ]);
+
+        // Prevent same as old password
+        if (Hash::check($this->new_password, $user->password)) {
+            return session()->flash('error', 'New password must be different from current password.');
+        }
+
+        // Update password
+        $user->password = Hash::make($this->new_password);
+        $user->save();
+		$this->changePasswordMode=false;
+        $this->reset(['current_password', 'new_password', 'new_password_confirmation']);
+
+        session()->flash('success', 'Password updated successfully.');
     }
 
 

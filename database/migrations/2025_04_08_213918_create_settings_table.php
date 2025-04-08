@@ -18,13 +18,19 @@ return new class extends Migration
 			$table->string('site_logo')->nullable(); 
 			$table->string('facebook_url')->nullable(); 
 			$table->string('instagram_url')->nullable(); 
+			$table->string('sitemail')->nullable(); 
 			$table->string('whatsapp_number')->nullable(); 
 			$table->string('intro_image_1')->nullable(); 
 			$table->string('intro_image_2')->nullable(); 
 			$table->string('intro_image_3')->nullable(); 
-			$table->string('intro_text_1')->nullable(); 
-			$table->string('intro_text_2')->nullable(); 
-			$table->string('intro_text_3')->nullable(); 
+			$table->string('intro_title_1')->nullable(); 
+			$table->string('intro_text_1')->nullable();
+			$table->string('intro_title_2')->nullable();
+			$table->string('intro_text_2')->nullable();				
+			$table->string('intro_title_3')->nullable(); 			 
+			$table->string('intro_text_3')->nullable(); 			 
+			$table->string('site_location')->nullable(); 
+			$table->string('siteDescription')->nullable(); 
 			$table->timestamps();
         });
     }

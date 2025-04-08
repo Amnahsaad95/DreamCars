@@ -11,7 +11,7 @@ class Setting extends Model
 	
 	protected $table = "settings";
 
-    protected $fillable = ['site_name', 'site_icon', 'site_logo', 'facebook_url','instagram_url',
-							'whatsapp_number', 'intro_image_1','intro_image_2','intro_image_3',
-							'intro_text_1','intro_text_2','intro_text_3'];
+    protected $fillable = ['site_name', 'site_icon', 'site_logo','sitemail', 'facebook_url','instagram_url',
+							'whatsapp_number', 'intro_image_1','intro_image_2','intro_image_3','intro_title_1',
+							'intro_text_1','intro_title_2','intro_text_2','intro_title_3','intro_text_3','site_location','siteDescription'];
 }

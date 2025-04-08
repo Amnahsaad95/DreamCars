@@ -58,4 +58,9 @@ class User extends Authenticatable
 	{
 		return $this->hasMany(Car::class,'user_Id');
 	}
+	
+	public function isAdmin()
+    {
+        return $this->role === 1;
+    }
 }

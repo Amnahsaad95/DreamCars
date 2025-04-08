@@ -102,15 +102,15 @@
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="text-gray-500 focus:outline-none">
+                   <!-- <button class="text-gray-500 focus:outline-none">
                         <i class="fas fa-bell"></i>
                     </button>
                     <button class="text-gray-500 focus:outline-none">
                         <i class="fas fa-envelope"></i>
-                    </button>
+                    </button>-->
                     <div class="flex items-center">
                         <img class="h-8 w-8 rounded-full" src="{{ asset('storage/' . Auth::user()->profile_Image) }}" alt="User avatar">
-                        <span class="ml-2 text-sm font-medium">{{ Auth::user()->name }}</span>
+                        <a href="{{route('logout')}}"><span class="ml-2 text-sm font-medium">Logout</span></a>
                     </div>
                 </div>
             </header>
