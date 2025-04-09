@@ -26,7 +26,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 65000,
                 'isSold'          => 0,
                 'car_Description' => 'Hyundai Elantra 2018 in excellent condition.',
-                'user_Id'         => 1,
+                'user_Id'         => 10,
             ],
             [
                 'Brand'           => 'Kia',
@@ -39,7 +39,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 62000,
                 'isSold'          => 0,
                 'car_Description' => 'Kia Cerato 2017, well maintained.',
-                'user_Id'         => 1,
+                'user_Id'         => 10,
             ],
             [
                 'Brand'           => 'Toyota',
@@ -52,7 +52,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 70000,
                 'isSold'          => 0,
                 'car_Description' => 'Toyota Corolla 2015, fuel efficient.',
-                'user_Id'         => 1,
+                'user_Id'         => 8,
             ],
             [
                 'Brand'           => 'Mercedes',
@@ -65,7 +65,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 120000,
                 'isSold'          => 0,
                 'car_Description' => 'Mercedes C200 2012, luxury car.',
-                'user_Id'         => 1,
+                'user_Id'         => 7,
             ],
             [
                 'Brand'           => 'BMW',
@@ -78,7 +78,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 115000,
                 'isSold'          => 0,
                 'car_Description' => 'BMW 320i 2016, sporty and powerful.',
-                'user_Id'         => 1,
+                'user_Id'         => 8,
             ],
             [
                 'Brand'           => 'Audi',
@@ -91,7 +91,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 110000,
                 'isSold'          => 0,
                 'car_Description' => 'Audi A4 2014, German quality.',
-                'user_Id'         => 1,
+                'user_Id'         => 8,
             ],
             [
                 'Brand'           => 'Volkswagen',
@@ -104,7 +104,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 95000,
                 'isSold'          => 0,
                 'car_Description' => 'Volkswagen Passat 2015, comfortable drive.',
-                'user_Id'         => 1,
+                'user_Id'         => 8,
             ],
             [
                 'Brand'           => 'Ford',
@@ -117,7 +117,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 58000,
                 'isSold'          => 0,
                 'car_Description' => 'Ford Focus 2013, reliable choice.',
-                'user_Id'         => 1,
+                'user_Id'         => 7,
             ],
             [
                 'Brand'           => 'Chevrolet',
@@ -130,7 +130,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 60000,
                 'isSold'          => 0,
                 'car_Description' => 'Chevrolet Cruze 2016, in good shape.',
-                'user_Id'         => 1,
+                'user_Id'         => 7,
             ],
             [
                 'Brand'           => 'Nissan',
@@ -143,7 +143,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 57000,
                 'isSold'          => 1,
                 'car_Description' => 'Nissan Sunny 2017, economical car.',
-                'user_Id'         => 1,
+                'user_Id'         => 7,
             ],
             [
                 'Brand'           => 'Honda',
@@ -156,7 +156,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 85000,
                 'isSold'          => 1,
                 'car_Description' => 'Honda Civic 2018, sleek design.',
-                'user_Id'         => 1,
+                'user_Id'         => 9,
             ],
             [
                 'Brand'           => 'Mazda',
@@ -169,7 +169,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 93000,
                 'isSold'          => 0,
                 'car_Description' => 'Mazda 3 2019, fuel efficient and stylish.',
-                'user_Id'         => 1,
+                'user_Id'         => 9,
             ],
             [
                 'Brand'           => 'Peugeot',
@@ -182,7 +182,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 120000,
                 'isSold'          => 0,
                 'car_Description' => 'Peugeot 3008 2020, luxurious SUV.',
-                'user_Id'         => 1,
+                'user_Id'         => 9,
             ],
             [
                 'Brand'           => 'Renault',
@@ -195,7 +195,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 56000,
                 'isSold'          => 0,
                 'car_Description' => 'Renault Megane 2016, spacious and comfortable.',
-                'user_Id'         => 1,
+                'user_Id'         => 9,
             ],
             
             

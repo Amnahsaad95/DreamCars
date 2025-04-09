@@ -25,9 +25,9 @@
                 <button 
                     wire:click="changeTab('all')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'all' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
-                ><i class="fas fa-check-circle mr-2 text-published"></i>
+                ><i class="fas fa-check-circle mr-2 text-secondary"></i>
                     All 
-					<span class="ml-2 bg-published text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$all->total()}}</span>
+					<span class="ml-2 bg-secondary text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$all->total()}}</span>
                 </button>
             </li>
             <li class="mr-2" role="presentation">
@@ -43,9 +43,9 @@
                 <button 
                     wire:click="changeTab('unpublished')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'unpublished' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
-                ><i class="fas fa-box-archive mr-2 text-published"></i>
+                ><i class="fas fa-box-archive mr-2 text-primary"></i>
                     Unpublished 
-					<span class="ml-2 bg-published text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$unpublished->total()}}</span>
+					<span class="ml-2 bg-primary text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$unpublished->total()}}</span>
                 </button>
             </li>
             <li class="mr-2" role="presentation">
@@ -72,7 +72,7 @@
     
     <!-- All Complaints Tab -->
     <div class="{{ $activeTab !== 'all' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">All Complaints</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">All Complaints and Suggestion</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500">
@@ -96,19 +96,25 @@
                             <td class="px-6 py-4">{{ $complaint->name }}</td>
                             <td class="px-6 py-4">{{ $complaint->phone_email }}</td>
                             <td class="px-6 py-4">{{ $complaint->content }}</td>
-                            <td class="px-6 py-4">{{ $complaint->is_public }}</td>
+                            <td class="px-6 py-4">
+								@if($complaint->is_public )
+									<i class="text-green-500 fas fa-check-circle"></i>
+								@else
+									<i class="text-red-500 fas fa-times-circle"></i>
+								@endif
+							</td>
                             <td class="px-6 py-4">
 							@if($complaint->status == 'accepted' && $complaint->is_public )
                                 <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Published</span>
 							@endif
-							@if($complaint->status == 'rejected' && $complaint->is_public )
+							@if($complaint->status == 'rejected' )
                                 <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Rejected</span>
 							@endif
-							@if($complaint->status == 'pending' && $complaint->is_public )
+							@if($complaint->status == 'pending'  )
                                 <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Pending</span>
 							@endif
-							@if( !$complaint->is_public )
-                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Unpublished</span>
+							@if( $complaint->status == 'accepted' && !$complaint->is_public )
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Unpublished</span>
 							@endif
                             </td>
 							
@@ -116,7 +122,28 @@
 							
                             <td class="px-6 py-4">{{ $complaint->car->Brand ?? ''}} {{$complaint->car->car_Model ?? '-'}}</td>
                             <td class="px-6 py-4">
-                                
+                                @if($complaint->status == 'accepted' && $complaint->is_public )
+									<button wire:click="unpublishComplaint({{ $complaint->complainant_Id }})" class="text-purple-600 hover:text-purple-900 mr-3">
+										<i class="fas fa-eye-slash"></i>
+									</button>
+								@endif
+								@if($complaint->status == 'rejected' && $complaint->is_public )
+									<button wire:click="publishComplaint({{ $complaint->complainant_Id }})" class="text-purple-600 hover:text-purple-900 mr-3">
+										<i class="fas fa-redo"></i>
+									</button>
+								@endif
+								@if($complaint->status == 'pending' && $complaint->is_public )
+									<button wire:click="publishComplaint({{ $complaint->complainant_Id }})" class="text-green-600 hover:text-green-900 mr-3">
+                                    <i class="fas fa-check"></i>
+									</button>
+									<button wire:click="rejectComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900 mr-3">
+										<i class="fas fa-times"></i>
+									</button>
+								@elseif($complaint->status == 'pending' && !$complaint->is_public )
+									<button wire:click="unpublishComplaint({{ $complaint->complainant_Id }})" class="text-purple-600 hover:text-purple-900 mr-3">
+										<i class="fas fa-eye-slash"></i>
+									</button>
+								@endif
                                 <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -132,12 +159,12 @@
         </div>
         
         <div class="mt-4">
-            {{ $publishedComplaints->links() }}
+            {{ $all->links() }}
         </div>
     </div>
     <!-- Published Complaints Tab -->
     <div class="{{ $activeTab !== 'published' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Published Complaints</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">Published Complaints and Suggestion</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500">
@@ -161,7 +188,13 @@
                             <td class="px-6 py-4">{{ $complaint->name }}</td>
                             <td class="px-6 py-4">{{ $complaint->phone_email }}</td>
                             <td class="px-6 py-4">{{ $complaint->content }}</td>
-                            <td class="px-6 py-4">{{ $complaint->is_public }}</td>
+                            <td class="px-6 py-4">
+								@if($complaint->is_public )
+									<i class="text-green-500 fas fa-check-circle"></i>
+								@else
+									<i class="text-red-500 fas fa-times-circle"></i>
+								@endif
+							</td>
                             <td class="px-6 py-4">
                                 <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Published</span>
                             </td>
@@ -193,7 +226,7 @@
     </div>
 	<!-- Published Complaints Tab -->
     <div class="{{ $activeTab !== 'unpublished' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Unpublished Complaints</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">Unpublished Complaints and Suggestion</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500">
@@ -217,9 +250,15 @@
                             <td class="px-6 py-4">{{ $complaint->name }}</td>
                             <td class="px-6 py-4">{{ $complaint->phone_email }}</td>
                             <td class="px-6 py-4">{{ $complaint->content }}</td>
-                            <td class="px-6 py-4">{{ $complaint->is_public }}</td>
                             <td class="px-6 py-4">
-                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Unpublished</span>
+								@if($complaint->is_public )
+									<i class="text-green-500 fas fa-check-circle"></i>
+								@else
+									<i class="text-red-500 fas fa-times-circle"></i>
+								@endif
+							</td>
+                            <td class="px-6 py-4">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Unpublished</span>
                             </td>
 							
                             <td class="px-6 py-4">{{ $complaint->user->name ?? '-' }}</td>
@@ -248,7 +287,7 @@
     
     <!-- Rejected Complaints Tab -->
     <div class="{{ $activeTab !== 'rejected' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Rejected Complaints</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">Rejected Complaints and Suggestion</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500">
@@ -272,7 +311,13 @@
                             <td class="px-6 py-4">{{ $complaint->name }}</td>
                             <td class="px-6 py-4">{{ $complaint->phone_email }}</td>
                             <td class="px-6 py-4">{{ $complaint->content }}</td>
-                            <td class="px-6 py-4">{{ $complaint->is_public }}</td>
+                            <td class="px-6 py-4">
+								@if($complaint->is_public )
+									<i class="text-green-500 fas fa-check-circle"></i>
+								@else
+									<i class="text-red-500 fas fa-times-circle"></i>
+								@endif
+							</td>
                             <td class="px-6 py-4">
                                 <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Rejected</span>
                             </td>
@@ -305,7 +350,7 @@
     
     <!-- Pending Complaints Tab -->
     <div class="{{ $activeTab !== 'pending' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Pending Complaints</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">Pending Complaints and Suggestion</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500">
@@ -329,7 +374,13 @@
                             <td class="px-6 py-4">{{ $complaint->name }}</td>
                             <td class="px-6 py-4">{{ $complaint->phone_email }}</td>
                             <td class="px-6 py-4">{{ $complaint->content }}</td>
-                            <td class="px-6 py-4">{{ $complaint->is_public }}</td>
+                            <td class="px-6 py-4">
+								@if($complaint->is_public )
+									<i class="text-green-500 fas fa-check-circle"></i>
+								@else
+									<i class="text-red-500 fas fa-times-circle"></i>
+								@endif
+							</td>
                             <td class="px-6 py-4">
                                 <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Pending</span>
                             </td>
@@ -337,13 +388,18 @@
 							
                             <td class="px-6 py-4">{{ $complaint->car->Brand ?? '' }} {{$complaint->car->car_Model ?? '-'}}</td>
                             <td class="px-6 py-4">
-                                
-                                <button wire:click="publishComplaint({{ $complaint->complainant_Id }})" class="text-green-600 hover:text-green-900 mr-3">
-                                    <i class="fas fa-check"></i>
-                                </button>
-                                <button wire:click="rejectComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900 mr-3">
-                                    <i class="fas fa-times"></i>
-                                </button>
+                                 @if(!$complaint->is_public )
+									<button wire:click="unpublishComplaint({{ $complaint->complainant_Id }})" class="text-purple-600 hover:text-purple-900 mr-3">
+										<i class="fas fa-eye-slash"></i>
+									</button>
+								@else
+									<button wire:click="publishComplaint({{ $complaint->complainant_Id }})" class="text-green-600 hover:text-green-900 mr-3">
+										<i class="fas fa-check"></i>
+									</button>
+									<button wire:click="rejectComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900 mr-3">
+										<i class="fas fa-times"></i>
+									</button>
+								@endif
                                 <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
                                     <i class="fas fa-trash"></i>
                                 </button>

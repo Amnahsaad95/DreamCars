@@ -35,9 +35,9 @@
                 <button 
                     wire:click="changeTab('pending')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'pending' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
-                ><i class="fas fa-clock mr-2 text-pending"></i>
+                ><i class="fas fa-clock mr-2 text-secondary"></i>
                     New
-					<span class="ml-2 bg-pending text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$pendingAds->total()}}</span>				
+					<span class="ml-2 bg-secondary text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$pendingAds->total()}}</span>				
                 </button>
             </li>
             <li class="mr-2" role="presentation">
@@ -53,9 +53,9 @@
                 <button 
                     wire:click="changeTab('unpublished')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'unpublished' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
-                ><i class="fas fa-box-archive mr-2 text-published"></i>
+                ><i class="fas fa-box-archive mr-2 text-primary"></i>
                     Unpublished 
-					<span class="ml-2 bg-published text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$unpublishedAds->total()}}</span>
+					<span class="ml-2 bg-primary text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$unpublishedAds->total()}}</span>
                 </button>
             </li>
             <li class="mr-2" role="presentation">
@@ -115,7 +115,7 @@
                                 <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Pending</span>
 							@endif
 							@if( $ads->status == 'unpublished')
-                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Unpublished</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Unpublished</span>
 							@endif
                             </td>
 							
@@ -254,7 +254,7 @@
                             <td class="px-6 py-4">{{ $ads->ad_Url }}</td>
                             <td class="px-6 py-4">{{ $ads->location }}</td>
                             <td class="px-6 py-4">
-                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Unpublished</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Unpublished</span>
                             </td>
 							<td class="px-6 py-4">{{ $ads->start_date }}</td>
 							

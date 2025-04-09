@@ -31,7 +31,7 @@ class ComplaintSuggestionManagement extends Component
     }
 	public function unpublishComplaint($complaintId)
     {
-        complaintsSuggestions::find($complaintId)->update(['is_public' => 0]);
+        complaintsSuggestions::find($complaintId)->update(['status' => 'accepted']);
         session()->flash('message', 'Complaint Unpublished successfully!');
     }
 	
@@ -58,9 +58,9 @@ class ComplaintSuggestionManagement extends Component
             });
             
         $published = (clone $query)->where('is_public', 1)->where('status', 'accepted')->paginate(10, ['*'], 'publishedPage');
-        $rejected = (clone $query)->where('is_public', 1)->where('status', 'rejected')->paginate(10, ['*'], 'rejectedPage');
-        $pending = (clone $query)->where('is_public', 1)->where('status', 'pending')->paginate(10, ['*'], 'pendingPage');
-		$unpublished = (clone $query)->where('is_public', 0)->paginate(10, ['*'], 'unpublishedPage');
+        $rejected = (clone $query)->where('status', 'rejected')->paginate(10, ['*'], 'rejectedPage');
+        $pending = (clone $query)->where('status', 'pending')->paginate(10, ['*'], 'pendingPage');
+		$unpublished = (clone $query)->where('is_public', 0)->where('status', 'accepted')->paginate(10, ['*'], 'unpublishedPage');
         
         return view('livewire.auth.complaint-suggestion-management', [
             'publishedComplaints' => $published,

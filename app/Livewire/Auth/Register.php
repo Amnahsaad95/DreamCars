@@ -16,6 +16,13 @@ class Register extends Component
     public $password_confirmation;
     public $terms = false;
 
+	protected $messages = [
+			'password.required' => 'Password is required',
+			'password.confirmed' => 'Password confirmation does not match',
+			'password.min' => 'Password must be at least 8 characters',
+			'password.regex' => 'Password must contain at least one letter ,uppercase and lowercase letters,least one number,least one number',
+			
+		];
     protected $rules = [
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',

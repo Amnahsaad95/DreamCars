@@ -64,16 +64,27 @@ class Settings extends Component
 
 	public function mount()
 	{
-		
-		$user = Auth::user();
+		$this->loadProfile();
+		$this->loadSite();
+	}
+    
+	public function toggleEdit()
+    {
+        $this->viewMode = !$this->viewMode;
+    }
+	public function loadProfile()
+    {
+        $user = Auth::user();
 		$this->name = $user->name ;
 		$this->email =  $user->email ;
 		$this->phone =  $user->phone ;
 		$this->city =  $user->city ;
 		$this->country =  $user->country ;
 		$this->oldimage = $user->profile_Image  ;
-		// Site fields
-		$this->settings = Setting::first();
+    }
+	public function loadSite()
+    {
+        $this->settings = Setting::first();
 		$this->siteName = $this->settings->site_name;
 		$this->oldicon =$this->settings->site_icon;
 		$this->oldlogo = $this->settings->site_logo;
@@ -92,12 +103,6 @@ class Settings extends Component
 		$this->intro_title_1 = $this->settings->intro_title_1;
 		$this->intro_title_2 = $this->settings->intro_title_2;
 		$this->intro_title_3 = $this->settings->intro_title_3;
-		
-	}
-    
-	public function toggleEdit()
-    {
-        $this->viewMode = !$this->viewMode;
     }
 	
 	public function profileEdit()
@@ -155,6 +160,7 @@ class Settings extends Component
 		
 		auth()->user()->update($validated);
 		//dd($validated);
+		$this->loadProfile();
         $this->viewProfileMode = true;
         session()->flash('message', 'Profile updated successfully!');
     }
@@ -261,7 +267,7 @@ class Settings extends Component
 			$validated['site_logo']=$this->settings->site_logo;
 		}
 		$this->settings->update($validated);		
-		$this->settings = Setting::first();
+		$this->loadSite();
         $this->viewMode = true; 
         session()->flash('message', 'Site information updated successfully!');
     }

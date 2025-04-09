@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\Hash;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -15,13 +17,13 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name'          => 'John Doe',
-                'email'         => 'johndoe@example.com',
+                'name'          => 'Admin',
+                'email'         => 'admin@dreamcar.com',
                 'password'      => Hash::make('password123'),
                 'phone'         => '1234567890',
                 'city'          => 'Damascus',
                 'country'       => 'Syria',
-                'profile_Image' => 'profile1.jpg',
+                'profile_Image' => 'profile/default-profile.png',
                 'Role'          => 1, // admin role
             ],
             [
@@ -31,7 +33,7 @@ class UserSeeder extends Seeder
                 'phone'         => '0987654321',
                 'city'          => 'Aleppo',
                 'country'       => 'Syria',
-                'profile_Image' => 'profile2.jpg',
+                'profile_Image' => 'profile/default-profile.png',
                 'Role'          => 2, // user role
             ],
             [
@@ -41,7 +43,7 @@ class UserSeeder extends Seeder
                 'phone'         => '1230984567',
                 'city'          => 'Homs',
                 'country'       => 'Syria',
-                'profile_Image' => 'profile3.jpg',
+                'profile_Image' => 'profile/default-profile.png',
                 'Role'          => 2, // user role
             ],
             [
@@ -51,7 +53,7 @@ class UserSeeder extends Seeder
                 'phone'         => '4567891230',
                 'city'          => 'Latakia',
                 'country'       => 'Syria',
-                'profile_Image' => 'profile4.jpg',
+                'profile_Image' => 'profile/default-profile.png',
                 'Role'          => 2, // user role
             ],
             [
@@ -61,7 +63,7 @@ class UserSeeder extends Seeder
                 'phone'         => '3216549870',
                 'city'          => 'Tartus',
                 'country'       => 'Syria',
-                'profile_Image' => 'profile5.jpg',
+                'profile_Image' => 'profile/default-profile.png',
                 'Role'          => 2, // user role
             ],
             [
@@ -71,7 +73,7 @@ class UserSeeder extends Seeder
                 'phone'         => '8527419630',
                 'city'          => 'Damascus',
                 'country'       => 'Syria',
-                'profile_Image' => 'profile6.jpg',
+                'profile_Image' => 'profile/default-profile.png',
                 'Role'          => 2, // user role
             ],
             [
@@ -81,7 +83,7 @@ class UserSeeder extends Seeder
                 'phone'         => '7896541230',
                 'city'          => 'Aleppo',
                 'country'       => 'Syria',
-                'profile_Image' => 'profile7.jpg',
+                'profile_Image' => 'profile/default-profile.png',
                 'Role'          => 2, // user role
             ],
             [
@@ -91,7 +93,7 @@ class UserSeeder extends Seeder
                 'phone'         => '6543217890',
                 'city'          => 'Homs',
                 'country'       => 'Syria',
-                'profile_Image' => 'profile8.jpg',
+                'profile_Image' => 'profile/default-profile.png',
                 'Role'          => 2, // user role
             ],
             [
@@ -101,7 +103,7 @@ class UserSeeder extends Seeder
                 'phone'         => '3219876540',
                 'city'          => 'Latakia',
                 'country'       => 'Syria',
-                'profile_Image' => 'profile9.jpg',
+                'profile_Image' => 'profile/default-profile.png',
                 'Role'          => 2, // user role
             ],
             [
@@ -111,7 +113,7 @@ class UserSeeder extends Seeder
                 'phone'         => '1597534862',
                 'city'          => 'Tartus',
                 'country'       => 'Syria',
-                'profile_Image' => 'profile10.jpg',
+                'profile_Image' => 'profile/default-profile.png',
                 'Role'          => 2, // user role
             ]
         ];

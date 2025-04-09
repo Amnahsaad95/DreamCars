@@ -40,6 +40,12 @@ class AppServiceProvider extends ServiceProvider
 							'siteDescription' => 'Find your dream car with our extensive inventory and trusted sellers.',
 							]);
 		}
+		if (DB::table('users')->count() == 0) {
+            Artisan::call('db:seed', [
+                '--class' => 'Database\\Seeders\\UserSeeder'
+            ]);
+        }
+		
 		if (DB::table('cars')->count() == 0) {
             Artisan::call('db:seed', [
                 '--class' => 'Database\\Seeders\\CarSeeder'
@@ -48,6 +54,11 @@ class AppServiceProvider extends ServiceProvider
 		if (DB::table('ads')->count() == 0) {
             Artisan::call('db:seed', [
                 '--class' => 'Database\\Seeders\\AdsSeeder'
+            ]);
+        }
+		if (DB::table('complaints_suggestions')->count() == 0) {
+            Artisan::call('db:seed', [
+                '--class' => 'Database\\Seeders\\ComplaintSeeder'
             ]);
         }
 		View::share('settings', Setting::first());

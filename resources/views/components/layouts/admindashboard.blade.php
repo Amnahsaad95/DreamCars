@@ -15,7 +15,7 @@
                 extend: {
                     colors: {
                         primary: '#3b82f6',
-                        secondary: '#6366f1',
+                        secondary: '#C289A8',
                         pending: '#f59e0b',
                         published: '#10b981',
                         rejected: '#ef4444',
