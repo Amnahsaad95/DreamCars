@@ -61,6 +61,10 @@ class CarSearch extends Component
         // Redirect to the ad URL
         return redirect()->to($ad->ad_Url);
     }
+	
+	public function show($id){
+		return redirect()->route('CarDetail',$id);
+	}
 
     public function render()
     {

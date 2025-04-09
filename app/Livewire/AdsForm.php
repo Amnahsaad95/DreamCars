@@ -34,7 +34,6 @@ class AdsForm extends Component
         
 		$imagePath ='';
 		if ($this->image) {
-            // Store the uploaded photo
 			$imageName = 'Ads_'.time().'_'.uniqid(). '.' .$this->image->extension();
 			
 			$path = $this->image->storeAs('ads', $imageName,'public');

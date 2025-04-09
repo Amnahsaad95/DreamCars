@@ -67,7 +67,12 @@ class CarDetail extends Component
         session()->flash('message', 'Thank you for your review!');
     }
 
-    public function render()
+    public function addComplaint($carId)
+    {
+        return redirect()->route('ComplaintSuggestionForm',$carId);
+    }
+	
+	public function render()
     {
         return view('livewire.car-detail');
     }

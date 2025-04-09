@@ -421,7 +421,7 @@
 				<div>
 					<p class="text-gray-600">Profile:</p>
 					@if($oldimage)
-						<img src=" {{ asset('storage/' . $oldimage) }}" class="w-30 h-30 rounded-lg border border-gray-200">
+						<img src=" {{ asset('storage/' . $oldimage) }}" class="w-[300px] h-[300px] rounded-lg border border-gray-200">
 					@else
 						<span class="text-gray-400">No Profile Image</span>
 					@endif

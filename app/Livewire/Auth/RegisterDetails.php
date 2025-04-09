@@ -27,10 +27,6 @@ class RegisterDetails extends Component
 	
 	 public function mount()
     {
-        // Set default image path (adjust this to your needs)
-       // $this->profileImage = asset('images/default-profile.png');
-        
-        // You could load user data here
          $this->name = auth()->user()->name;
          $this->email = auth()->user()->email;
          $this->profileImage = auth()->user()->profile_Image ?? asset('profile/default-profile.jpg');
@@ -48,7 +44,6 @@ class RegisterDetails extends Component
 		$imagePath ='';
 
         if ($this->image) {
-            // Store the uploaded photo
 			$imageName = 'Profile_'.time().'_'.uniqid(). '.' .$this->image->extension();
 			
 			$path = $this->image->storeAs('profile', $imageName,'public');

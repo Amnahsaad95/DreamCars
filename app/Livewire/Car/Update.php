@@ -17,9 +17,10 @@ class Update extends Component
 			$car_Price,$car_Year,$car_Description,$color,$images=[],
 			$car_Image=[],$isSold,  $car_id,$city,$country;
 
-	public function mount($id)
+	public function mount($id,$edit)
     {
-        
+		if($edit == 'true')
+			$this->editMode = true;
         $this->loadData($id);
     }
 	
@@ -58,28 +59,36 @@ class Update extends Component
 			'isSold' => 'required|boolean',
 			'color' => 'required|string',
 			'car_Description' => 'required|string',
-			'car_Image' => 'nullable|array|min:3|max:3',
-			'car_Image.*' =>'image|mimes:jpeg,png,jpg,gif|max:2048',			
+			'car_Image' => 'nullable|array|min:0|max:3',
+			'car_Image.*' =>'nullable|image|mimes:jpeg,png,jpg,gif|max:7000',			
 		]);
+		
 		$imagePaths = [];
 		if(isset($this->car_Image))
 		{
-			foreach ($this->car_Image as $image) {
-				
+			foreach ($this->car_Image as $index => $image) {
+				//dd($index);
 				$imageName = 'Car_'.time().'_'.uniqid(). '.' .$image->extension();
 				
 				$path = $image->storeAs('cars', $imageName,'public');
 				//$path = $image->store('cars', 'public'); 
 				
-				$imagePaths[] = $path;
+				$this->images[$index] = $path;
 				
 			}
-			$validated['car_Image'] = implode(',', $imagePaths);
+			$validated['car_Image'] = implode(',', $this->images);
 		}
+		if($this->isSold == true){
+			$this->isSold =1;
+		}
+		else{
+			$this->isSold =0;
+		}
+		//dd($this->isSold);
 		
 		$this->car->update($validated);	
 		$this->loadData($this->car->car_Id);
-        $this->editMode = false;  // تحديث البيانات
+        $this->editMode = false;  
         session()->flash('message', 'Site information updated successfully!');
 		
 	}

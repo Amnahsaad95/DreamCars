@@ -14,7 +14,7 @@
             <!-- Filter selection dropdown -->
             <div class="relative" x-data="{filterDropdownOpen : false,}">
                 <button @click="filterDropdownOpen = !filterDropdownOpen" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center">
-                    <i class="fas fa-plus mr-2"></i>Add Filter
+                    <i class="fas fa-filter mr-2"></i> Filter
                 </button>
                 
                 <!-- Filter dropdown menu -->
@@ -85,6 +85,12 @@
                         <input type="number" wire:model.live.debounce.300ms="priceValue2" placeholder="Value" 
                                class="text-sm border-b focus:outline-none focus:border-blue-500 px-1 py-1 w-20">
                     @endif
+				@elseif($filter === 'isSold')
+					<select wire:model.live.debounce.300ms="activeFilters.{{ $filter }}"  class="text-sm border rounded focus:outline-none focus:border-blue-500 px-1 py-1 mr-1">
+                        <option value="" selected disabled>Choose Option</option>
+						<option value="0">Avaiable</option>
+                        <option value="1">Sold</option>
+                    </select>
                 @else
                     <input type="{{ $filter === 'car_Year' ? 'number' : 'text' }}" 
                            wire:model.live.debounce.300ms="activeFilters.{{ $filter }}" 
@@ -140,6 +146,9 @@
     </div>
     
     <!-- Pagination would go here -->
+	<div class="mt-4">
+        {{ $cars->links() }} <!-- عرض التصفح بين الصفحات -->
+    </div>
 </div>
 
 @push('scripts')

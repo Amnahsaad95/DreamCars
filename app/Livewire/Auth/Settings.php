@@ -197,6 +197,9 @@ class Settings extends Component
 
 			$validated['intro_image_1'] = $path;
 		}
+		else{
+			$validated['intro_image_1']=$this->settings->intro_image_1;
+		}
 		if ($this->intro_image_2) {
 			
 			if ($this->settings->intro_image_2) {
@@ -208,6 +211,9 @@ class Settings extends Component
 			$path = $this->intro_image_2->storeAs('Intro', $imageName, 'public');
 
 			$validated['intro_image_2'] = $path;
+		}
+		else{
+			$validated['intro_image_2']=$this->settings->intro_image_2;
 		}
 		if ($this->intro_image_3) {
 			
@@ -221,17 +227,23 @@ class Settings extends Component
 
 			$validated['intro_image_3'] = $path;
 		}
+		else{
+			$validated['intro_image_3']=$this->settings->intro_image_3;
+		}
 		if ($this->site_icon) {
 			
 			if ($this->settings->site_icon) {
-				//Storage::disk('public')->delete($this->settings->oldicon);
+				Storage::disk('public')->delete($this->settings->oldicon);
 			}
 
-			$imageName = 'Icon'.time().'_'.uniqid(). '.' .$this->site_icon->extension();
+			$imageName = 'Icon_'.time().'_'.uniqid(). '.' .$this->site_icon->extension();
 
 			$path = $this->site_icon->storeAs('icon', $imageName, 'public');
 
 			$validated['site_icon'] = $path;
+		}
+		else{
+			$validated['site_icon']=$this->settings->site_icon;
 		}
 		if ($this->site_logo) {
 			
@@ -239,11 +251,14 @@ class Settings extends Component
 				Storage::disk('public')->delete($this->settings->site_logo);
 			}
 
-			$imageName = 'Logo'.time().'_'.uniqid(). '.' .$this->site_logo->extension();
+			$imageName = 'Logo_'.time().'_'.uniqid(). '.' .$this->site_logo->extension();
 
 			$path = $this->site_logo->storeAs('Logo', $imageName, 'public');
 
 			$validated['site_logo'] = $path;
+		}
+		else{
+			$validated['site_logo']=$this->settings->site_logo;
 		}
 		$this->settings->update($validated);		
 		$this->settings = Setting::first();

@@ -7,6 +7,7 @@
         <h2 class="text-xl font-semibold text-gray-700 mb-6">Login to your account</h2>
         
         <form wire:submit.prevent="submit" class="space-y-4">
+		
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
                 <input wire:model="email" type="email" id="email" name="email" required 
@@ -28,7 +29,7 @@
                 </div>
                 
                 <div class="text-sm">
-                    <a href="" class="font-medium text-blue-600 hover:text-blue-500">Forgot password?</a>
+                    <a href="{{ route('forgot.password') }}" class="font-medium text-blue-600 hover:text-blue-500">Forgot password?</a>
                 </div>
             </div>
             
@@ -40,7 +41,7 @@
             </div>
         </form>
         
-        <div class="mt-6">
+       <!-- <div class="mt-6">
             <div class="relative">
                 <div class="absolute inset-0 flex items-center">
                     <div class="w-full border-t border-gray-300"></div>
@@ -69,7 +70,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div>-->
         
         <div class="mt-6 text-center text-sm text-gray-600">
             Don't have an account? <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-blue-500">Sign up</a>

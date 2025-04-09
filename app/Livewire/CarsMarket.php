@@ -41,11 +41,9 @@ class CarsMarket extends Component
                         } elseif ($this->priceCondition === 'between') {
                             $query->whereBetween('car_Price', [$this->priceValue, $this->priceValue2]);
                         }
-					}
-                    elseif($filter === 'isSold'){
-						dd($filter);
-					}
+					}                    
 					else {
+						//dd($value);
                         $query->where($filter, 'like', '%'.$value.'%');
                     }
                 }
@@ -61,7 +59,7 @@ class CarsMarket extends Component
                     $query->orderByDesc('car_Year');
                 }
             })
-            ->get();
+            ->paginate(10);;
 
         return view('livewire.cars-market', [
             'cars' => $cars,
@@ -72,7 +70,7 @@ class CarsMarket extends Component
                 'color' => 'Color',
                 'country' => 'Country',
                 'city' => 'City',
-                'isSold' => 'isSold',
+                'isSold' => 'Sold',
                 'car_Price' => 'Price',
             ]
         ]);

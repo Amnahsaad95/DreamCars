@@ -32,7 +32,7 @@ class Create extends Component
 		'color' => 'required|string',
 		'car_Description' => 'required|string',
 		'car_Image' => 'required|array|min:3|max:3',
-		'car_Image.*' =>'image|mimes:jpeg,png,jpg,gif|max:2048',
+		'car_Image.*' =>'image|mimes:jpeg,png,jpg,gif|max:7000',
     ];
 	protected $messages = [
 		'car_Image.*.image' => 'File should be image .',

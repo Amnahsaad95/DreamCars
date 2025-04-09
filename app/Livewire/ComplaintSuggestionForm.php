@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-
+use App\Models\Car;
 use App\Models\complaintsSuggestions;
 
 class ComplaintSuggestionForm extends Component
@@ -11,6 +11,7 @@ class ComplaintSuggestionForm extends Component
     public $name;
     public $phone;
     public $content;
+    public $isDisabled = false;
     public $is_public = false;
     public $type = 'complaint'; // default to complaint
     public $about_type;
@@ -31,6 +32,17 @@ class ComplaintSuggestionForm extends Component
         'user_name' => 'nullable|string|max:255',
         'car_name' => 'nullable|string|max:255',
     ];
+	
+	public function mount($carId = null)
+    {
+        $this->car_Id = $carId;
+
+        if ($this->car_Id) {
+            $this->car_name = Car::findOrFail($this->car_Id)->Brand.' '.Car::findOrFail($this->car_Id)->car_Model;
+			$this->about_type="car";
+			$this->isDisabled= true;
+        }
+    }
 
     public function render()
     {
@@ -77,6 +89,7 @@ class ComplaintSuggestionForm extends Component
 			$complaint ='complaint';
 			if($this->about_type == 'car'){
 				$complaint = $this->type.'_car';
+				$this->user_Id = Car::findOrFail($this->car_Id)->user_Id;
 			}
 			
 			if($this->about_type == 'user'){
@@ -92,10 +105,10 @@ class ComplaintSuggestionForm extends Component
             'user_Id' => $this->user_Id ?? null,
             'car_Id' => $this->car_Id ?? null,
         ]);
-
+		//dd("aaaaa");
         session()->flash('message', 'Your ' . $this->type . ' has been submitted successfully!');
         
-        $this->reset(['name', 'phone', 'content', 'user_name','user_Id','car_name','car_Id']);
+        $this->reset();
     }
 }
 

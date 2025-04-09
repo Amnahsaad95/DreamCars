@@ -59,10 +59,14 @@
                             </div>
                             <div>
                                 <p class="text-gray-500 text-sm">Avaiable </p>
-                                <p class="font-medium">{{ $car->isSold ?'No':'Yes'}}</p>
-                            </div><div>
+                                <p class="font-medium">{{ $car->isSold == 1 ?'No':'Yes'}}</p>
+                            </div>
+							<div>
                                 <p class="text-gray-500 text-sm">color </p>
-                                <p class="font-medium">{{ $car->color }}</p>
+                                <div class="flex items-center space-x-2">
+									<div class="w-4 h-4 rounded-full border" style="background-color: #{{ ltrim($car->color, '#')}} !important;"></div>
+									<span class="text-sm text-gray-700">{{ $car->color }}</span>
+								</div>
                             </div>
                             
                         </div>

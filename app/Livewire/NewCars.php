@@ -13,6 +13,11 @@ class NewCars extends Component
 	{
 		return Car::inRandomOrder()->take(3)->get();
 	}
+	public function show($id){
+		return redirect()->route('CarDetail',$id);
+	}
+
+	
     public function render()
     {
 		$cars=Car::orderBy('created_at','desc')->take(6)->get();

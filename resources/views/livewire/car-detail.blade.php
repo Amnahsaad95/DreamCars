@@ -91,8 +91,8 @@
                 @if(!$car->sold)
                 <div class="flex space-x-3">
 					
-                    <button class="bg-primary hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg flex items-center transition duration-200">
-                        <i class="fas fa-star mr-2"></i> Add Review
+                    <button wire:click="addComplaint({{$car->car_Id}})" class="bg-primary hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg flex items-center transition duration-200">
+                        <i class="fas fa-star mr-2"></i> Add Complaint
                     </button>
 					<div x-data="{ phoneNumber: @entangle('phone'),isSold: @entangle('isSold') }">
 						<button :disabled="isSold" @click="!isSold && (window.location.href = 'tel:${phoneNumber}')"   class="border border-primary text-primary hover:bg-blue-50 font-bold py-3 px-6 rounded-lg flex items-center transition duration-200">

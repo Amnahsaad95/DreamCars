@@ -48,7 +48,7 @@
                 </div>
                 <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
                     <nav class="flex-1 space-y-2">
-                        <a href="#" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-indigo-700 text-white">
+                        <a href="{{route('dashboard')}}" class="flex items-center px-4 py-2 text-sm font-medium rounded-lg bg-indigo-700 text-white">
                             <i class="fas fa-tachometer-alt mr-3"></i>
                             Dashboard
                         </a>

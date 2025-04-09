@@ -92,9 +92,10 @@ class Lists extends Component
         $this->isModalOpen = true;
     }
 
-    public function View($id)
+    public function View($id,$edit)
     {
-		return redirect()->route('update',$id);
+		//dd($edit);
+		return redirect()->route('update',['id'=>$id,'edit'=>$edit]);
     }
 
     public function edit($id)
@@ -143,7 +144,7 @@ class Lists extends Component
 	
 	public function goToCreateCar()
 	{
-		return redirect()->route('createCar'); // Uses Laravel route name
+		return redirect()->route('createCar'); 
 	}
 
     private function resetForm()

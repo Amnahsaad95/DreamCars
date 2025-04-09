@@ -13,8 +13,12 @@ class Dashboard extends Component
 	
     public function render()
     {
+		
 		$userCount = User::count();
-		$cars = Car::count();
+		if(Auth::user()->Role ==1)
+			$cars = Car::count();
+		else
+			$cars = Car::query()->where('user_Id',Auth::user()->user_Id)->count();
 		$ads = Ads::count();
 		
         return view('livewire.dashboard',[

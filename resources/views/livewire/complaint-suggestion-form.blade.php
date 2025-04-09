@@ -1,4 +1,5 @@
-<div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
+<div class="container mx-auto px-4 py-8 max-w-6xl">
+<div class="max-w-2xl mx-auto p-12 bg-white rounded-lg shadow-md">
 	<h1 class="text-2xl text-center font-bold mb-6">Submit Your FeedBack</h1>
     @if(session()->has('message'))
         <div class="mb-4 p-4 bg-green-100 text-green-700 rounded">
@@ -12,11 +13,11 @@
             <label class="block text-gray-700 mb-2">Type</label>
             <div class="flex space-x-4">
                 <label class="inline-flex items-center">
-                    <input type="radio" wire:model.live="type" value="complaint" class="form-radio">
+                    <input type="radio" wire:model.live="type" value="complaint" class="form-radio" {{ $isDisabled ? 'disabled' : '' }}>
                     <span class="ml-2">Complaint</span>
                 </label>
                 <label class="inline-flex items-center">
-                    <input type="radio" wire:model.live="type" value="suggestion" class="form-radio">
+                    <input type="radio" wire:model.live="type" value="suggestion" class="form-radio" {{ $isDisabled ? 'disabled' : '' }}>
                     <span class="ml-2">Suggestion</span>
                 </label>
             </div>
@@ -28,16 +29,16 @@
                 <label class="block text-gray-700 mb-2">This complaint is about:</label>
                 <div class="flex space-x-4">
                     <label class="inline-flex items-center">
-                        <input type="radio" wire:model.live="about_type" value="user" class="form-radio">
+                        <input type="radio" wire:model.live="about_type" value="user" class="form-radio" {{ $isDisabled ? 'disabled' : '' }}>
                         <span class="ml-2">User</span>
                     </label>
                     <label class="inline-flex items-center">
-                        <input type="radio" wire:model.live="about_type" value="car" class="form-radio">
+                        <input type="radio" wire:model.live="about_type" value="car" class="form-radio" {{ $isDisabled ? 'disabled' : '' }}>
                         <span class="ml-2">Car</span>
                     </label>
                 </div>
             </div>
-
+			@endif
             <!-- Dynamic field for about_name -->
             @if($about_type)
 				
@@ -58,7 +59,7 @@
 				@else
 					<div class="relative mb-4">
 						<label class="block text-gray-700 mb-2">Car Name</label>
-						<input type="text" wire:model.live.debounce.150ms="car_name" placeholder="search ....." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+						<input type="text" wire:model.live.debounce.150ms="car_name" placeholder="search ....." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" {{ $isDisabled ? 'disabled' : '' }}>
 
 						<div class="absolute z-10 bg-white  w-full mt-1 max-h-60 overflow-auto">
 							@foreach($results as $result)
@@ -70,7 +71,7 @@
 					</div>
 				@endif
             @endif
-        @endif
+        
 
         <!-- Name -->
         <div class="mb-4">
@@ -107,5 +108,8 @@
         <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
             Submit @if($type === 'complaint') Complaint @else Suggestion @endif
         </button>
+		</div>
     </form>
+	</div>
+
 </div>

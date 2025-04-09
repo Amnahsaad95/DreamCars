@@ -1,7 +1,7 @@
 
  <div>
 	<!-- 3. Advertising Banner -->
-	
+	<div wire:poll.keep-alive.20s>
 	<div class="max-w-4xl w-full mx-auto my-8">
 		<!-- Banner Header -->
 		<div class="flex justify-between items-center mb-2">
@@ -38,11 +38,11 @@
 		<div class="flex justify-between items-center mt-2">
 			<span class="text-xs text-gray-500">Advertisement from {{ $randomAds->FullName }}</span>
 		</div>
-	</div>
+	</div></div>
 
 	
 	<!-- 4. Search Input -->
-	<div class="py-12 bg-gray-50">
+	<div class="container mx-auto px-4 py-8 bg-gray-100 rounded-lg">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<h1 class="text-3xl font-bold text-center mb-8">Find Your Perfect Car</h1>
 			
@@ -68,7 +68,7 @@
 				<div x-show="open" class="absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg">
 					<ul class="max-h-60 overflow-auto">
 						@forelse($searchResults as $car)
-							<li wire:key="car-{{ $car['car_Id'] ?? '' }}" class="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-gray-100" wire:click="selectCar({{ $car['car_Id'] ??'' }})">
+							<li wire:click="show({{$car['car_Id']}})" wire:key="car-{{ $car['car_Id'] ?? '' }}" class="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-gray-100" wire:click="selectCar({{ $car['car_Id'] ??'' }})">
 								<div class="font-medium text-gray-900">{{ $car['Brand'] ?? ''}} {{ $car['car_Model'] ??''}}</div>
 								<div class="text-sm text-gray-500"> {{ $car['car_Year'] ?? '' }}</div>
 							</li>
