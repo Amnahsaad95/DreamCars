@@ -82,12 +82,14 @@ class Update extends Component
 			$this->isSold =1;
 		}
 		else{
+			//dd($this->isSold);
 			$this->isSold =0;
 		}
 		//dd($this->isSold);
 		
 		$this->car->update($validated);	
 		$this->loadData($this->car->car_Id);
+		//dd($this->isSold);
         $this->editMode = false;  
         session()->flash('message', 'Site information updated successfully!');
 		

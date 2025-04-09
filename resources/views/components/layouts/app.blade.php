@@ -65,7 +65,7 @@
             <div class="hidden md:flex items-center space-x-6" :class="{ 'space-x-reverse': isArabic }">
                 <a href="{{ url('/') }}" class="text-gray-700 hover:text-primary">Home</a>
                 <a href="{{ route('AllCar') }}" class="text-gray-700 hover:text-primary">Cars</a>
-                <a href="#" class="text-gray-700 hover:text-primary">About</a>
+                <a href="{{ route('aboutUs') }}" class="text-gray-700 hover:text-primary">About Us</a>
                 <a href="{{ route('ComplaintSuggestionForm') }}" class="text-gray-700 hover:text-primary">Contact</a>
 				
                 @auth
@@ -97,11 +97,10 @@
         
         <!-- Mobile Navigation -->
         <div x-show="navOpen" class="md:hidden bg-white py-2 px-4 border-t">
-            <a href="#" class="block py-2 text-gray-700">Home</a>
-            <a href="#" class="block py-2 text-gray-700">Cars</a>
-            <a href="#" class="block py-2 text-gray-700">Sell</a>
-            <a href="#" class="block py-2 text-gray-700">About</a>
-            <a href="#" class="block py-2 text-gray-700">Contact</a>
+            <a href="{{ url('/') }}" class="block py-2 text-gray-700">Home</a>
+            <a href="{{ route('AllCar') }}" class="block py-2 text-gray-700">Cars</a>
+            <a href="{{ route('aboutUs') }}" class="block py-2 text-gray-700">About Us</a>
+            <a href="{{ route('ComplaintSuggestionForm') }}" class="block py-2 text-gray-700">Contact</a>
             <div class="pt-2 border-t mt-2">
                 <button @click="isArabic = !isArabic" class="px-3 py-1 bg-gray-100 rounded-full text-sm">
                     <span x-show="!isArabic">العربية</span>
@@ -117,28 +116,28 @@
              :style="`transform: translateX(-${currentSlide * 100}%)`">
             <div class="w-full flex-shrink-0 bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white">
                 <div class="text-center px-8">
-                    <h2 class="text-4xl font-bold mb-4">Find Your Dream Car</h2>
-                    <p class="text-xl mb-6">Thousands of listings updated daily</p>
-                    <button class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
-                        Browse Inventory
+                    <h2 class="text-4xl font-bold mb-4">{{$settings->intro_title_1}}</h2>
+                    <p class="text-xl mb-6">{{$settings->intro_text_1}}</p>
+                    <button onclick="scrollToSearchSection()" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
+                        Start Searching
                     </button>
                 </div>
             </div>
             <div class="w-full flex-shrink-0 bg-gradient-to-r from-secondary to-primary flex items-center justify-center text-white">
                 <div class="text-center px-8">
-                    <h2 class="text-4xl font-bold mb-4">Sell Your Car Fast</h2>
-                    <p class="text-xl mb-6">Get top dollar with our premium service</p>
+                    <h2 class="text-4xl font-bold mb-4">{{$settings->intro_title_2}}</h2>
+                    <p class="text-xl mb-6">{{$settings->intro_text_2}}</p>
                     <button class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
-                        List Your Vehicle
+                        Explore Cars
                     </button>
                 </div>
             </div>
             <div class="w-full flex-shrink-0 bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white">
                 <div class="text-center px-8">
-                    <h2 class="text-4xl font-bold mb-4">Financing Available</h2>
-                    <p class="text-xl mb-6">Competitive rates for qualified buyers</p>
+                    <h2 class="text-4xl font-bold mb-4">{{$settings->intro_title_3}}</h2>
+                    <p class="text-xl mb-6">{{$settings->intro_text_3}}</p>
                     <button onclick="window.location.href='{{ url('/addNewAds') }}'" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
-                        Add Your Ads
+                       Post Your Ad Now
                     </button>
                 </div>
             </div>
@@ -164,30 +163,30 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <h3 class="logo text-xl font-bold mb-4">{{$settings->site_name}}</h3>
-                    <p class="text-gray-400">Find your dream car with our extensive inventory and trusted sellers.</p>
+                    <p class="text-gray-400">{{$settings->siteDescription}}</p>
                 </div>
                 <div>
                     <h4 class="font-semibold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Browse Cars</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Sell Your Car</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Financing</a></li>
+                        <li><a href="{{ url('/') }}" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="{{ route('AllCar') }}" class="text-gray-400 hover:text-white">Browse Cars</a></li>
+                        <li><a href="{{ route('aboutUs') }}" class="text-gray-400 hover:text-white">About us</li>
+                        <li><a href="{ route('ComplaintSuggestionForm') }}" class="text-gray-400 hover:text-white">Contact us</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold mb-4">Contact Us</h4>
                     <ul class="space-y-2 text-gray-400">
                         <li class="flex items-center"><i class="fas fa-phone-alt mr-2"></i>{{$settings->whatsapp_number}}</li>
-                        <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> info@automarket.com</li>
-                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> 123 Main St, City</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> {{$settings->sitemail}}</li>
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> {{$settings->site_location}}</li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold mb-4">Connect With Us</h4>
                     <div class="flex space-x-4">
                         <a href="{{$settings->facebook_url}}" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f text-xl"></i></a>
-                        <a href="{{$settings->whatsapp_number}}" class="text-gray-400 hover:text-white"><i class="fab fa-whatsapp text-xl"></i></a>
+                        <a href="https://wa.me/{{ $settings->whatsapp_number }}" class="text-gray-400 hover:text-white"><i class="fab fa-whatsapp text-xl"></i></a>
                         <a href="{{$settings->instagram_url}}" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
                     </div>
                     <div class="mt-4">
@@ -203,5 +202,13 @@
             </div>
         </div>
     </footer>
+	<script>
+	function scrollToSearchSection() {
+	   // Scroll to the search section
+	   document.getElementById('search-section').scrollIntoView({
+		  behavior: 'smooth'
+	   });
+	}
+	</script>
 </body>
 </html>

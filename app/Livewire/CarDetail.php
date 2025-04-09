@@ -30,21 +30,6 @@ class CarDetail extends Component
         $this->mainImage = $imagePath;
     }
 
-    public function setRating($rating)
-    {
-        $this->rating = $rating;
-    }
-
-    public function hoverRating($rating)
-    {
-        $this->hoverRating = $rating;
-    }
-
-    public function resetRating()
-    {
-        $this->hoverRating = $this->rating;
-    }
-
     public function addComment()
     {
         $this->validate([
@@ -71,7 +56,14 @@ class CarDetail extends Component
     {
         return redirect()->route('ComplaintSuggestionForm',$carId);
     }
-	
+	public function callSeller()
+    {
+        if (!$this->isSold && $this->phone) {
+            // Code to trigger the phone call
+            $phoneNumber = $this->phone;
+            return redirect()->to("tel:$phoneNumber");
+        }
+    }
 	public function render()
     {
         return view('livewire.car-detail');

@@ -1,3 +1,4 @@
+<div class="container mx-auto px-4 py-8 max-w-6xl">
 <div class="flex-grow overflow-auto max-w-7xl mx-auto bg-white rounded-lg shadow-md p-6">
     <!-- Header with search and controls -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
@@ -150,6 +151,8 @@
         {{ $cars->links() }} <!-- عرض التصفح بين الصفحات -->
     </div>
 </div>
+</div>
+
 
 @push('scripts')
 <script>

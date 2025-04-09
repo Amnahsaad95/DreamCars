@@ -42,7 +42,7 @@
 
 	
 	<!-- 4. Search Input -->
-	<div class="container mx-auto px-4 py-8 bg-gray-100 rounded-lg">
+	<div id="search-section" class="container mx-auto px-4 py-8 bg-gray-100 rounded-lg">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<h1 class="text-3xl font-bold text-center mb-8">Find Your Perfect Car</h1>
 			

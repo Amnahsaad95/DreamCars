@@ -94,8 +94,17 @@
                     <button wire:click="addComplaint({{$car->car_Id}})" class="bg-primary hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg flex items-center transition duration-200">
                         <i class="fas fa-star mr-2"></i> Add Complaint
                     </button>
-					<div x-data="{ phoneNumber: @entangle('phone'),isSold: @entangle('isSold') }">
-						<button :disabled="isSold" @click="!isSold && (window.location.href = 'tel:${phoneNumber}')"   class="border border-primary text-primary hover:bg-blue-50 font-bold py-3 px-6 rounded-lg flex items-center transition duration-200">
+					<div x-data="{ 
+    callSeller() {
+        
+            window.location.href = 'tel:' + @entangle('phone').initialValue;
+        
+    }
+}">	<button 
+							@if($isSold) disabled @endif 
+							wire:click="callSeller" 
+							class="border border-primary text-primary hover:bg-blue-50 font-bold py-3 px-6 @if($isSold) disabled-button @endif rounded-lg flex items-center transition duration-200"
+							>
 							<i class="fas fa-phone mr-2"></i> Contact Seller
 						</button>
 					</div>
@@ -107,12 +116,14 @@
         
 
 </div>
+<script>
+    // You can call your Livewire method from the front-end to trigger the logic.
+    function callSeller() {
+        if (!@this.isSold && @this.phone) {
+            window.location.href = 'tel:' + @this.phone;
+        }
+    }
+</script>
 </div>
 
-@push('styles')
-<style>
-    .fa-star {
-        transition: all 0.2s ease;
-    }
-</style>
-@endpush
+

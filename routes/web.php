@@ -8,6 +8,7 @@ use App\Livewire\Car\Create;
 use App\Livewire\Car\Update;
 use App\Livewire\Car\Lists;
 
+use App\Livewire\AboutUs;
 use App\Livewire\AdsForm;
 use App\Livewire\ComplaintSuggestionForm;
 use App\Livewire\Home;
@@ -37,6 +38,7 @@ Route::get('/AllCar', CarsMarket::class)->name('AllCar');
 Route::get('/CarDetail/{id}', CarDetail::class)->name('CarDetail');
 
 
+Route::get('/aboutUs', AboutUs::class)->name('aboutUs');
 Route::get('/addNewAds', AdsForm::class)->name('addNewAds');
 Route::get('/ComplaintSuggestionForm/{carId?}', ComplaintSuggestionForm::class)->name('ComplaintSuggestionForm');
 

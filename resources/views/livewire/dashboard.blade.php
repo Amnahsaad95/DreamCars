@@ -37,17 +37,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white rounded-lg shadow p-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-gray-500 text-sm font-medium">Conversion Rate</p>
-                                <p class="text-2xl font-bold">3.42%</p>
-                            </div>
-                            <div class="bg-purple-100 p-3 rounded-full">
-                                <i class="fas fa-percentage text-purple-600"></i>
-                            </div>
-                        </div>
-                    </div>
 					@endif
                 </div>
 

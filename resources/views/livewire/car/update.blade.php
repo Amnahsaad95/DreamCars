@@ -58,8 +58,8 @@
                                 <p class="font-medium text-blue-600">${{ number_format($car->car_Price, 2) }}</p>
                             </div>
                             <div>
-                                <p class="text-gray-500 text-sm">Avaiable </p>
-                                <p class="font-medium">{{ $car->isSold == 1 ?'No':'Yes'}}</p>
+                                <p class="text-gray-500 text-sm">Sold </p>
+                                <p class="font-medium">{{ $car->isSold == 0 ? 'No':'Yes'}}</p>
                             </div>
 							<div>
                                 <p class="text-gray-500 text-sm">color </p>
@@ -160,9 +160,9 @@
                             @error('car_Price') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-4">
-                            <label class="block text-gray-700 mb-2">Available </label>
+                            <label class="block text-gray-700 mb-2">Sold </label>
 							<label class="relative inline-flex items-center cursor-pointer">
-								<input type="checkbox" wire:model="isSold" class="sr-only peer" @checked(!$isSold)>
+								<input type="checkbox" wire:model="isSold" class="sr-only peer" @checked($isSold)>
 								<div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-red-500 transition-all"></div>
 								<div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full peer-checked:translate-x-full transition-all"></div>
 							</label>
