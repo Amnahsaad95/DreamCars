@@ -106,7 +106,7 @@
             <div class="flex justify-end space-x-4">
                 
                 <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-                    Save Changes
+                    Add Car
                 </button>
             </div>
         </form>

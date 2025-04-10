@@ -95,9 +95,7 @@
                             </td>
 							
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                <button wire:click="openViewModal({{ $user->user_Id }})" class="text-blue-600 hover:text-blue-900 mr-3">
-                                    <i class="fas fa-eye"></i>
-                                </button>
+                               
                                 <button wire:click="delete({{ $user->user_Id }})" wire:confirm="return confirm('Are you sure?')" class="text-red-600 hover:text-red-900">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -126,56 +124,6 @@
     </div>
 
 	
-    <!-- View Car Modal -->
-	<div x-data="{ isViewModalOpen: @entangle('isViewModalOpen') }">	    
-	    <div x-show="isViewModalOpen" x-cloak class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-        <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-1/2 lg:w-1/3 shadow-lg rounded-md bg-white">
-		<div class="relative top-20 mx-auto p-5 border w-11/12 md:w-1/2 lg:w-1/3 shadow-lg rounded-md bg-white">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-gray-800">User Detail</h3>
-                <button wire:click="closeModal" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 gap-4 mb-4">
-                <div class="flex justify-center mb-4">
-					@isset($viewUser->profile_Image)
-						<img src="{{ asset('storage/'.$viewUser->profile_Image ) }}" alt="User Profile" class="h-40 w-full object-cover rounded-md">
-					@else
-						<img src="{{ asset('storage/profile/default-profile.jpg' ) }}" alt="User Profile" class="h-40 w-full object-cover rounded-md">
-					@endisset
-                    
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <p class="text-sm font-medium text-gray-500">Name</p>
-                        <p class="text-sm text-gray-900">{{ $viewUser->name ?? '' }}</p>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-gray-500">Email</p>
-                        <p class="text-sm text-gray-900">{{ $viewUser->email ?? '' }}</p>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-gray-500">Phone</p>
-                        <p class="text-sm text-gray-900">{{ $viewUser->phone ?? '' }}</p>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-gray-500">City</p>
-                        <p class="text-sm text-gray-900">{{ $viewUser->city ?? '' }}</p>
-                    </div>
-                    <div>
-                        <p class="text-sm font-medium text-gray-500">Country</p>
-                        <p class="text-sm text-gray-900">{{ $viewUser->country ?? '' }}</p>
-                    </div>
-                </div>
-            </div>
-            <button wire:click="closeModal" wire:loading.attr="disabled">
-                Close
-            </button>
-	</div>
-	</div>	
-		</div>	
-	</div>	
+   
 </div>
 

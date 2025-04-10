@@ -361,7 +361,7 @@
                     </div>
                     <div>
                         <label class="block text-gray-600 mb-1"><i class="fab fa-whatsapp text-blue-700 mr-2"></i> Whatsapp</label>
-                        <input type="url" wire:model="whatsapp_number" class="w-full p-2 border rounded">
+                        <input type="text" wire:model="whatsapp_number" class="w-full p-2 border rounded">
                         @error('whatsapp_number') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                     </div>
                 </div>
