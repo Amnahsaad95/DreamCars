@@ -33,8 +33,8 @@ Whether you’re a seller or a buyer, we provide everything you need in one plac
 ## How to Run the Project Locally
 
 1 — Clone the Project
-```bash
-git clone https://github.com/Amnahsaad95/DreamCars.git
+
+`git clone https://github.com/Amnahsaad95/DreamCars.git`
 
 
 2 — Install Dependencies
