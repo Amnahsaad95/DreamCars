@@ -35,7 +35,7 @@ Whether you’re a seller or a buyer, we provide everything you need in one plac
 1 — Clone the Project
 
 `git clone https://github.com/Amnahsaad95/DreamCars.git`
-
+`cd DreamCars`
 
 2 — Install Dependencies
 
@@ -56,7 +56,16 @@ Seed Dummy Data:
 
 `php artisan db:seed`
 
-5 — Run the Project
+5 — Storage
+
+After cloning the project and setting up, you need to create a symbolic link to access uploaded files.
+
+Run the following command in your terminal:
+
+```bash
+php artisan storage:link
+
+6 — Run the Project
 
 `php artisan serve`
 
@@ -64,7 +73,7 @@ Visit the website:
 
 `http://localhost:8000`
 
-6- For Login as Admin
+7 — For Login as Admin
 
 `admin@dreamcar.com
 password123`
