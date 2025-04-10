@@ -36,23 +36,23 @@ Whether you’re a seller or a buyer, we provide everything you need in one plac
 
 ## How to Run the Project Locally
 
-1 — Clone the Project
+1. Clone the Project
 
 `git clone https://github.com/Amnahsaad95/DreamCars.git`
 `cd DreamCars`
 
-2 — Install Dependencies
+2. Install Dependencies
 
 `composer install`
 
-3 — Environment Configuration
+3. Environment Configuration
 
 `cp .env.example .env`
 `php artisan key:generate`
 
 Update .env file with your database information.
 
-4 — Database Migration
+4. Database Migration
 
 `php artisan migrate`
 
@@ -60,7 +60,7 @@ Seed Dummy Data:
 
 `php artisan db:seed`
 
-5 — Storage
+5. Storage
 
 After cloning the project and setting up, you need to create a symbolic link to access uploaded files.
 
@@ -68,7 +68,7 @@ Run the following command in your terminal:
 
 `php artisan storage:link`
 
-6 — Run the Project
+6. Run the Project
 
 `php artisan serve`
 
@@ -76,7 +76,7 @@ Visit the website:
 
 `http://localhost:8000`
 
-7 — For Login as Admin
+7. For Login as Admin
 
 Email `admin@dreamcar.com`
 Password `password123`
@@ -88,8 +88,10 @@ Password `password123`
 - Tailwind CSS
 - Alpine.js
 - MySQL Database
+- 
+## Copyright
 
-## Project Flow Diagram
-User → Register/Login → Browse Cars → Search & Filter → View Details → Contact Seller
+© 2025 Amnah SaadElden . All rights reserved.
+
 
 
