@@ -62,8 +62,7 @@ After cloning the project and setting up, you need to create a symbolic link to 
 
 Run the following command in your terminal:
 
-```bash
-php artisan storage:link
+`php artisan storage:link`
 
 6 — Run the Project
 
