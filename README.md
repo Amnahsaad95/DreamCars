@@ -1,11 +1,15 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 align="center">Dream Cars</h1>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Project Screenshots
+
+### Screenshot 1
+![Screenshot 1](https://github.com/Amnahsaad95/DreamCars/blob/main/public/images/DreamCars-Home.png)
+
+### Screenshot 2
+![Screenshot 2](https://github.com/Amnahsaad95/DreamCars/blob/main/public/images/carmarket.png)
+
+### Screenshot 3
+![Screenshot 3](https://github.com/Amnahsaad95/DreamCars/blob/main/public/images/Dashboard.jpg)
 
 ## About Dream Cars
 
@@ -19,36 +23,36 @@ Whether you’re a seller or a buyer, we provide everything you need in one plac
 
 ## Main Features
 
-    - Easy car listing for sellers.
-    - Advanced search & filters for buyers.    
-    - Detailed car information & gallery.    
-    - Compare cars feature.    
-    - Secure user authentication & authorization.    
-    - Responsive design for mobile, tablet, and desktop.    
-    - Modern & fast UI using:    
-        -- Laravel Livewire    
-        -- Alpine.js    
-        -- Tailwind CSS
+- Easy car listing for sellers.
+- Advanced search & filters for buyers.
+- Detailed car information & gallery.
+- Compare cars feature.
+- Secure user authentication & authorization.
+- Responsive design for mobile, tablet, and desktop.
+- Modern & fast UI using:
+  1. Laravel Livewire
+  2. Alpine.js
+  2. Tailwind CSS
 
 ## How to Run the Project Locally
 
-1 — Clone the Project
+1. Clone the Project
 
 `git clone https://github.com/Amnahsaad95/DreamCars.git`
 `cd DreamCars`
 
-2 — Install Dependencies
+2. Install Dependencies
 
 `composer install`
 
-3 — Environment Configuration
+3. Environment Configuration
 
 `cp .env.example .env`
 `php artisan key:generate`
 
 Update .env file with your database information.
 
-4 — Database Migration
+4. Database Migration
 
 `php artisan migrate`
 
@@ -56,7 +60,7 @@ Seed Dummy Data:
 
 `php artisan db:seed`
 
-5 — Storage
+5. Storage
 
 After cloning the project and setting up, you need to create a symbolic link to access uploaded files.
 
@@ -64,7 +68,7 @@ Run the following command in your terminal:
 
 `php artisan storage:link`
 
-6 — Run the Project
+6. Run the Project
 
 `php artisan serve`
 
@@ -72,10 +76,10 @@ Visit the website:
 
 `http://localhost:8000`
 
-7 — For Login as Admin
+7. For Login as Admin
 
-`admin@dreamcar.com
-password123`
+Email `admin@dreamcar.com`
+Password `password123`
 
 ## Technologies Used
 
@@ -85,7 +89,9 @@ password123`
 - Alpine.js
 - MySQL Database
 
-## Project Flow Diagram
-User → Register/Login → Browse Cars → Search & Filter → View Details → Contact Seller
+## Copyright
+
+© 2025 Amnah SaadElden . All rights reserved.
+
 
 
