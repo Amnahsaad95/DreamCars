@@ -30,9 +30,9 @@ Whether you’re a seller or a buyer, we provide everything you need in one plac
 - Secure user authentication & authorization.
 - Responsive design for mobile, tablet, and desktop.
 - Modern & fast UI using:
-  -- Laravel Livewire
-  -- Alpine.js
-  -- Tailwind CSS
+  1. Laravel Livewire
+  2. Alpine.js
+  2. Tailwind CSS
 
 ## How to Run the Project Locally
 
