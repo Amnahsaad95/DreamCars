@@ -7,60 +7,73 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## About Dream Cars
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:Dream Cars was founded with the goal of making car buying and selling easier and faster for everyone.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Our platform allows sellers to showcase their cars easily, while providing buyers with a smooth and direct experience to find the car they want.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+We’re here to make the car buying and selling process more transparent, offering a wide range of options to suit all needs.
 
-## Learning Laravel
+Whether you’re a seller or a buyer, we provide everything you need in one place. We aim to offer an innovative platform that helps sellers display their cars with ease, while providing buyers with a unique experience to discover and compare cars with complete transparency.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Main Features
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    - Easy car listing for sellers.    
+    - Advanced search & filters for buyers.    
+    - Detailed car information & gallery.    
+    - Compare cars feature.    
+    - Secure user authentication & authorization.    
+    - Responsive design for mobile, tablet, and desktop.    
+    - Modern & fast UI using:    
+        -- Laravel Livewire    
+        -- Alpine.js    
+        -- Tailwind CSS
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## How to Run the Project Locally
 
-## Laravel Sponsors
+1 — Clone the Project
+```bash
+git clone https://github.com/Amnahsaad95/DreamCars.git
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+2 — Install Dependencies
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+`composer install`
 
-## Contributing
+3 — Environment Configuration
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+`cp .env.example .env`
+`php artisan key:generate`
 
-## Code of Conduct
+Update .env file with your database information.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4 — Database Migration
 
-## Security Vulnerabilities
+`php artisan migrate`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Seed Dummy Data:
 
-## License
+`php artisan db:seed`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5 — Run the Project
+
+`php artisan serve`
+
+Visit the website:
+
+`http://localhost:8000`
+
+
+## Technologies Used
+
+*Laravel
+*Laravel Livewire
+*Tailwind CSS
+Alpine.js
+*MySQL Database
+
+## Project Flow Diagram
+User → Register/Login → Browse Cars → Search & Filter → View Details → Contact Seller
+
+
