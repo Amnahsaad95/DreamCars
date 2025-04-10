@@ -26,7 +26,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 65000,
                 'isSold'          => 0,
                 'car_Description' => 'Hyundai Elantra 2018 in excellent condition.',
-                'user_Id'         => 10,
+                'user_Id'         => 1,
             ],
             [
                 'Brand'           => 'Kia',
@@ -39,7 +39,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 62000,
                 'isSold'          => 0,
                 'car_Description' => 'Kia Cerato 2017, well maintained.',
-                'user_Id'         => 10,
+                'user_Id'         => 1,
             ],
             [
                 'Brand'           => 'Toyota',
@@ -52,7 +52,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 70000,
                 'isSold'          => 0,
                 'car_Description' => 'Toyota Corolla 2015, fuel efficient.',
-                'user_Id'         => 8,
+                'user_Id'         => 2,
             ],
             [
                 'Brand'           => 'Mercedes',
@@ -65,7 +65,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 120000,
                 'isSold'          => 0,
                 'car_Description' => 'Mercedes C200 2012, luxury car.',
-                'user_Id'         => 7,
+                'user_Id'         => 2,
             ],
             [
                 'Brand'           => 'BMW',
@@ -78,7 +78,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 115000,
                 'isSold'          => 0,
                 'car_Description' => 'BMW 320i 2016, sporty and powerful.',
-                'user_Id'         => 8,
+                'user_Id'         => 3,
             ],
             [
                 'Brand'           => 'Audi',
@@ -91,7 +91,7 @@ class CarSeeder extends Seeder
                 'car_Price'       => 110000,
                 'isSold'          => 0,
                 'car_Description' => 'Audi A4 2014, German quality.',
-                'user_Id'         => 8,
+                'user_Id'         => 3,
             ],
             [
                 'Brand'           => 'Volkswagen',

@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\View;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Schema;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 		
-		View::share('settings', Setting::first());
+		if (Schema::hasTable('settings')) {
+			View::share('settings', Setting::first());
+		}
 
     }
 }

@@ -32,7 +32,7 @@ class ComplaintSeeder extends Seeder
                 'status'      => 'accepted',
                 'type'        => 'suggestion',
                 'user_Id'     => 8,
-                'car_Id'      => 40,
+                'car_Id'      => 14,
             ],
             [
                 'name'        => 'Ali Ahmed',
@@ -52,7 +52,7 @@ class ComplaintSeeder extends Seeder
                 'status'      => 'rejected',
                 'type'        => 'suggestion',
                 'user_Id'     => 8,
-                'car_Id'      => 40,
+                'car_Id'      => 10,
             ],
             [
                 'name'        => 'Fatima Ali',
@@ -72,7 +72,7 @@ class ComplaintSeeder extends Seeder
                 'status'      => 'pending',
                 'type'        => 'complaint_car',
                 'user_Id'     => 10,
-                'car_Id'      => 43,
+                'car_Id'      => 7,
             ],
         ]);
     }
