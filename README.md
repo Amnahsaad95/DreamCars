@@ -64,10 +64,14 @@ Visit the website:
 
 `http://localhost:8000`
 
+6- For Login as Admin
+
+`admin@dreamcar.com
+password123`
 
 ## Technologies Used
 
-1.Laravel
+- Laravel
 2.Laravel Livewire
 3.Tailwind CSS
 4.Alpine.js
