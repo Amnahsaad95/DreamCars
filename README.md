@@ -88,7 +88,7 @@ Password `password123`
 - Tailwind CSS
 - Alpine.js
 - MySQL Database
-- 
+
 ## Copyright
 
 © 2025 Amnah SaadElden . All rights reserved.
