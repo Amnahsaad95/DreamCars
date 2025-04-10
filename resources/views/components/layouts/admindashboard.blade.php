@@ -96,10 +96,7 @@
                     <button class="md:hidden text-gray-500 focus:outline-none">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <div class="relative mx-4">
-                        <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                    </div>
+                    
                 </div>
                 <div class="flex items-center space-x-4">
                    <!-- <button class="text-gray-500 focus:outline-none">

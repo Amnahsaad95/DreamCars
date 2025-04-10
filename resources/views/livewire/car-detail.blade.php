@@ -114,8 +114,87 @@
         </div>
         
         
+<!-- Comments Section -->
+        <div class="p-6 border-t border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Customer Reviews</h2>
+            @if(session()->has('message'))
+				<div class="mb-4 p-4 bg-green-100 text-green-700 rounded">
+					{{ session('message') }}
+				</div>
+			@endif
+            <div class="bg-gray-50 p-4 rounded-lg mb-8">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">Write a Review</h3>
+                <form wire:submit.prevent="addComment">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                            Name
+                        </label>
+                        <input 
+                            wire:model="name"
+                            id="name" 
+							type="text"							
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            placeholder="Enter your Name"></textarea>
+                        @error('name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                    </div>
+					 <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+                            Phone
+                        </label>
+                        <input 
+                            wire:model="commentPhone"
+                            id="phone" 
+							type="text"							
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            placeholder="Enter your phone"></textarea>
+                        @error('commentPhone') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="comment">
+                            Your Comment
+                        </label>
+                        <textarea 
+                            wire:model="newComment"
+                            id="comment" 
+                            rows="3" 
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            placeholder="Share your Opinion..."></textarea>
+                        @error('newComment') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                    </div>
+                    <button type="submit" class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Submit Review
+                    </button>
+                </form>
+            </div>
+            
+            
+            <!-- Comments List -->
+            <div class="space-y-6">
+			
+                @forelse($comments as $comment)
+                <div class="border-b border-gray-200 pb-6">
+                    <div class="flex items-start">
+                        
+                        <div class="ml-4 flex-1">
+                            <div class="flex items-center justify-between">
+                                <h4 class="text-sm font-bold text-gray-900">{{ $comment->name }}</h4>
+                                <span class="text-xs text-gray-500">{{ $comment->created_at }}</span>
+                            </div>
+                            <p class="text-sm text-gray-600">
+                                {{ $comment->content }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                <div class="text-center py-8 text-gray-500">
+                    No reviews yet. Be the first to review!
+                </div>
+                @endforelse
+            </div>
+        </div>
+    </div>
 
-</div>
 <script>
     // You can call your Livewire method from the front-end to trigger the logic.
     function callSeller() {
