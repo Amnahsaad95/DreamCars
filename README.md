@@ -19,7 +19,7 @@ Whether you’re a seller or a buyer, we provide everything you need in one plac
 
 ## Main Features
 
-    - Easy car listing for sellers.    
+    - Easy car listing for sellers.
     - Advanced search & filters for buyers.    
     - Detailed car information & gallery.    
     - Compare cars feature.    
