@@ -72,10 +72,10 @@ password123`
 ## Technologies Used
 
 - Laravel
-2.Laravel Livewire
-3.Tailwind CSS
-4.Alpine.js
-5.MySQL Database
+- Laravel Livewire
+- Tailwind CSS
+- Alpine.js
+- MySQL Database
 
 ## Project Flow Diagram
 User → Register/Login → Browse Cars → Search & Filter → View Details → Contact Seller
