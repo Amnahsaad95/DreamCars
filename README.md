@@ -67,11 +67,11 @@ Visit the website:
 
 ## Technologies Used
 
-*Laravel
-*Laravel Livewire
-*Tailwind CSS
-Alpine.js
-*MySQL Database
+1.Laravel
+2.Laravel Livewire
+3.Tailwind CSS
+4.Alpine.js
+5.MySQL Database
 
 ## Project Flow Diagram
 User → Register/Login → Browse Cars → Search & Filter → View Details → Contact Seller
