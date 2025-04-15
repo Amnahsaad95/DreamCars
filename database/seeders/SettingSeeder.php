@@ -27,8 +27,15 @@ class SettingSeeder extends Seeder
 					'intro_text_2' => 'More choices, better prices, and the easiest way to find your dream car .',
 					'intro_title_3' => 'Your Ad Is Not Just a Picture... It is a Story !',
 					'intro_text_3' => 'Show it the right way — Professional Ads, Real Reach, Real Results .',
+					'intro_title_1_Ar' => 'ابحث بذكاء... وتمتّع بتجربة شراء مريحة!',
+					'intro_text_1_Ar' => 'تفاصيل واضحة، صور حقيقية، وتواصل مباشر مع البائعين — كل شيء أصبح أسهل لك.',
+					'intro_title_2_Ar' => 'ما زلت تبحث؟ أفضل السيارات تجدها هنا!',
+					'intro_text_2_Ar' => 'خيارات أكثر، أسعار أفضل، وأسهل طريقة للعثور على سيارتك المثالية.',
+					'intro_title_3_Ar' => 'وراء كل إعلان قصة... دع الناس يكتشفونها!',
+					'intro_text_3_Ar' => 'اعرض إعلانك بالشكل المثالي — احترافية في العرض، وصول واسع، ونتائج مضمونة.',
 					'site_location' => '123, Homs Syria',
 					'siteDescription' => 'Find your dream car with our extensive inventory and trusted sellers.',
+					'siteDescriptionAr' => 'اعثر على سيارتك الحلم من خلال مجموعة واسعة من السيارات وبائعين موثوقين.',
 					];
 							
 		DB::table('settings')->insert($setting);

@@ -107,5 +107,10 @@ return [
 	'end_date_format' => 'يوم-----سنة',
 	'create_advertisement' => 'إنشاء الإعلان',
 	'preview' => 'معاينة',
+	
+	/////carousel 
+	'start_search' => 'ابدأ البحث',
+	'explore_cars' => 'استكشف السيارات',
+	'post_Ads' => 'انشر إعلانك الآن',
 
 ];

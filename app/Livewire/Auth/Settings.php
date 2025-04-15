@@ -50,13 +50,20 @@ class Settings extends Component
     public $intro_text_1 ;
     public $intro_title_2   ;
     public $intro_text_2 ;
-    public $intro_title_3  ;
-    public $site_location  ;
+    public $intro_title_3  ;    
     public $intro_text_3 ;
+    public $intro_title_1_Ar  ;
+    public $intro_text_1_Ar ;
+    public $intro_title_2_Ar   ;
+    public $intro_text_2_Ar ;
+    public $intro_title_3_Ar  ;    
+    public $intro_text_3_Ar ;
+	public $site_location  ;
 	public $viewMode = true;
 	public $changePasswordMode = false;
 	public $viewProfileMode = true;
 	public $siteDescription ;
+	public $siteDescriptionAr ;
 	// Password fields
 	public $current_password;
     public $new_password;
@@ -90,6 +97,7 @@ class Settings extends Component
 		$this->oldlogo = $this->settings->site_logo;
 		$this->site_location = $this->settings->site_location ;
 		$this->siteDescription = $this->settings->siteDescription ;
+		$this->siteDescriptionAr = $this->settings->siteDescriptionAr ;
 		$this->sitemail = $this->settings->sitemail ;
 		$this->facebook_url = $this->settings->facebook_url ;
 		$this->whatsapp_number = $this->settings->whatsapp_number;
@@ -103,6 +111,12 @@ class Settings extends Component
 		$this->intro_title_1 = $this->settings->intro_title_1;
 		$this->intro_title_2 = $this->settings->intro_title_2;
 		$this->intro_title_3 = $this->settings->intro_title_3;
+		$this->intro_text_1_Ar = $this->settings->intro_text_1_Ar;
+		$this->intro_text_2_Ar = $this->settings->intro_text_2_Ar;
+		$this->intro_text_3_Ar = $this->settings->intro_text_3_Ar;
+		$this->intro_title_1_Ar = $this->settings->intro_title_1_Ar;
+		$this->intro_title_2_Ar = $this->settings->intro_title_2_Ar;
+		$this->intro_title_3_Ar = $this->settings->intro_title_3_Ar;
     }
 	
 	public function profileEdit()
@@ -176,6 +190,7 @@ class Settings extends Component
 			'site_logo' => 'nullable|image|max:2048',
 			'site_location' => 'nullable|string|max:255',
 			'siteDescription' => 'nullable|string|max:255',
+			'siteDescriptionAr' => 'nullable|string|max:255',
 			'sitemail' => 'nullable|string|max:255',
 			'facebook_url' => 'nullable|string|max:255',
 			'whatsapp_number' => 'nullable|string|max:255',
@@ -189,6 +204,12 @@ class Settings extends Component
 			'intro_title_1' => 'nullable|string|max:255',
 			'intro_title_2' => 'nullable|string|max:255',
 			'intro_title_3' => 'nullable|string|max:255',
+			'intro_text_1_Ar' => 'nullable|string|max:255',
+			'intro_text_2_Ar' => 'nullable|string|max:255',
+			'intro_text_3_Ar' => 'nullable|string|max:255',
+			'intro_title_1_Ar' => 'nullable|string|max:255',
+			'intro_title_2_Ar' => 'nullable|string|max:255',
+			'intro_title_3_Ar' => 'nullable|string|max:255',
 			
 		]);
 		if ($this->intro_image_1) {

@@ -5,7 +5,7 @@
     
     navOpen: false,
     profileDropdown: false,
-    
+    isRtl: {{ app()->getLocale() == 'ar' ? 'true' : 'false' }},
     currentBanner: 0,
     init() {
         setInterval(() => {
@@ -192,31 +192,31 @@
     <!-- 2. Carousel -->
     <div class="relative h-96 overflow-hidden">
         <div class="absolute inset-0 flex transition-transform duration-1000" 
-             :style="`transform: translateX(-${currentSlide * 100}%)`">
+             :style="`transform: translateX(${isRtl ? currentSlide * 100 : -currentSlide * 100}%);`">
             <div class="w-full flex-shrink-0 bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white">
                 <div class="text-center px-8">
-                    <h2 class="text-4xl font-bold mb-4">{{$settings->intro_title_1}}</h2>
-                    <p class="text-xl mb-6">{{$settings->intro_text_1}}</p>
+                    <h2 class="text-4xl font-bold mb-4">{{app()->getLocale() == 'ar' ? $settings->intro_title_1_Ar : $settings->intro_title_1}}</h2>
+                    <p class="text-xl mb-6">{{app()->getLocale() == 'ar' ? $settings->intro_text_1_Ar : $settings->intro_text_1}}</p>
                     <button onclick="scrollToSearchSection('search-section','/')" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
-                        Start Searching
+                        {{ __('messages.start_search') }}
                     </button>
                 </div>
             </div>
             <div class="w-full flex-shrink-0 bg-gradient-to-r from-secondary to-primary flex items-center justify-center text-white">
                 <div class="text-center px-8">
-                    <h2 class="text-4xl font-bold mb-4">{{$settings->intro_title_2}}</h2>
-                    <p class="text-xl mb-6">{{$settings->intro_text_2}}</p>
+                    <h2 class="text-4xl font-bold mb-4">{{app()->getLocale() == 'ar' ? $settings->intro_title_2_Ar : $settings->intro_title_2}}</h2>
+                    <p class="text-xl mb-6">{{app()->getLocale() == 'ar' ? $settings->intro_text_2_Ar : $settings->intro_text_2}}</p>
                     <button class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
-                        Explore Cars
+                        {{ __('messages.explore_cars') }}
                     </button>
                 </div>
             </div>
             <div class="w-full flex-shrink-0 bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-white">
                 <div class="text-center px-8">
-                    <h2 class="text-4xl font-bold mb-4">{{$settings->intro_title_3}}</h2>
-                    <p class="text-xl mb-6">{{$settings->intro_text_3}}</p>
+                    <h2 class="text-4xl font-bold mb-4">{{app()->getLocale() == 'ar' ? $settings->intro_title_3_Ar : $settings->intro_title_3}}</h2>
+                    <p class="text-xl mb-6">{{app()->getLocale() == 'ar' ? $settings->intro_text_3_Ar : $settings->intro_text_3}}</p>
                     <button onclick="window.location.href='{{ url('/addNewAds') }}'" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
-                       Post Your Ad Now
+                       {{ __('messages.post_Ads') }}
                     </button>
                 </div>
             </div>
@@ -241,7 +241,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <h3 class="logo text-xl font-bold mb-4">{{$settings->site_name}}</h3>
-                    <p class="text-gray-400">{{$settings->siteDescription}}</p>
+                    <p class="text-gray-400">{{app()->getLocale() == 'ar' ? $settings->siteDescriptionAr : $settings->siteDescription}}</p>
                 </div>
                 <div>
                     <h4 class="font-semibold mb-4">{{ __('messages.QuickLink') }}</h4>

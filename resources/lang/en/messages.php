@@ -99,4 +99,9 @@ return [
 	'create_advertisement' => 'Create Advertisement',
 	'preview' => 'Preview',
 	
+	///carousel 
+	'start_search' => 'Start Searching',
+	'explore_cars' => 'Explore Cars',
+	'post_Ads' => 'Post Your Ad Now',
+	
 ];

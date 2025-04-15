@@ -23,6 +23,12 @@ return new class extends Migration
 			$table->string('intro_image_1')->nullable(); 
 			$table->string('intro_image_2')->nullable(); 
 			$table->string('intro_image_3')->nullable(); 
+			$table->string('intro_title_1_Ar')->nullable(); 
+			$table->string('intro_text_1_Ar')->nullable();
+			$table->string('intro_title_2_Ar')->nullable();
+			$table->string('intro_text_2_Ar')->nullable();				
+			$table->string('intro_title_3_Ar')->nullable(); 			 
+			$table->string('intro_text_3_Ar')->nullable(); 
 			$table->string('intro_title_1')->nullable(); 
 			$table->string('intro_text_1')->nullable();
 			$table->string('intro_title_2')->nullable();
@@ -31,6 +37,7 @@ return new class extends Migration
 			$table->string('intro_text_3')->nullable(); 			 
 			$table->string('site_location')->nullable(); 
 			$table->string('siteDescription')->nullable(); 
+			$table->string('siteDescriptionAr')->nullable(); 
 			$table->timestamps();
         });
     }

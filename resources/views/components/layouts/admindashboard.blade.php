@@ -83,9 +83,16 @@
                                 <p class="text-xs text-indigo-200">{{ __('auth.admin') }}</p>
                             </div>
                         </div>
+					</div>
+					<div class="mt-auto pb-4">
+                        <div class="flex items-center px-4 py-3 bg-indigo-700 rounded-lg">
+                             <a href="{{route('logout')}}"><span class="ml-2 text-sm font-medium px-2">{{ __('auth.logout') }}</span></a>
+						
+                        </div>
                     </div>
                 </div>
             </div>
+			
         </div>
 
         <!-- Main Content -->
@@ -106,9 +113,10 @@
                         <i class="fas fa-envelope"></i>
                     </button>-->
                     <div class="flex items-center">
-                        <img class="h-8 w-8 rounded-full" src="{{ asset('storage/' . Auth::user()->profile_Image) }}" alt="User avatar">
-                        <a href="{{route('logout')}}"><span class="ml-2 text-sm font-medium px-2">{{ __('auth.logout') }}</span></a>
-                    </div>
+                       <!-- Language Toggle -->
+						<livewire:language-switcher :currentRouteName="Route::currentRouteName()" 
+											:currentRouteParams="request()->route()->parameters()" /> 
+					</div>
                 </div>
             </header>
 

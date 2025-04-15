@@ -69,7 +69,40 @@ return [
 	'user_manag' => 'إدارة المستخدمين',
 	'date' => 'التاريخ',
 	'search_user' => 'البحث عن مستخدم',
-
+	
+	///setting
+	
+	 'site_info' => 'معلومات الموقع',
+    'site_name' => 'اسم الموقع:',
+    'site_location' => 'موقع الموقع:',
+    'site_desc' => 'الوصف:',
+    'site_desc_Ar' => ' الوصف باللغة العربية:',
+    'site_Icon_logo' => 'أيقونة وشعار الموقع',
+    'site_icon' => 'أيقونة الموقع:',
+    'site_no_icon' => 'لا توجد أيقونة',
+    'site_logo' => 'شعار الموقع:',
+    'site_no_logo' => 'لا يوجد شعار',
+    'site_images' => 'صور المعرض',
+    'site_no_images' => 'لا توجد صورة',
+    'site_section' => 'أقسام المقدمة',
+    'site_social_media_link' => 'روابط وسائل التواصل الاجتماعي',
+    'site_facebook' => 'فيسبوك:',
+    'site_instagram' => 'انستغرام:',
+    'site_whatsapp' => 'واتساب:',
+	
+	'site_intro_section' => 'أقسام المقدمة',
+    'site_Text' => 'النص',
+    'site_Title' => 'العنوان',
+	'site_intro_section_Ar' => 'أقسام المقدمة بالعربية',
+	'site_Text_Ar' => 'النص باللغة العربية',
+	'site_Title_Ar' => 'العنوان باللغة العربية',
+	
+    'site_select_image' => 'اختر صورة',
+    'site_select_icon' => 'اختر أيقونة',
+    'site_select_logo' => 'اختر شعار',
+    'site_intro_image_1' => 'صورة المقدمة الأولى',
+    'site_intro_image_2' => 'صورة المقدمة الثانية',
+    'site_intro_image_3' => 'صورة المقدمة الثالثة',
 
 
 
