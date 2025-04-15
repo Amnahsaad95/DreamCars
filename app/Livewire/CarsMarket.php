@@ -19,6 +19,13 @@ class CarsMarket extends Component
         'sortBy' => ['except' => ''],
     ];
 
+	protected $listeners = ['languageChanged' => 'updateLanguage'];
+
+    public function updateLanguage($language)
+    {
+        app()->setLocale($language);  // تحديث اللغة في المكون
+    }
+	
     public function render()
     {
 		
@@ -105,7 +112,10 @@ class CarsMarket extends Component
     }
 
     public function show($id){
-		return redirect()->route('CarDetail',$id);
+		return redirect()->route('CarDetail',[
+        'locale' => app()->getLocale(),
+        'id' => $id
+    ]);
 	}
 
 

@@ -1,5 +1,5 @@
 <div class="flex-grow overflow-auto container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">Ads Management</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ __('dashboard.ads_management') }}</h1>
     
     @if(session('message'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -26,7 +26,7 @@
                     wire:click="changeTab('all')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'all' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
                 ><i class="fas fa-check-circle mr-2 text-published"></i>
-                    All 
+                    {{ __('dashboard.all') }} 
 					<span class="ml-2 bg-published text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$all->total()}}</span>
                 </button>
             </li>
@@ -36,7 +36,7 @@
                     wire:click="changeTab('pending')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'pending' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
                 ><i class="fas fa-clock mr-2 text-secondary"></i>
-                    New
+                    {{ __('dashboard.new') }}
 					<span class="ml-2 bg-secondary text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$pendingAds->total()}}</span>				
                 </button>
             </li>
@@ -45,7 +45,7 @@
                     wire:click="changeTab('published')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'published' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
                 ><i class="fas fa-share-square mr-2 text-published"></i>
-                    Published 
+                     {{ __('dashboard.published') }} 
 					<span class="ml-2 bg-published text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$publishedAds->total()}}</span>
                 </button>
             </li>
@@ -54,7 +54,7 @@
                     wire:click="changeTab('unpublished')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'unpublished' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
                 ><i class="fas fa-box-archive mr-2 text-primary"></i>
-                    Unpublished 
+                     {{ __('dashboard.unpublished') }} 
 					<span class="ml-2 bg-primary text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$unpublishedAds->total()}}</span>
                 </button>
             </li>
@@ -63,7 +63,7 @@
                     wire:click="changeTab('rejected')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'rejected' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
                 ><i class="fas fa-ban mr-2 text-rejected"></i>
-                    Rejected 
+                     {{ __('dashboard.rejected') }} 
 					<span class="ml-2 bg-rejected text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$rejectedAds->total()}}</span>
                 </button>
             </li>
@@ -73,21 +73,21 @@
     
     <!-- All adss Tab -->
     <div class="{{ $activeTab !== 'all' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">All Ads</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ __('dashboard.all_ads') }} </h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-{{ app()->getLocale() == 'ar' ? 'right' : 'left' }} text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3"></th>
-                        <th scope="col" class="px-6 py-3">Full Name</th>
-                        <th scope="col" class="px-6 py-3">Hit</th>
-                        <th scope="col" class="px-6 py-3">Ad Url</th>
-                        <th scope="col" class="px-6 py-3">Location</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
-                        <th scope="col" class="px-6 py-3">Start Date</th>
-                        <th scope="col" class="px-6 py-3">End Date</th>
-                        <th scope="col" class="px-6 py-3">Actions</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.FullName') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.hit') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.url') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.location') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.status') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.start_date') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.end_date') }}</th>
+                        <th scope="col" class="px-6 py-3 text-left"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -106,23 +106,23 @@
                             <td class="px-6 py-4">{{ $ads->location }}</td>
                             <td class="px-6 py-4">
 							@if($ads->status == 'published' )
-                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Published</span>
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.published') }}</span>
 							@endif
 							@if($ads->status == 'rejected' )
-                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Rejected</span>
+                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.rejected') }}</span>
 							@endif
 							@if($ads->status == 'pending')
-                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Pending</span>
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.pending') }}</span>
 							@endif
 							@if( $ads->status == 'unpublished')
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Unpublished</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.unpublished') }}</span>
 							@endif
                             </td>
 							
                             <td class="px-6 py-4">{{ $ads->start_date }}</td>
 							
                             <td class="px-6 py-4">{{ $ads->End_date}}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-left">
                                 @if($ads->status == 'published' )
 									<button wire:click="unpublishAds({{ $ads->id }})" class="text-purple-600 hover:text-purple-900 mr-3">
 										<i class="fas fa-eye-slash"></i>
@@ -148,7 +148,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">No Ads found</td>
+                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">{{ __('dashboard.no_ads') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -161,21 +161,21 @@
     </div>
     <!-- Published adss Tab -->
     <div class="{{ $activeTab !== 'published' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Published Ads</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ __('dashboard.published_ads') }}</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-{{ app()->getLocale() == 'ar' ? 'right' : 'left' }} text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3"></th>
-                        <th scope="col" class="px-6 py-3">Full Name</th>
-                        <th scope="col" class="px-6 py-3">Hit</th>
-                        <th scope="col" class="px-6 py-3">Ad Url</th>
-                        <th scope="col" class="px-6 py-3">Location</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
-                        <th scope="col" class="px-6 py-3">Start Date</th>
-                        <th scope="col" class="px-6 py-3">End Date</th>
-                        <th scope="col" class="px-6 py-3">Actions</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.FullName') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.hit') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.url') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.location') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.status') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.start_date') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.end_date') }}</th>
+                        <th scope="col" class="px-6 py-3"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -193,12 +193,12 @@
                             <td class="px-6 py-4">{{ $ads->ad_Url }}</td>
                             <td class="px-6 py-4">{{ $ads->location }}</td>
                             <td class="px-6 py-4">
-                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Published</span>
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.published') }}</span>
                             </td>
 							<td class="px-6 py-4">{{ $ads->start_date }}</td>
 							
                             <td class="px-6 py-4">{{ $ads->End_date}}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-left">
                                 <button wire:click="unpublishAds({{ $ads->id }})" class="text-purple-600 hover:text-purple-900 mr-3">
                                     <i class="fas fa-eye-slash"></i>
                                 </button>
@@ -209,7 +209,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">No published adss found</td>
+                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">{{ __('dashboard.no_published_ads') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -222,21 +222,21 @@
     </div>
 	<!-- Published adss Tab -->
     <div class="{{ $activeTab !== 'unpublished' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Unpublished Ads</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ __('dashboard.unpublished_ads') }}</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-{{ app()->getLocale() == 'ar' ? 'right' : 'left' }} text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3"></th>
-                        <th scope="col" class="px-6 py-3">Full Name</th>
-                        <th scope="col" class="px-6 py-3">Hit</th>
-                        <th scope="col" class="px-6 py-3">Ad Url</th>
-                        <th scope="col" class="px-6 py-3">Location</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
-                        <th scope="col" class="px-6 py-3">Start Date</th>
-                        <th scope="col" class="px-6 py-3">End Date</th>
-                        <th scope="col" class="px-6 py-3">Actions</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.FullName') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.hit') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.url') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.location') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.status') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.start_date') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.end_date') }}</th>
+                        <th scope="col" class="px-6 py-3"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -254,12 +254,12 @@
                             <td class="px-6 py-4">{{ $ads->ad_Url }}</td>
                             <td class="px-6 py-4">{{ $ads->location }}</td>
                             <td class="px-6 py-4">
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Unpublished</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.unpublished') }}</span>
                             </td>
 							<td class="px-6 py-4">{{ $ads->start_date }}</td>
 							
                             <td class="px-6 py-4">{{ $ads->End_date}}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-left">
                                 
                                 <button wire:click="deleteAds({{ $ads->id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
                                     <i class="fas fa-trash"></i>
@@ -268,7 +268,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">No Unpublished ads found</td>
+                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">{{ __('dashboard.no_unpublished_ads') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -282,21 +282,21 @@
     
     <!-- Rejected adss Tab -->
     <div class="{{ $activeTab !== 'rejected' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Rejected Ads</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ __('dashboard.rejected_ads') }}</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-{{ app()->getLocale() == 'ar' ? 'right' : 'left' }} text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3"></th>
-                        <th scope="col" class="px-6 py-3">Full Name</th>
-                        <th scope="col" class="px-6 py-3">Hit</th>
-                        <th scope="col" class="px-6 py-3">Ad Url</th>
-                        <th scope="col" class="px-6 py-3">Location</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
-                        <th scope="col" class="px-6 py-3">Start Date</th>
-                        <th scope="col" class="px-6 py-3">End Date</th>
-                        <th scope="col" class="px-6 py-3">Actions</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.FullName') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.hit') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.url') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.location') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.status') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.start_date') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.end_date') }}</th>
+                        <th scope="col" class="px-6 py-3"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -314,12 +314,12 @@
                             <td class="px-6 py-4">{{ $ads->ad_Url }}</td>
                             <td class="px-6 py-4">{{ $ads->location }}</td>
                             <td class="px-6 py-4">
-                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Rejected</span>
+                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.rejected') }}</span>
                             </td>
 							<td class="px-6 py-4">{{ $ads->start_date }}</td>
 							
                             <td class="px-6 py-4">{{ $ads->End_date}}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-left">
                                 
                                 <button wire:click="publishAds({{ $ads->id }})" class="text-purple-600 hover:text-purple-900 mr-3">
                                     <i class="fas fa-redo"></i>
@@ -331,7 +331,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="px-6 py-4 text-center text-gray-500">No rejected ads found</td>
+                            <td colspan="8" class="px-6 py-4 text-center text-gray-500">{{ __('dashboard.no_rejected_ads') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -345,21 +345,21 @@
     
     <!-- Pending adss Tab -->
     <div class="{{ $activeTab !== 'pending' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">New Ads</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ __('dashboard.new_ads') }}</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-{{ app()->getLocale() == 'ar' ? 'right' : 'left' }} text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3"></th>
-                        <th scope="col" class="px-6 py-3">Full Name</th>
-                        <th scope="col" class="px-6 py-3">Hit</th>
-                        <th scope="col" class="px-6 py-3">Ad Url</th>
-                        <th scope="col" class="px-6 py-3">Location</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
-                        <th scope="col" class="px-6 py-3">Start Date</th>
-                        <th scope="col" class="px-6 py-3">End Date</th>
-                        <th scope="col" class="px-6 py-3">Actions</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.FullName') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.hit') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.url') }} </th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.location') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.status') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.start_date') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('dashboard.end_date') }}</th>
+                        <th scope="col" class="px-6 py-3 text-left"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -377,12 +377,12 @@
                             <td class="px-6 py-4">{{ $ads->ad_Url }}</td>
                             <td class="px-6 py-4">{{ $ads->location }}</td>
                             <td class="px-6 py-4">
-                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Pending</span>
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.pending') }}</span>
                             </td>
 							<td class="px-6 py-4">{{ $ads->start_date }}</td>
 							
                             <td class="px-6 py-4">{{ $ads->End_date}}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-left">
                                 
                                 <button wire:click="publishAds({{ $ads->id }})" class="text-green-600 hover:text-green-900 mr-3">
                                     <i class="fas fa-check"></i>
@@ -397,7 +397,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">No pending adss found</td>
+                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">{{ __('dashboard.no_pending_ads') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -1,6 +1,6 @@
 <div class="container mx-auto px-4 py-8 max-w-6xl">
 <div class="max-w-2xl mx-auto p-12 bg-white rounded-lg shadow-md">
-	<h1 class="text-2xl text-center font-bold mb-6">Submit Your FeedBack</h1>
+	<h1 class="text-2xl text-center font-bold mb-6">{{ __('messages.submit_feedback') }}</h1>
     @if(session()->has('message'))
         <div class="mb-4 p-4 bg-green-100 text-green-700 rounded">
             {{ session('message') }}
@@ -10,15 +10,15 @@
     <form wire:submit.prevent="submit">
         <!-- Type Selection -->
         <div class="mb-4">
-            <label class="block text-gray-700 mb-2">Type</label>
+            <label class="block text-gray-700 mb-2">{{ __('messages.type') }}</label>
             <div class="flex space-x-4">
                 <label class="inline-flex items-center">
                     <input type="radio" wire:model.live="type" value="complaint" class="form-radio" {{ $isDisabled ? 'disabled' : '' }}>
-                    <span class="ml-2">Complaint</span>
+                    <span class="ml-2">{{ __('messages.complaint') }}</span>
                 </label>
                 <label class="inline-flex items-center">
                     <input type="radio" wire:model.live="type" value="suggestion" class="form-radio" {{ $isDisabled ? 'disabled' : '' }}>
-                    <span class="ml-2">Suggestion</span>
+                    <span class="ml-2">{{ __('messages.suggestion') }}</span>
                 </label>
             </div>
         </div>
@@ -26,15 +26,15 @@
         <!-- About Selection (only for complaints) -->
         @if($type === 'complaint')
             <div class="mb-4">
-                <label class="block text-gray-700 mb-2">This complaint is about:</label>
+                <label class="block text-gray-700 mb-2">{{ __('messages.this_complaint_is_about') }}</label>
                 <div class="flex space-x-4">
                     <label class="inline-flex items-center">
                         <input type="radio" wire:model.live="about_type" value="user" class="form-radio" {{ $isDisabled ? 'disabled' : '' }}>
-                        <span class="ml-2">User</span>
+                        <span class="ml-2">{{ __('messages.user') }}</span>
                     </label>
                     <label class="inline-flex items-center">
                         <input type="radio" wire:model.live="about_type" value="car" class="form-radio" {{ $isDisabled ? 'disabled' : '' }}>
-                        <span class="ml-2">Car</span>
+                        <span class="ml-2">{{ __('messages.car') }}</span>
                     </label>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                 <div class="mb-4">
 				@if($about_type === 'user')					
 					<div class="relative mb-4">
-						<label class="block text-gray-700 mb-2">User Name</label>
+						<label class="block text-gray-700 mb-2">{{ __('messages.user_name') }}</label>
 						<input type="text" wire:model.live.debounce.150ms="user_name" placeholder="search ....." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
 
 						<div class="absolute z-10 bg-white  w-full mt-1 max-h-60 overflow-auto">
@@ -58,7 +58,7 @@
 					</div>
 				@else
 					<div class="relative mb-4">
-						<label class="block text-gray-700 mb-2">Car Name</label>
+						<label class="block text-gray-700 mb-2">{{ __('messages.car_name') }}</label>
 						<input type="text" wire:model.live.debounce.150ms="car_name" placeholder="search ....." class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" {{ $isDisabled ? 'disabled' : '' }}>
 
 						<div class="absolute z-10 bg-white  w-full mt-1 max-h-60 overflow-auto">
@@ -75,14 +75,14 @@
 
         <!-- Name -->
         <div class="mb-4">
-            <label class="block text-gray-700 mb-2">Your Name</label>
+            <label class="block text-gray-700 mb-2">{{ __('messages.car_Detail') }}</label>
             <input type="text" wire:model="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
         <!-- Phone -->
         <div class="mb-4">
-            <label class="block text-gray-700 mb-2">Your Phone Number</label>
+            <label class="block text-gray-700 mb-2">{{ __('messages.car_Detail') }}</label>
             <input type="text" wire:model="phone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
             @error('phone') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
@@ -90,7 +90,7 @@
         <!-- Content -->
         <div class="mb-4">
             <label class="block text-gray-700 mb-2">
-                @if($type === 'complaint') Complaint Details @else Suggestion Details @endif
+                @if($type === 'complaint') {{ __('messages.complaint') }} @else {{ __('messages.suggestion') }} @endif
             </label>
             <textarea wire:model="content" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
             @error('content') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
@@ -100,13 +100,13 @@
         <div class="mb-4">
             <label class="inline-flex items-center">
                 <input type="checkbox" wire:model="is_public" class="form-checkbox">
-                <span class="ml-2">Make this @if($type === 'complaint') complaint @else suggestion @endif public</span>
+                <span class="ml-2">{{ __('messages.make') }} @if($type === 'complaint') {{ __('messages.complaint') }} @else {{ __('messages.suggestion') }} @endif {{ __('messages.public') }}</span>
             </label>
         </div>
 
         <!-- Submit Button -->
         <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-            Submit @if($type === 'complaint') Complaint @else Suggestion @endif
+            {{ __('messages.submit') }} @if($type === 'complaint') {{ __('messages.complaint') }} @else {{ __('messages.suggestion') }} @endif
         </button>
 		</div>
     </form>

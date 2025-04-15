@@ -1,5 +1,5 @@
 <div class="flex-grow overflow-auto container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">Complaint / Suggestion Management</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ __('dashboard.title2') }}</h1>
     
     @if(session('message'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -12,7 +12,7 @@
             <input 
                 type="text" 
                 wire:model.live.debounce.150ms="search"
-                placeholder="Search complaints..." 
+                placeholder="{{ __('dashboard.search_placeholder_comp') }}" 
                 class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-1/3"
             >
             <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
@@ -26,7 +26,7 @@
                     wire:click="changeTab('all')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'all' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
                 ><i class="fas fa-check-circle mr-2 text-secondary"></i>
-                    All 
+                    {{ __('dashboard.all') }} 
 					<span class="ml-2 bg-secondary text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$all->total()}}</span>
                 </button>
             </li>
@@ -35,7 +35,7 @@
                     wire:click="changeTab('published')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'published' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
                 ><i class="fas fa-share-square mr-2 text-published"></i>
-                    Published 
+                    {{ __('dashboard.published') }} 
 					<span class="ml-2 bg-published text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$publishedComplaints->total()}}</span>
                 </button>
             </li>
@@ -44,7 +44,7 @@
                     wire:click="changeTab('unpublished')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'unpublished' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
                 ><i class="fas fa-box-archive mr-2 text-primary"></i>
-                    Unpublished 
+                    {{ __('dashboard.unpublished') }} 
 					<span class="ml-2 bg-primary text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$unpublished->total()}}</span>
                 </button>
             </li>
@@ -53,7 +53,7 @@
                     wire:click="changeTab('rejected')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'rejected' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
                 ><i class="fas fa-ban mr-2 text-rejected"></i>
-                    Rejected 
+                    {{ __('dashboard.rejected') }} 
 					<span class="ml-2 bg-rejected text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$rejectedComplaints->total()}}</span>
                 </button>
             </li>
@@ -62,7 +62,7 @@
                     wire:click="changeTab('pending')"
                     class="inline-block p-4 border-b-2 rounded-t-lg {{ $activeTab === 'pending' ? 'border-blue-500 text-blue-600' : 'border-transparent hover:text-gray-600 hover:border-gray-300' }}"
                 ><i class="fas fa-clock mr-2 text-pending"></i>
-                    Pending
+                    {{ __('dashboard.pending') }}
 					<span class="ml-2 bg-pending text-white text-xs font-semibold px-2 py-0.5 rounded-full">{{$pendingComplaints->total()}}</span>				
                 </button>
             </li>
@@ -72,21 +72,21 @@
     
     <!-- All Complaints Tab -->
     <div class="{{ $activeTab !== 'all' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">All Complaints and Suggestion</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ __('dashboard.all_comp_Sugg') }}</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-{{ app()->getLocale() == 'ar' ? 'right' : 'left' }}  text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3">ID</th>
-                        <th scope="col" class="px-6 py-3">Name</th>
-                        <th scope="col" class="px-6 py-3">Email</th>
-                        <th scope="col" class="px-6 py-3">content</th>
-                        <th scope="col" class="px-6 py-3">is_public</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
-                        <th scope="col" class="px-6 py-3">User Name</th>
-                        <th scope="col" class="px-6 py-3">Car Name</th>
-                        <th scope="col" class="px-6 py-3">Actions</th>
+                        <th scope="col" class="px-6 py-3"></th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.name') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.email') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.content') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.public') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.status') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.user_name') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.car_name') }}</th>
+                        <th scope="col" class="px-6 py-3"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,23 +105,23 @@
 							</td>
                             <td class="px-6 py-4">
 							@if($complaint->status == 'accepted' && $complaint->is_public )
-                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Published</span>
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.published') }} </span>
 							@endif
 							@if($complaint->status == 'rejected' )
-                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Rejected</span>
+                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.rejected') }} </span>
 							@endif
 							@if($complaint->status == 'pending'  )
-                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Pending</span>
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.pending') }}</span>
 							@endif
 							@if( $complaint->status == 'accepted' && !$complaint->is_public )
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Unpublished</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.unpublished') }}</span>
 							@endif
                             </td>
 							
                             <td class="px-6 py-4">{{ $complaint->user->name ?? '-' }}</td>
 							
                             <td class="px-6 py-4">{{ $complaint->car->Brand ?? ''}} {{$complaint->car->car_Model ?? '-'}}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-left">
                                 @if($complaint->status == 'accepted' && $complaint->is_public )
 									<button wire:click="unpublishComplaint({{ $complaint->complainant_Id }})" class="text-purple-600 hover:text-purple-900 mr-3">
 										<i class="fas fa-eye-slash"></i>
@@ -151,7 +151,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">No published complaints found</td>
+                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">{{ __('dashboard.no_comp_Sugg') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -164,21 +164,21 @@
     </div>
     <!-- Published Complaints Tab -->
     <div class="{{ $activeTab !== 'published' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Published Complaints and Suggestion</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ __('dashboard.published_comp_Sugg') }}</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-{{ app()->getLocale() == 'ar' ? 'right' : 'left' }} text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3">ID</th>
-                        <th scope="col" class="px-6 py-3">Name</th>
-                        <th scope="col" class="px-6 py-3">Email</th>
-                        <th scope="col" class="px-6 py-3">content</th>
-                        <th scope="col" class="px-6 py-3">is_public</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
-                        <th scope="col" class="px-6 py-3">User Name</th>
-                        <th scope="col" class="px-6 py-3">Car Name</th>
-                        <th scope="col" class="px-6 py-3">Actions</th>
+                        <th scope="col" class="px-6 py-3"></th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.name') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.email') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.content') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.public') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.status') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.user_name') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.car_name') }}</th>
+                        <th scope="col" class="px-6 py-3"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -196,13 +196,13 @@
 								@endif
 							</td>
                             <td class="px-6 py-4">
-                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Published</span>
+                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.published') }}</span>
                             </td>
 							
                             <td class="px-6 py-4">{{ $complaint->user->name ?? '-' }}</td>
 							
                             <td class="px-6 py-4">{{ $complaint->car->Brand ?? ''}} {{$complaint->car->car_Model ?? '-'}}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-left">
                                 <button wire:click="unpublishComplaint({{ $complaint->complainant_Id }})" class="text-purple-600 hover:text-purple-900 mr-3">
                                     <i class="fas fa-eye-slash"></i>
                                 </button>
@@ -213,7 +213,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">No published complaints found</td>
+                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">{{ __('dashboard.no_publish_comp_Sugg') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -224,23 +224,23 @@
             {{ $publishedComplaints->links() }}
         </div>
     </div>
-	<!-- Published Complaints Tab -->
+	<!-- Unpublished Complaints Tab -->
     <div class="{{ $activeTab !== 'unpublished' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Unpublished Complaints and Suggestion</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ __('dashboard.unpublished_comp_Sugg') }}</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-{{ app()->getLocale() == 'ar' ? 'right' : 'left' }} text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3">ID</th>
-                        <th scope="col" class="px-6 py-3">Name</th>
-                        <th scope="col" class="px-6 py-3">Email</th>
-                        <th scope="col" class="px-6 py-3">content</th>
-                        <th scope="col" class="px-6 py-3">is_public</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
-                        <th scope="col" class="px-6 py-3">User Name</th>
-                        <th scope="col" class="px-6 py-3">Car Name</th>
-                        <th scope="col" class="px-6 py-3">Actions</th>
+                        <th scope="col" class="px-6 py-3"></th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.name') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.email') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.content') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.public') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.status') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.user_name') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.car_name') }}</th>
+                        <th scope="col" class="px-6 py-3"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -258,13 +258,13 @@
 								@endif
 							</td>
                             <td class="px-6 py-4">
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Unpublished</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.unpublished') }}</span>
                             </td>
 							
                             <td class="px-6 py-4">{{ $complaint->user->name ?? '-' }}</td>
 							
                             <td class="px-6 py-4">{{ $complaint->car->Brand ?? ''}} {{$complaint->car->car_Model ?? '-'}}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-left">
                                 
                                 <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
                                     <i class="fas fa-trash"></i>
@@ -273,7 +273,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">No Unpublished complaints found</td>
+                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">{{ __('dashboard.no_unpublish_comp_Sugg') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -287,21 +287,21 @@
     
     <!-- Rejected Complaints Tab -->
     <div class="{{ $activeTab !== 'rejected' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Rejected Complaints and Suggestion</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ __('dashboard.rejected_comp_Sugg') }}</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-{{ app()->getLocale() == 'ar' ? 'right' : 'left' }} text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3">ID</th>
-                        <th scope="col" class="px-6 py-3">Name</th>
-                        <th scope="col" class="px-6 py-3">Email</th>
-                        <th scope="col" class="px-6 py-3">content</th>
-                        <th scope="col" class="px-6 py-3">is_public</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
-                        <th scope="col" class="px-6 py-3">User Name</th>
-                        <th scope="col" class="px-6 py-3">Car Name</th>
-                        <th scope="col" class="px-6 py-3">Actions</th>
+                        <th scope="col" class="px-6 py-3"></th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.name') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.email') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.content') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.public') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.status') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.user_name') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.car_name') }}</th>
+                        <th scope="col" class="px-6 py-3"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -319,12 +319,12 @@
 								@endif
 							</td>
                             <td class="px-6 py-4">
-                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Rejected</span>
+                                <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.rejected') }}</span>
                             </td>
 							<td class="px-6 py-4">{{ $complaint->user->name ?? '-' }}</td>
 							
                             <td class="px-6 py-4">{{ $complaint->car->Brand ?? ''}} {{$complaint->car->car_Model?? '-'}}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-left">
                                 
                                 <button wire:click="publishComplaint({{ $complaint->complainant_Id }})" class="text-purple-600 hover:text-purple-900 mr-3">
                                     <i class="fas fa-redo"></i>
@@ -336,7 +336,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="px-6 py-4 text-center text-gray-500">No rejected complaints found</td>
+                            <td colspan="8" class="px-6 py-4 text-center text-gray-500">{{ __('dashboard.no_reject_comp_Sugg') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -350,21 +350,21 @@
     
     <!-- Pending Complaints Tab -->
     <div class="{{ $activeTab !== 'pending' ? 'hidden' : '' }} p-4 rounded-lg bg-white">
-        <h2 class="text-xl font-semibold text-gray-700 mb-4">Pending Complaints and Suggestion</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ __('dashboard.pending_comp_Sugg') }}</h2>
         
         <div class="overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-{{ app()->getLocale() == 'ar' ? 'right' : 'left' }} text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3">ID</th>
-                        <th scope="col" class="px-6 py-3">Name</th>
-                        <th scope="col" class="px-6 py-3">Email</th>
-                        <th scope="col" class="px-6 py-3">content</th>
-                        <th scope="col" class="px-6 py-3">is_public</th>
-                        <th scope="col" class="px-6 py-3">Status</th>
-                        <th scope="col" class="px-6 py-3">User Name</th>
-                        <th scope="col" class="px-6 py-3">Car Name</th>
-                        <th scope="col" class="px-6 py-3">Actions</th>
+                        <th scope="col" class="px-6 py-3"></th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.name') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.email') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.content') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.public') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.status') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.user_name') }}</th>
+                        <th scope="col" class="px-6 py-3">{{ __('messages.car_name') }}</th>
+                        <th scope="col" class="px-6 py-3"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -382,12 +382,12 @@
 								@endif
 							</td>
                             <td class="px-6 py-4">
-                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Pending</span>
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">{{ __('dashboard.pending') }}</span>
                             </td>
 							<td class="px-6 py-4">{{ $complaint->user->name ?? '-' }}</td>
 							
                             <td class="px-6 py-4">{{ $complaint->car->Brand ?? '' }} {{$complaint->car->car_Model ?? '-'}}</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 text-left">
                                  @if(!$complaint->is_public )
 									<button wire:click="unpublishComplaint({{ $complaint->complainant_Id }})" class="text-purple-600 hover:text-purple-900 mr-3">
 										<i class="fas fa-eye-slash"></i>
@@ -407,7 +407,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">No pending complaints found</td>
+                            <td colspan="7" class="px-6 py-4 text-center text-gray-500">{{ __('dashboard.no_pending_comp_Sugg') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

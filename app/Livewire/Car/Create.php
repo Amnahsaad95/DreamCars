@@ -74,7 +74,7 @@ class Create extends Component
 		
         session()->flash('success', 'Add successful');
 		$this->reset();
-		return redirect()->route('carlists');
+		return redirect()->route('carlists',['locale' => app()->getLocale()]);
     }
 	
     public function render()

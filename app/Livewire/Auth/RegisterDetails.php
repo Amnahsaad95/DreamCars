@@ -61,12 +61,12 @@ class RegisterDetails extends Component
             'profile_Image' => $imagePath ?? '',
         ]);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard',['locale' => app()->getLocale()]);
     }
 
     public function skip()
     {
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard',['locale' => app()->getLocale()]);
     }
 
     public function render()

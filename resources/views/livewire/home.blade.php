@@ -6,4 +6,5 @@
 <livewire:new-cars/> 
 
 <livewire:reviews/> 
-	</div>
+	
+</div>

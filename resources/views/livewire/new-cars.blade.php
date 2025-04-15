@@ -1,7 +1,7 @@
 <div>
     <!-- 5. Latest 6 Cars -->
     <section class="container mx-auto px-4 py-8">
-        <h2 class="text-2xl font-bold mb-6">Recently Added Cars</h2>
+        <h2 class="text-2xl font-bold mb-6">{{ __('messages.RecentlyCars') }}</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 		@foreach($cars as $car)
                 <div wire:click="show({{$car->car_Id}})" class="cursor-pointer  bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition">
@@ -27,7 +27,7 @@
 
     <!-- 6. Random 3 Cars -->
     <section class="container mx-auto px-4 py-8 bg-gray-100 rounded-lg">
-        <h2 class="text-2xl font-bold mb-6">Featured Listings</h2>
+        <h2 class="text-2xl font-bold mb-6">{{ __('messages.FeatureCars') }}</h2>
         <div wire:poll.keep-alive.20s class="grid grid-cols-1 md:grid-cols-3 gap-6">
 		@foreach($randomCars as $car)
                 <div wire:click="show({{$car->car_Id}})" class="cursor-pointer bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition">
@@ -53,7 +53,7 @@
 
     <!-- 7. Last 5 Sold Cars -->
     <section class="container mx-auto px-4 py-8">
-        <h2 class="text-2xl font-bold mb-6">Recently Sold</h2>
+        <h2 class="text-2xl font-bold mb-6">{{ __('messages.SoldCars') }}</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
 		@foreach($soldCars as $car)
                 <div wire:click="show({{$car->car_Id}})" class="cursor-pointer  bg-white rounded-lg shadow overflow-hidden border border-gray-200">

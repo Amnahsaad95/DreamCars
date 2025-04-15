@@ -1,36 +1,36 @@
 <div class="flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div class="flex justify-center mb-6">
-            <a href="{{ url('/') }}" class="logo text-2xl font-bold text-gray-800">Dream Cars</a>
+            <a href="{{ route('Home',['locale' => app()->getLocale()])  }}" class="logo text-2xl font-bold text-gray-800">Dream Cars</a>
         </div>
         
-        <h2 class="text-xl font-semibold text-gray-700 mb-6">Create your account</h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-6">{{ __('auth.create_account') }}</h2>
         
         <form wire:submit.prevent="submit" class="space-y-4">
             <div>
-                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{{ __('auth.name') }}</label>
                 <input wire:model="name" type="text" id="name" name="name" required 
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                 @error('name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
             
             <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">{{ __('auth.email') }}</label>
                 <input wire:model="email" type="email" id="email" name="email" required 
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                 @error('email') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
             
             <div>
-                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">{{ __('auth.pass') }}</label>
                 <input wire:model="password" type="password" id="password" name="password" required 
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                <p class="mt-1 text-xs text-gray-500">Must be at least 8 characters</p>
+                
                 @error('password') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
             
             <div>
-                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">{{ __('auth.conf_pass') }}</label>
                 <input wire:model="password_confirmation" type="password" id="password_confirmation" name="password_confirmation" required 
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
             </div>
@@ -38,16 +38,15 @@
             <div class="flex items-center">
                 <input wire:model="terms" id="terms" name="terms" type="checkbox" required 
                     class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                <label for="terms" class="ml-2 block text-sm text-gray-700">
-                    I agree to the <a href="#" class="text-blue-600 hover:text-blue-500">Terms of Service</a> and <a href="#" class="text-blue-600 hover:text-blue-500">Privacy Policy</a>
-                </label>
+                <label for="terms" class="ml-2 block text-sm text-gray-700 px-2">
+                    {{ __('auth.term') }} </label>
             </div>
-            @error('terms') <span class="text-red-500 text-xs">You must accept the terms and conditions</span> @enderror
+            @error('terms') <span class="text-red-500 text-xs">{{ __('auth.error_term') }}</span> @enderror
             
             <div>
                 <button type="submit" 
                     class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Continue
+                    {{ __('auth.continue') }}
                 </button>
             </div>
         </form>
@@ -84,7 +83,7 @@
         </div>-->
         
         <div class="mt-6 text-center text-sm text-gray-600">
-            Already have an account? <a href="{{ route('login') }}" class="font-medium text-blue-600 hover:text-blue-500">Sign in</a>
+            {{ __('auth.have_Account') }} <a href="{{ route('login') }}" class="font-medium text-blue-600 hover:text-blue-500">{{ __('auth.signin') }}</a>
         </div>
     </div>
 </div>

@@ -1,16 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" x-data="{ 
-    isArabic: false,
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" x-data="{ 
+    isArabic: true,
     currentSlide: 0,
     
     navOpen: false,
     profileDropdown: false,
     
-    banners: [
-        'Special financing available!',
-        'Free inspection with every purchase',
-        'Limited-time trade-in bonus'
-    ],
     currentBanner: 0,
     init() {
         setInterval(() => {
@@ -20,6 +15,8 @@
             this.currentBanner = (this.currentBanner + 1) % this.banners.length;
         }, 8000);
     }
+	,
+	
  }" x-init="init()">
 <head>
     <meta charset="UTF-8">
@@ -43,10 +40,22 @@
             }
         }
     </script>
+	<style>
+        .auth-dropdown {
+            opacity: 0;
+            transform: translateY(-10px);
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .auth-dropdown.open {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+    </style>
 </head>
-<body class="font-sans bg-gray-50" :dir="isArabic ? 'rtl' : 'ltr'">
-    <!-- 1. Navigation Bar -->
-    <nav class="bg-white shadow-md">
+<body class="font-sans bg-gray-50 {{ app()->getLocale() == 'ar' ? 'font-arabic' : 'font-sans' }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" >
+     <nav class="bg-white shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
@@ -63,10 +72,11 @@
             
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center space-x-6" :class="{ 'space-x-reverse': isArabic }">
-                <a href="{{ url('/') }}" class="text-gray-700 hover:text-primary">Home</a>
-                <a href="{{ route('AllCar') }}" class="text-gray-700 hover:text-primary">Cars</a>
-                <a href="{{ route('aboutUs') }}" class="text-gray-700 hover:text-primary">About Us</a>
-                <a href="{{ route('ComplaintSuggestionForm') }}" class="text-gray-700 hover:text-primary">Contact</a>
+                <a href="{{ route('Home',['locale' => app()->getLocale()]) }}" class="text-gray-700 hover:text-primary">{{ __('messages.Home') }}</a>
+                <a href="#" class="text-gray-700 hover:text-primary"></a>
+                <a href="{{ route('AllCar',['locale' => app()->getLocale()]) }}" class="text-gray-700 hover:text-primary">{{ __('messages.Cars') }}</a>
+                <a href="{{ route('aboutUs',['locale' => app()->getLocale()]) }}" class="text-gray-700 hover:text-primary">{{ __('messages.AboutUs') }}</a>
+                <a href="{{ route('ComplaintSuggestionForm',['locale' => app()->getLocale()]) }}" class="text-gray-700 hover:text-primary">{{ __('messages.ContactUs') }}</a>
 				
                 @auth
 					<!-- Profile Dropdown -->
@@ -83,15 +93,83 @@
 							<a href="{{route('logout')}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
 						</div>
 					</div>
-                @else						
-					<a href="{{ route('login') }}" class="text-gray-700 hover:text-primary">Login</a>
-					<a href="{{ route('register') }}" class="text-gray-700 hover:text-primary">SignUp</a>
+                @else	
+					
+					<div x-data="{ open: false }" class="relative inline-block text-{{ app()->getLocale() == 'ar' ? 'right' : 'left' }} px-6">
+						<!-- Styled User Button -->
+						<button 
+							@click="open = !open"
+							class="relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 shadow-lg hover:shadow-xl transition-all duration-300 group"
+						>
+							<!-- User Icon -->
+							<i class="fas fa-user text-white text-xl"></i>
+							
+							<!-- Animated Ring Effect -->
+							<span class="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-white/30 transition-all duration-300"></span>
+							
+						</button>
+						
+						<!-- Dropdown Menu -->
+						<div 
+							x-show="open"
+							@click.away="open = false"
+							x-transition:enter="transition ease-out duration-200"
+							x-transition:enter-start="opacity-0 scale-95"
+							x-transition:enter-end="opacity-100 scale-100"
+							x-transition:leave="transition ease-in duration-150"
+							x-transition:leave-start="opacity-100 scale-100"
+							x-transition:leave-end="opacity-0 scale-95"
+							class="absolute left-0  mt-2 w-64 origin-top-right rounded-xl bg-white shadow-xl z-50 overflow-hidden border border-gray-100 "
+						>
+							<!-- Dropdown Header -->
+							<div class="p-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white">
+								<h3 class="font-bold text-lg">{{ __('messages.welcome') }}</h3>
+								<p class="text-sm opacity-90">{{ __('messages.join_community') }}</p>
+							</div>
+							
+							<!-- Dropdown Content -->
+							<div class="p-4">
+								<!-- Login Button -->
+								<a href="{{route('login')}}" class="flex items-center justify-between px-4 py-3 mb-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group">
+									<div class="flex items-center">
+										<div class="p-2 mr-3 rounded-full bg-indigo-100 text-indigo-600">
+											<i class="fas fa-sign-in-alt text-sm"></i>
+										</div>
+										<div class="px-2">
+											<p class="font-medium text-gray-800">{{ __('messages.sign_in') }}</p>
+											<p class="text-xs text-gray-500">{{ __('messages.already_have_account') }}</p>
+										</div>
+									</div>
+									<i class="fas fa-chevron-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} text-gray-400 group-hover:text-indigo-500 transition-colors"></i>
+								</a>
+								
+								<!-- Register Button -->
+								<a href="{{ route('register') }}" class="flex items-center justify-between px-4 py-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors group">
+									<div class="flex items-center">
+										<div class="p-2 mr-3 rounded-full bg-purple-100 text-purple-600">
+											<i class="fas fa-user-plus text-sm"></i>
+										</div>
+										<div class="px-2">
+											<p class="font-medium text-gray-800">{{ __('messages.create_account') }}</p>
+											<p class="text-xs text-gray-500">{{ __('messages.new_to_platform') }}</p>
+										</div>
+									</div>
+									<i class="fas fa-chevron-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }} text-gray-400 group-hover:text-purple-500 transition-colors"></i>
+								</a>
+							</div>
+							
+							<!-- Dropdown Footer -->
+							<div class="px-4 py-3 bg-gray-50 border-t text-center">
+							</div>
+						</div>
+					</div>
+					
 				@endauth	
                 <!-- Language Toggle -->
-                <button @click="isArabic = !isArabic" class="px-3 py-1 bg-gray-100 rounded-full text-sm">
-                    <span x-show="!isArabic">العربية</span>
-                    <span x-show="isArabic">English</span>
-                </button>
+               	<livewire:language-switcher :currentRouteName="Route::currentRouteName()" 
+											:currentRouteParams="request()->route()->parameters()" /> 
+				
+				
             </div>
         </div>
         
@@ -103,10 +181,11 @@
             <a href="{{ route('ComplaintSuggestionForm') }}" class="block py-2 text-gray-700">Contact</a>
             <div class="pt-2 border-t mt-2">
                 <button @click="isArabic = !isArabic" class="px-3 py-1 bg-gray-100 rounded-full text-sm">
-                    <span x-show="!isArabic">العربية</span>
-                    <span x-show="isArabic">English</span>
+                    <span wire:click="changeLanguage('ar')" x-show="!isArabic">العربية</span>
+                    <span wire:click="changeLanguage('en')" x-show="isArabic">English</span>
                 </button>
             </div>
+			
         </div>
     </nav>
 
@@ -118,7 +197,7 @@
                 <div class="text-center px-8">
                     <h2 class="text-4xl font-bold mb-4">{{$settings->intro_title_1}}</h2>
                     <p class="text-xl mb-6">{{$settings->intro_text_1}}</p>
-                    <button onclick="scrollToSearchSection()" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
+                    <button onclick="scrollToSearchSection('search-section','/')" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
                         Start Searching
                     </button>
                 </div>
@@ -151,11 +230,10 @@
         </div>
     </div>
 
+
     
 	
 	{{ $slot }}
-
-    
 
     <!-- 9. Footer -->
     <footer class="bg-gray-800 text-white py-12">
@@ -166,28 +244,28 @@
                     <p class="text-gray-400">{{$settings->siteDescription}}</p>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <h4 class="font-semibold mb-4">{{ __('messages.QuickLink') }}</h4>
                     <ul class="space-y-2">
-                        <li><a href="{{ url('/') }}" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="{{ route('AllCar') }}" class="text-gray-400 hover:text-white">Browse Cars</a></li>
-                        <li><a href="{{ route('aboutUs') }}" class="text-gray-400 hover:text-white">About us</li>
-                        <li><a href="{ route('ComplaintSuggestionForm') }}" class="text-gray-400 hover:text-white">Contact us</a></li>
+                        <li><a href="{{ route('Home',['locale' => app()->getLocale()]) }}" class="text-gray-400 hover:text-white">{{ __('messages.Home') }}</a></li>
+                        <li><a href="{{ route('AllCar',['locale' => app()->getLocale()]) }}" class="text-gray-400 hover:text-white">{{ __('messages.Cars') }}</a></li>
+                        <li><a href="{{ route('aboutUs',['locale' => app()->getLocale()]) }}" class="text-gray-400 hover:text-white">{{ __('messages.AboutUs') }}</li>
+                        <li><a href="{{ route('ComplaintSuggestionForm',['locale' => app()->getLocale()]) }}" class="text-gray-400 hover:text-white">{{ __('messages.ContactUs') }}</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Contact Us</h4>
+                    <h4 class="font-semibold mb-4">{{ __('messages.ContactUs') }}</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li class="flex items-center"><i class="fas fa-phone-alt mr-2"></i>{{$settings->whatsapp_number}}</li>
-                        <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> {{$settings->sitemail}}</li>
-                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> {{$settings->site_location}}</li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt mr-2 px-2"></i>{{$settings->whatsapp_number}}</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2 px-2"></i> {{$settings->sitemail}}</li>
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2 px-2"></i> {{$settings->site_location}}</li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Connect With Us</h4>
+                    <h4 class="font-semibold mb-4">{{ __('messages.ConnectWithUs') }}</h4>
                     <div class="flex space-x-4">
-                        <a href="{{$settings->facebook_url}}" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f text-xl"></i></a>
-                        <a href="https://wa.me/{{ $settings->whatsapp_number }}" class="text-gray-400 hover:text-white"><i class="fab fa-whatsapp text-xl"></i></a>
-                        <a href="{{$settings->instagram_url}}" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="{{$settings->facebook_url}}" class="text-gray-400 hover:text-white px-2"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="https://wa.me/{{ $settings->whatsapp_number }}" class="text-gray-400 hover:text-white px-2"><i class="fab fa-whatsapp text-xl"></i></a>
+                        <a href="{{$settings->instagram_url}}" class="text-gray-400 hover:text-white px-2"><i class="fab fa-instagram text-xl"></i></a>
                     </div>
                     <div class="mt-4">
                         <button @click="isArabic = !isArabic" class="px-4 py-2 bg-gray-700 rounded-md text-sm">
@@ -202,13 +280,22 @@
             </div>
         </div>
     </footer>
+
+
+    
 	<script>
-	function scrollToSearchSection() {
+	function scrollToSearchSection(sectionId, url = null) {
 	   // Scroll to the search section
-	   document.getElementById('search-section').scrollIntoView({
-		  behavior: 'smooth'
-	   });
+	     if (window.location.pathname === url || url === null) {
+			document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+		} else {
+			window.location.href = url + '#' + sectionId;
+		}	
 	}
+    window.addEventListener('reload-page', () => {
+        window.location.reload();
+    });
+	
 	</script>
 </body>
 </html>

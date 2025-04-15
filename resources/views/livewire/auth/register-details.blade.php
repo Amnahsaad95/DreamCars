@@ -2,8 +2,8 @@
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div class="mb-6">
             <div class="flex justify-between items-center mb-2">
-                <h2 class="text-xl font-semibold text-gray-700">Complete your profile</h2>
-                <span class="text-xs text-gray-500">Step 2 of 2</span>
+                <h2 class="text-xl font-semibold text-gray-700">{{ __('auth.Complete_profile') }}</h2>
+                <span class="text-xs text-gray-500">{{ __('auth.step') }}</span>
             </div>
             <div class="w-full bg-gray-200 rounded-full h-1.5">
                 <div class="bg-blue-600 h-1.5 rounded-full" style="width: 100%"></div>
@@ -27,27 +27,27 @@
 				</label>
 			</div>
 			
-			<p class="mt-4 text-gray-600 text-sm">Click the camera icon to upload a new photo</p>
+			<p class="mt-4 text-gray-600 text-sm">{{ __('auth.camera') }}</p>
 		</div>
         <form wire:submit.prevent="submit" class="space-y-4">
            
             
             <div>
-                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">{{ __('auth.phone') }}</label>
                 <input wire:model="phone" type="tel" id="phone" name="phone" 
                     class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                 @error('phone') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
              <div class="flex space-x-4">
                 <div class="w-1/2">
-                    <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                    <label for="city" class="block text-sm font-medium text-gray-700 mb-1">{{ __('auth.City') }}</label>
                     <input wire:model="city" type="text" id="city" name="city" 
                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                     @error('city') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 
                 <div class="w-1/2">
-                    <label for="country" class="block text-sm font-medium text-gray-700 mb-1">Country</label>
+                    <label for="country" class="block text-sm font-medium text-gray-700 mb-1">{{ __('auth.Country') }}</label>
                     <input wire:model="country" type="text" id="country" name="country" 
                         class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                     
@@ -60,13 +60,13 @@
             <div class="pt-4">
                 <button type="submit" 
                     class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Complete Registration
+                    {{ __('auth.complete') }}
                 </button>
             </div>
         </form>
         
         <div class="mt-4 text-center text-sm text-gray-600">
-            <button wire:click="skip" class="font-medium text-blue-600 hover:text-blue-500">Skip for now</button>
+            <button wire:click="skip" class="font-medium text-blue-600 hover:text-blue-500">{{ __('auth.skip') }}</button>
         </div>
     </div>
 </div>

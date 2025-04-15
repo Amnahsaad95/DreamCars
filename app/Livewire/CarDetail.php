@@ -62,7 +62,9 @@ class CarDetail extends Component
 
     public function addComplaint($carId)
     {
-        return redirect()->route('ComplaintSuggestionForm',$carId);
+        return redirect()->route('ComplaintSuggestionForm',[
+						'locale' => app()->getLocale(),
+						'carId'=>$carId]);
     }
 	
 	public function callSeller()

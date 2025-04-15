@@ -25,7 +25,8 @@ class ForgotPasswordForm extends Component
             ['token' => $token, 'created_at' => now()]
         );
 
-        $this->resetLink = route('reset.password', $token);
+        $this->resetLink = route('reset.password', ['locale' => app()->getLocale(),
+        'token' => $token]);
     }
 
     public function render()

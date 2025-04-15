@@ -18,6 +18,12 @@ class CarSearch extends Component
 
     protected $queryString = ['search'];
 
+	protected $listeners = ['languageChanged' => 'updateLanguage'];
+
+    public function updateLanguage($language)
+    {
+        app()->setLocale($language);  // تحديث اللغة في المكون
+    }
     public function updatedSearch($value)
     {
         if (strlen($value) > 0) {

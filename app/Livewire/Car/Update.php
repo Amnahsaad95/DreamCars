@@ -91,7 +91,7 @@ class Update extends Component
 		$this->loadData($this->car->car_Id);
 		//dd($this->isSold);
         $this->editMode = false;  
-		return redirect()->route('update',['id'=>$this->car->car_Id,'edit'=>'false']);
+		return redirect()->route('update',['locale' => app()->getLocale(),'id'=>$this->car->car_Id,'edit'=>'false']);
         session()->flash('message', 'Site information updated successfully!');
 		
 	}

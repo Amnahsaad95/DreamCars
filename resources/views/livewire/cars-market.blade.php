@@ -2,7 +2,7 @@
 <div class="flex-grow overflow-auto max-w-7xl mx-auto bg-white rounded-lg shadow-md p-6">
     <!-- Header with search and controls -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-        <h1 class="text-2xl font-bold text-gray-800">Car Marketplace</h1>
+        <h1 class="text-2xl font-bold text-gray-800">{{ __('messages.AllCars') }}</h1>
         
         <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
             <!-- Search input -->
@@ -15,7 +15,7 @@
             <!-- Filter selection dropdown -->
             <div class="relative" x-data="{filterDropdownOpen : false,}">
                 <button @click="filterDropdownOpen = !filterDropdownOpen" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center">
-                    <i class="fas fa-filter mr-2"></i> Filter
+                    <i class="fas fa-filter mr-2"></i> {{ __('messages.filter') }}
                 </button>
                 
                 <!-- Filter dropdown menu -->
@@ -52,11 +52,11 @@
             <!-- Sort dropdown -->
             <div class="relative">
                 <select wire:model.live="sortBy" class="appearance-none pl-3 pr-8 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-auto">
-                    <option value="">Sort by</option>
-                    <option value="price_asc">Price: Low to High</option>
-                    <option value="price_desc">Price: High to Low</option>
-                    <option value="year_asc">Year: Oldest</option>
-                    <option value="year_desc">Year: Newest</option>
+                    <option value="">{{ __('messages.sortBy') }}</option>
+                    <option value="price_asc">{{ __('messages.sort.priceLTH') }}</option>
+                    <option value="price_desc">{{ __('messages.sort.priceHTL') }}</option>
+                    <option value="year_asc">{{ __('messages.sort.yearO') }}</option>
+                    <option value="year_desc">{{ __('messages.sort.yearN') }}</option>
                 </select>
                 <i class="fas fa-chevron-down absolute right-3 top-3 text-gray-400 pointer-events-none"></i>
             </div>

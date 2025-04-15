@@ -7,7 +7,13 @@ use App\Models\Car;
 
 class NewCars extends Component
 {
-		
+	
+	protected $listeners = ['languageChanged' => 'updateLanguage'];
+
+    public function updateLanguage($language)
+    {
+        app()->setLocale($language);  // تحديث اللغة في المكون
+    }
 	
 	public function getRandomCars()
 	{

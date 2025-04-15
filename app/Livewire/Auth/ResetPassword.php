@@ -16,13 +16,7 @@ class ResetPassword extends Component
     public $password;
     public $password_confirmation;
 
-	protected $messages = [
-			'password.required' => 'Password is required',
-			'password.confirmed' => 'Password confirmation does not match',
-			'password.min' => 'Password must be at least 8 characters',
-			'password.regex' => 'Password must contain at least one letter ,uppercase and lowercase letters,least one number,least one number',
-			
-		];
+	
     public function mount($token)
 	
     {
@@ -51,7 +45,7 @@ class ResetPassword extends Component
         DB::table('password_reset_tokens')->where('token', $this->token)->delete();
 
         session()->flash('message', 'Password Changed Successfully');
-        return redirect()->route('login');
+        return redirect()->route('login',['locale' => app()->getLocale()]);
     }
 
     public function render()

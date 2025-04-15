@@ -95,7 +95,7 @@ class Lists extends Component
     public function View($id,$edit)
     {
 		//dd($edit);
-		return redirect()->route('update',['id'=>$id,'edit'=>$edit]);
+		return redirect()->route('update',['locale' => app()->getLocale(),'id'=>$id,'edit'=>$edit]);
     }
 
     public function edit($id)
@@ -144,7 +144,7 @@ class Lists extends Component
 	
 	public function goToCreateCar()
 	{
-		return redirect()->route('createCar'); 
+		return redirect()->route('createCar',['locale' => app()->getLocale()]); 
 	}
 
     private function resetForm()

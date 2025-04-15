@@ -1,5 +1,7 @@
 <section class="py-5" wire:key="aboutus-1">
-    <div class="max-w-4xl mx-auto px-4 py-12">
+	
+   @if(app()->getLocale() == 'en')
+   <div class="max-w-4xl mx-auto px-4 py-12">
         <div class="bg-white rounded-lg shadow-md p-6 md:p-8 mb-12">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">Our Story</h2>
             <p class="text-gray-600 mb-4">
@@ -55,4 +57,59 @@
 
 
    </div>
+   @else
+   
+   <div class="max-w-4xl mx-auto px-4 py-12">
+        <div class="bg-white rounded-lg shadow-md p-6 md:p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">قصتنا</h2>
+            <p class="text-gray-600 mb-4">
+                تأسست دريم كار بهدف تسهيل وتسريع عملية بيع وشراء السيارات للجميع. منصتنا تتيح للبائعين عرض سياراتهم بكل سهولة، بينما نوفر للمشترين تجربة سلسة ومباشرة للعثور على السيارة التي يبحثون عنها.
+            </p>
+            <p class="text-gray-600">
+              نحن هنا لجعل عملية بيع وشراء السيارات أكثر شفافية، مع تقديم مجموعة واسعة من الخيارات التي تلبي جميع الاحتياجات. سواء كنت بائعًا أو مشتريًا، ستجد كل ما تحتاجه في مكان واحد.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">مهمتنا</h3>
+                <p class="text-gray-600">
+                    نهدف إلى تقديم منصة مبتكرة تساعد البائعين على عرض سياراتهم بسهولة، وتوفر للمشترين تجربة فريدة لاكتشاف السيارات ومقارنتها بكل شفافية ووضوح.
+                </p>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">لماذا تختارنا؟</h3>
+                <ul class="text-gray-600 space-y-2">
+                    <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>بيع بلا تعقيد – اعرض سيارتك بسهولة</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>بحث بسيط – اعثر على سيارتك المثالية بسرعة</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>تواصل فوري – تواصل مباشر مع البائعين</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="h-5 w-5 text-primary mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>تجربة موثوقة – كل سيارة يتم فحصها بدقة</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+   </div>
+
+	@endif
 </section>

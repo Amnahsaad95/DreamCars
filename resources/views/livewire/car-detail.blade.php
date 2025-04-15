@@ -6,7 +6,7 @@
             <li aria-current="page">
                 <div class="flex items-center">
                     <i class="fas fa-chevron-right text-gray-400"></i>
-                    <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">Car Details</span>
+                    <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">{{ __('messages.car_Detail') }}</span>
                 </div>
             </li>
         </ol>
@@ -60,29 +60,29 @@
                 </div>
                 
                 <div class="mb-6">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Details</h3>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ __('messages.details') }}</h3>
                     <div class="grid grid-cols-2 gap-3">
                         <div class="flex items-center">
                             <i class="fas fa-calendar-alt text-blue-500 mr-2"></i>
-                            <span class="text-gray-700">Year: {{ $car->car_Year }}</span>
+                            <span class="text-gray-700">{{ __('messages.year') }} : {{ $car->car_Year }}</span>
                         </div>
                         <div class="flex items-center">
                             <i class="fas fa-palette text-blue-500 mr-2"></i>
-                            <span class="text-gray-700">Color: {{ $car->color }}</span>
+                            <span class="text-gray-700">{{ __('messages.color') }} : {{ $car->color }}</span>
                         </div>
                         <div class="flex items-center">
                             <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
-                            <span class="text-gray-700">Location: {{ $car->city }}, {{ $car->country }}</span>
+                            <span class="text-gray-700">{{ __('messages.location') }} : {{ $car->city }}, {{ $car->country }}</span>
                         </div>
                         <div class="flex items-center">
                             <i class="fas fa-user text-blue-500 mr-2"></i>
-                            <span class="text-gray-700">Seller: {{ $car->user->name }}</span>
+                            <span class="text-gray-700">{{ __('messages.seller') }} : {{ $car->user->name }}</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="mb-6">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Description</h3>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ __('messages.description') }} </h3>
                     <p class="text-gray-600">
                         {{ $car->car_Description }}
                     </p>
@@ -92,7 +92,7 @@
                 <div class="flex space-x-3">
 					
                     <button wire:click="addComplaint({{$car->car_Id}})" class="bg-primary hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg flex items-center transition duration-200">
-                        <i class="fas fa-star mr-2"></i> Add Complaint
+                        <i class="fas fa-star mr-2"></i> {{ __('messages.add_complaint') }}
                     </button>
 					<div x-data="{ 
     callSeller() {
@@ -105,7 +105,7 @@
 							wire:click="callSeller" 
 							class="border border-primary text-primary hover:bg-blue-50 font-bold py-3 px-6 @if($isSold) disabled-button @endif rounded-lg flex items-center transition duration-200"
 							>
-							<i class="fas fa-phone mr-2"></i> Contact Seller
+							<i class="fas fa-phone mr-2"></i> {{ __('messages.contact_seller') }}
 						</button>
 					</div>
                 </div>
@@ -116,53 +116,53 @@
         
 <!-- Comments Section -->
         <div class="p-6 border-t border-gray-200">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Customer Reviews</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">{{ __('messages.customer_reviews') }}</h2>
             @if(session()->has('message'))
 				<div class="mb-4 p-4 bg-green-100 text-green-700 rounded">
 					{{ session('message') }}
 				</div>
 			@endif
             <div class="bg-gray-50 p-4 rounded-lg mb-8">
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Write a Review</h3>
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">{{ __('messages.write_review') }}</h3>
                 <form wire:submit.prevent="addComment">
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-                            Name
+                            {{ __('messages.name') }}
                         </label>
                         <input 
                             wire:model="name"
                             id="name" 
 							type="text"							
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                            placeholder="Enter your Name"></textarea>
+                            placeholder="{{ __('messages.enter_name') }}"></textarea>
                         @error('name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>
 					 <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
-                            Phone
+                            {{ __('messages.phone') }}
                         </label>
                         <input 
                             wire:model="commentPhone"
                             id="phone" 
 							type="text"							
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                            placeholder="Enter your phone"></textarea>
+                            placeholder="{{ __('messages.enter_phone') }}"></textarea>
                         @error('commentPhone') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="comment">
-                            Your Comment
+                            {{ __('messages.comment') }}
                         </label>
                         <textarea 
                             wire:model="newComment"
                             id="comment" 
                             rows="3" 
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-                            placeholder="Share your Opinion..."></textarea>
+                            placeholder="{{ __('messages.enter_comment') }}"></textarea>
                         @error('newComment') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                     </div>
                     <button type="submit" class="bg-primary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        Submit Review
+                        {{ __('messages.submit_review') }}
                     </button>
                 </form>
             </div>
@@ -188,7 +188,7 @@
                 </div>
                 @empty
                 <div class="text-center py-8 text-gray-500">
-                    No reviews yet. Be the first to review!
+                    {{ __('messages.No_Reviews') }}
                 </div>
                 @endforelse
             </div>

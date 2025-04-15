@@ -44,7 +44,7 @@
 	<!-- 4. Search Input -->
 	<div id="search-section" class="container mx-auto px-4 py-8 bg-gray-100 rounded-lg">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-			<h1 class="text-3xl font-bold text-center mb-8">Find Your Perfect Car</h1>
+			<h1 class="text-3xl font-bold text-center mb-8">{{ __('messages.SearchInput') }}</h1>
 			
 			 <div class="relative w-full max-w-xl mx-auto" x-data="{ open: @entangle('showDropdown') }">
 				<!-- Search Input -->
@@ -52,12 +52,12 @@
 					<input
 						type="text"
 						wire:model.live.debounce.150ms="search"
-						placeholder="Search for cars..."
+						placeholder="{{ __('messages.SearchPlasceHold') }}"
 						class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
 						@focus="open = true"
 						@click.away="open = false"
 					>
-					<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+					<div class="absolute inset-y-0 {{ app()->getLocale() == 'ar' ? 'left' : 'right' }}-0 flex items-center pr-3 pointer-events-none">
 						<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
 						</svg>

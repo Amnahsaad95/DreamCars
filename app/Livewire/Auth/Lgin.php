@@ -20,14 +20,14 @@ class Lgin extends Component
     public function submit()
     {
         $this->validate();
-
+		
         if (!Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
         }
 
-        return redirect()->intended(route('dashboard'));
+        return redirect()->intended(route('dashboard',['locale' => app()->getLocale()]));
     }
 
     public function render()
