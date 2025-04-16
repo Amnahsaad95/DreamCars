@@ -27,12 +27,12 @@ class AdsManagement extends Component
     public function publishAds($adsId)
     {
         Ads::find($adsId)->update(['status' => 'published']);
-        session()->flash('message', 'Ads published successfully!');
+		session()->flash('message', __('messages.Ads_action_message', ['action' => __('messages.published')]));
     }
 	public function unpublishAds($adsId)
     {
         Ads::find($adsId)->update(['status' => 'unpublished']);
-        session()->flash('message', 'Ads Unpublished successfully!');
+		session()->flash('message', __('messages.Ads_action_message', ['action' => __('messages.unpublished')]));
     }
 	
 	
@@ -40,13 +40,13 @@ class AdsManagement extends Component
     public function rejectAds($adsId)
     {
         Ads::find($adsId)->update(['status' => 'rejected']);
-        session()->flash('message', 'Ads rejected successfully!');
+		session()->flash('message', __('messages.Ads_action_message', ['action' => __('messages.rejected')]));
     }
     
     public function deleteAds($adsId)
     {
         Ads::find($adsId)->delete();
-        session()->flash('message', 'Ads deleted successfully!');
+		session()->flash('message', __('messages.Ads_action_message', ['action' => __('messages.deleted')]));
     }
     
 	

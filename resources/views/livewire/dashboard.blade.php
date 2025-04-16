@@ -6,7 +6,7 @@
                     <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-gray-500 text-sm font-medium">Total Cars</p>
+                                <p class="text-gray-500 text-sm font-medium">{{ __('dashboard.total_cars') }}</p>
                                 <p class="text-2xl font-bold">{{$cars}}</p>
                             </div>
                             <div class="bg-indigo-100 p-3 rounded-full">
@@ -18,7 +18,7 @@
                     <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-gray-500 text-sm font-medium">Total Users</p>
+                                <p class="text-gray-500 text-sm font-medium">{{ __('dashboard.total_users') }}</p>
                                 <p class="text-2xl font-bold">{{$users}}</p>
                             </div>
                             <div class="bg-blue-100 p-3 rounded-full">
@@ -29,7 +29,7 @@
                     <div class="bg-white rounded-lg shadow p-6">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-gray-500 text-sm font-medium">Total Ads</p>
+                                <p class="text-gray-500 text-sm font-medium">{{ __('dashboard.total_ads') }}</p>
                                 <p class="text-2xl font-bold">{{$ads}}</p>
                             </div>
                             <div class="bg-green-100 p-3 rounded-full">

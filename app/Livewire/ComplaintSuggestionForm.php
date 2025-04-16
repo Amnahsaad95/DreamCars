@@ -105,8 +105,7 @@ class ComplaintSuggestionForm extends Component
             'user_Id' => $this->user_Id ?? null,
             'car_Id' => $this->car_Id ?? null,
         ]);
-		//dd("aaaaa");
-        session()->flash('message', 'Your ' . $this->type . ' has been submitted successfully!');
+        session()->flash('message', __('messages.submitted_successfully', ['type' => $this->type]));
         
         $this->reset();
     }

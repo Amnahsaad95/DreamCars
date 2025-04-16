@@ -96,7 +96,7 @@
 							
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                
-                                <button wire:click="delete({{ $user->user_Id }})" wire:confirm="return confirm('Are you sure?')" class="text-red-600 hover:text-red-900">
+                                <button wire:click="delete({{ $user->user_Id }})" wire:confirm="{{ __('messages.are_you_sure') }}" class="text-red-600 hover:text-red-900">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>

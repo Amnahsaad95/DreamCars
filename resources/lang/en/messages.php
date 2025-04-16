@@ -104,4 +104,26 @@ return [
 	'explore_cars' => 'Explore Cars',
 	'post_Ads' => 'Post Your Ad Now',
 	
+	
+	///messeges
+	'submitted_successfully' => 'Your :type has been submitted successfully!',
+    'review_submitted' => 'Thank you! Your review has been submitted and is waiting for admin approval!',
+    'ad_created' => 'Ad created successfully!',
+    'are_you_sure' => 'Are you sure?',
+	'action_message' => ':action successfully!',
+	'Ads_action_message' => '|Ads :action successfully!',
+	'published' => 'Published',
+	'unpublished' => 'Unpublished',
+	'rejected' => 'Rejected',
+	'deleted' => 'Deleted',
+	'action_success' => ':item updated successfully.',
+	'password' => 'Password',
+	'profile' => 'Profile',
+	'site_info' => 'Site information',
+	
+	'current_password_incorrect' => 'Current password is incorrect.',
+	'new_password_same_as_current' => 'New password must be different from current password.',
+
+
+	
 ];

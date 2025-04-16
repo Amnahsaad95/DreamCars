@@ -29,7 +29,6 @@ class CarDetail extends Component
         $this->car = Car::findOrFail($id);
 		$this->phone = $this->car->user->phone;
 		$this->isSold = $this->car->isSold;
-		//$this->comments = complaintsSuggestions::query()->where('type', 'suggestion')->where('car_Id', $id)->paginate(10);
         $this->mainImage = explode(',', $this->car->car_Image)[0] ;
     }
 
@@ -56,7 +55,7 @@ class CarDetail extends Component
             'car_Id' => $this->car->car_Id ,
         ]);
 
-        session()->flash('message', 'Thank you! Your Review has been submitted and is waiting for admin approval!');
+        session()->flash('message', __('messages.review_submitted'));
 		$this->reset('name','commentPhone','newComment');
     }
 

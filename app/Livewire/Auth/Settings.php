@@ -176,7 +176,8 @@ class Settings extends Component
 		//dd($validated);
 		$this->loadProfile();
         $this->viewProfileMode = true;
-        session()->flash('message', 'Profile updated successfully!');
+		session()->flash('message', __('messages.action_success', ['item' => __('messages.profile')]));
+
     }
 
     
@@ -289,8 +290,8 @@ class Settings extends Component
 		}
 		$this->settings->update($validated);		
 		$this->loadSite();
-        $this->viewMode = true; 
-        session()->flash('message', 'Site information updated successfully!');
+        $this->viewMode = true;
+		session()->flash('message', __('messages.action_success', ['item' => __('messages.site_info')]));
     }
 	
 	public function updatePassword()
@@ -299,7 +300,7 @@ class Settings extends Component
 
         // Check old password
         if (!Hash::check($this->current_password, $user->password)) {
-            return session()->flash('error', 'Current password is incorrect.');
+			return session()->flash('error', __('messages.current_password_incorrect'));
         }
 
         // Validate new password
@@ -316,7 +317,7 @@ class Settings extends Component
 
         // Prevent same as old password
         if (Hash::check($this->new_password, $user->password)) {
-            return session()->flash('error', 'New password must be different from current password.');
+			return session()->flash('error', __('messages.new_password_same_as_current'));
         }
 
         // Update password
@@ -324,8 +325,8 @@ class Settings extends Component
         $user->save();
 		$this->changePasswordMode=false;
         $this->reset(['current_password', 'new_password', 'new_password_confirmation']);
+		session()->flash('success', __('messages.action_success', ['item' => __('messages.password')]));
 
-        session()->flash('success', 'Password updated successfully.');
     }
 
 

@@ -11,13 +11,9 @@ class Home extends Component
 	use WithPagination;
 
     public $search = '';
-	
 
-	
     public function render()
-    {
-		
-		
+    {		
         return view('livewire.home', ['cars'=>Car::WhereLike('Brand',$this->search ?? '')]);
     }
 }

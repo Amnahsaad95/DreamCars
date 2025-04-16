@@ -141,7 +141,7 @@
 										<i class="fas fa-times"></i>
 									</button>
 								@endif
-                                <button wire:click="deleteads({{ $ads->id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
+                                <button wire:click="deleteads({{ $ads->id }})" class="text-red-600 hover:text-red-900" wire:confirm="{{ __('messages.are_you_sure') }}"	>
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -202,7 +202,7 @@
                                 <button wire:click="unpublishAds({{ $ads->id }})" class="text-purple-600 hover:text-purple-900 mr-3">
                                     <i class="fas fa-eye-slash"></i>
                                 </button>
-                                <button wire:click="deleteAds({{ $ads->id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
+                                <button wire:click="deleteAds({{ $ads->id }})" class="text-red-600 hover:text-red-900" wire:confirm="{{ __('messages.are_you_sure') }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -261,7 +261,7 @@
                             <td class="px-6 py-4">{{ $ads->End_date}}</td>
                             <td class="px-6 py-4 text-left">
                                 
-                                <button wire:click="deleteAds({{ $ads->id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
+                                <button wire:click="deleteAds({{ $ads->id }})" class="text-red-600 hover:text-red-900" wire:confirm="{{ __('messages.are_you_sure') }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -324,7 +324,7 @@
                                 <button wire:click="publishAds({{ $ads->id }})" class="text-purple-600 hover:text-purple-900 mr-3">
                                     <i class="fas fa-redo"></i>
                                 </button>
-                                <button wire:click="deleteAds({{ $ads->id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
+                                <button wire:click="deleteAds({{ $ads->id }})" class="text-red-600 hover:text-red-900" wire:confirm="{{ __('messages.are_you_sure') }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -390,7 +390,7 @@
                                 <button wire:click="rejectAds({{ $ads->id }})" class="text-red-600 hover:text-red-900 mr-3">
                                     <i class="fas fa-times"></i>
                                 </button>
-                                <button wire:click="deleteAds({{ $ads->id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
+                                <button wire:click="deleteAds({{ $ads->id }})" class="text-red-600 hover:text-red-900" wire:confirm="{{ __('messages.are_you_sure') }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>

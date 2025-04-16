@@ -44,7 +44,7 @@ class ResetPassword extends Component
 
         DB::table('password_reset_tokens')->where('token', $this->token)->delete();
 
-        session()->flash('message', 'Password Changed Successfully');
+        //session()->flash('message', 'Password Changed Successfully');
         return redirect()->route('login',['locale' => app()->getLocale()]);
     }
 

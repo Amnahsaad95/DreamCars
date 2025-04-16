@@ -72,7 +72,7 @@ class Create extends Component
 					 'car_Image' => implode(',', $imagePaths), 
 					 'car_Description'=>$this->car_Description]);
 		
-        session()->flash('success', 'Add successful');
+        session()->flash('success', 'Car Added Successfully');
 		$this->reset();
 		return redirect()->route('carlists',['locale' => app()->getLocale()]);
     }

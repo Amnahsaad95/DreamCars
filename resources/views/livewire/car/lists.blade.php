@@ -135,7 +135,7 @@
                                 <button wire:click="View({{ $car->car_Id }},'true')" class="text-yellow-600 hover:text-yellow-900 mr-3 px-2">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button wire:click="delete({{ $car->car_Id }})" wire:confirm="return confirm('Are you sure?')" class="text-red-600 hover:text-red-900 px-2">
+                                <button wire:click="delete({{ $car->car_Id }})" wire:confirm="{{ __('messages.are_you_sure') }}" class="text-red-600 hover:text-red-900 px-2">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>

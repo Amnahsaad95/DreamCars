@@ -53,7 +53,7 @@ class AdsForm extends Component
             'location' => $this->location,
         ]);
         
-        session()->flash('message', 'Ad created successfully!');
+        session()->flash('message', __('messages.ad_created'));
         
         $this->reset();
     }

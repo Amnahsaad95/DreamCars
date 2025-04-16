@@ -131,6 +131,7 @@ return [
     'newComment' => 'التعليق',
     'email' => 'الايميل',
     'password' => 'كلمة السر',
+    'new_password' => 'كلمة السر الجديدة',
 	'password_confirmation'=>'تأكيد كلمة السر',
 	///car
 	'Brand' => 'العلامة التجارية',

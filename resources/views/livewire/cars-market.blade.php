@@ -25,7 +25,7 @@
                         @foreach($filterOptions as $key => $label)
                             @if(!array_key_exists($key, $activeFilters))
                                 <div wire:click="addFilter('{{ $key }}')" 
-                                     class="flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer">
+                                     class="flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer ">
                                     @if($key === 'Brand')
                                         <i class="fas fa-car mr-2 text-gray-500"></i>
                                     @elseif($key === 'car_Model')
@@ -41,7 +41,7 @@
                                     @elseif($key === 'isSold')
                                         <i class="fas fa-check-circle mr-2 text-gray-500"></i>
                                     @endif
-                                    <span>{{ $label }}</span>
+                                    <span class="px-2">{{ $label }}</span>
                                 </div>
                             @endif
                         @endforeach

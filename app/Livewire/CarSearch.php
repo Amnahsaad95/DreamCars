@@ -18,12 +18,7 @@ class CarSearch extends Component
 
     protected $queryString = ['search'];
 
-	protected $listeners = ['languageChanged' => 'updateLanguage'];
-
-    public function updateLanguage($language)
-    {
-        app()->setLocale($language);  // تحديث اللغة في المكون
-    }
+	
     public function updatedSearch($value)
     {
         if (strlen($value) > 0) {
@@ -69,7 +64,10 @@ class CarSearch extends Component
     }
 	
 	public function show($id){
-		return redirect()->route('CarDetail',$id);
+		return redirect()->route('CarDetail',[
+			'locale' => app()->getLocale(),
+			'id' => $id
+		]);
 	}
 
     public function render()

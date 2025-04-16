@@ -144,7 +144,7 @@
 										<i class="fas fa-eye-slash"></i>
 									</button>
 								@endif
-                                <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
+                                <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" wire:confirm="{{ __('messages.are_you_sure') }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -206,7 +206,7 @@
                                 <button wire:click="unpublishComplaint({{ $complaint->complainant_Id }})" class="text-purple-600 hover:text-purple-900 mr-3">
                                     <i class="fas fa-eye-slash"></i>
                                 </button>
-                                <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
+                                <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" wire:confirm="{{ __('messages.are_you_sure') }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -266,7 +266,7 @@
                             <td class="px-6 py-4">{{ $complaint->car->Brand ?? ''}} {{$complaint->car->car_Model ?? '-'}}</td>
                             <td class="px-6 py-4 text-left">
                                 
-                                <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
+                                <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" wire:confirm="{{ __('messages.are_you_sure') }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -329,7 +329,7 @@
                                 <button wire:click="publishComplaint({{ $complaint->complainant_Id }})" class="text-purple-600 hover:text-purple-900 mr-3">
                                     <i class="fas fa-redo"></i>
                                 </button>
-                                <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
+                                <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" wire:confirm="{{ __('messages.are_you_sure') }}"">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -400,7 +400,7 @@
 										<i class="fas fa-times"></i>
 									</button>
 								@endif
-                                <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">
+                                <button wire:click="deleteComplaint({{ $complaint->complainant_Id }})" class="text-red-600 hover:text-red-900" wire:confirm="{{ __('messages.are_you_sure') }}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>

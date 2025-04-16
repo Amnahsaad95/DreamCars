@@ -9,6 +9,9 @@ return [
     'Users' => 'Users',	
     'Ads' => 'Ads',
     'Settings' => 'Settings',
+    'total_cars' => 'Total Cars',
+    'total_users' => 'Total Users',
+    'total_ads' => 'Total Ads',
 	
 	// cars 
 	'title' => 'Car Management',
@@ -58,6 +61,7 @@ return [
     'unpublished' => 'Unpublished',
     'rejected' => 'Rejected',
     'pending' => 'Pending',
+    'delete' => 'Delete',
     'no_data' => 'No data found',
     'actions' => 'Actions',
     'delete_confirm' => 'Are you sure?',

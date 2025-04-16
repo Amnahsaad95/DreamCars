@@ -112,5 +112,24 @@ return [
 	'start_search' => 'ابدأ البحث',
 	'explore_cars' => 'استكشف السيارات',
 	'post_Ads' => 'انشر إعلانك الآن',
+	
+	
+	///messages
+	'submitted_successfully' => 'تم إرسال :type بنجاح!',
+    'review_submitted' => 'شكرًا لك! تم إرسال تقييمك وهو في انتظار موافقة المسؤول.',
+    'ad_created' => 'تم إنشاء الإعلان بنجاح!',
+    'are_you_sure' => 'هل أنت متأكد؟',
+	'action_message' => 'تم :action بنجاح!',
+	'Ads_action_message' => 'تم :action  الاعلان بنجاح!',
+	'published' => 'النشر',
+	'unpublished' => 'عدم النشر',
+	'rejected' => 'الرفض',
+	'deleted' => 'الحذف',
+	'action_success' => 'تم تحديث :item بنجاح.',
+	'password' => 'كلمة المرور',
+	'profile' => 'الملف الشخصي',
+	'site_info' => 'معلومات الموقع',
+	'current_password_incorrect' => 'كلمة المرور الحالية غير صحيحة.',
+	'new_password_same_as_current' => 'يجب أن تكون كلمة المرور الجديدة مختلفة عن الحالية.',
 
 ];

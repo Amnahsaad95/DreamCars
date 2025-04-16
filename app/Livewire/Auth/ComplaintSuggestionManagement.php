@@ -27,12 +27,12 @@ class ComplaintSuggestionManagement extends Component
     public function publishComplaint($complaintId)
     {
         complaintsSuggestions::find($complaintId)->update(['status' => 'accepted']);
-        session()->flash('message', 'Complaint published successfully!');
+		session()->flash('message', __('messages.action_message', ['action' => __('messages.published')]));
     }
 	public function unpublishComplaint($complaintId)
     {
         complaintsSuggestions::find($complaintId)->update(['status' => 'accepted']);
-        session()->flash('message', 'Complaint Unpublished successfully!');
+		session()->flash('message', __('messages.action_message', ['action' => __('messages.unpublished')]));
     }
 	
 	
@@ -40,13 +40,13 @@ class ComplaintSuggestionManagement extends Component
     public function rejectComplaint($complaintId)
     {
         complaintsSuggestions::find($complaintId)->update(['status' => 'rejected']);
-        session()->flash('message', 'Complaint rejected successfully!');
+		session()->flash('message', __('messages.action_message', ['action' => __('messages.rejected')]));
     }
     
     public function deleteComplaint($complaintId)
     {
         complaintsSuggestions::find($complaintId)->delete();
-        session()->flash('message', 'Complaint deleted successfully!');
+		session()->flash('message', __('messages.action_message', ['action' => __('messages.deleted')]));
     }
     
     public function render()

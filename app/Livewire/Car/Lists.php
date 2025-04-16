@@ -17,8 +17,6 @@ class Lists extends Component
 
     public $brand, $model, $year, $color, $price, $status,$city,$country,$images,$description;
     public $carId;
-    public $isModalOpen = false;
-    public $isViewModalOpen = false;
     public $viewCar;
     public $search = '';
     public $sortBy = 'Brand';
@@ -85,50 +83,10 @@ class Lists extends Component
         $this->sortBy = $field;
     }
 
-    public function openModal()
-    {
-		//dd("I am here");
-        $this->resetForm();
-        $this->isModalOpen = true;
-    }
-
     public function View($id,$edit)
     {
 		//dd($edit);
 		return redirect()->route('update',['locale' => app()->getLocale(),'id'=>$id,'edit'=>$edit]);
-    }
-
-    public function edit($id)
-    {
-        $car = Car::findOrFail($id);
-        $this->carId = $id;
-        $this->brand = $car->Brand;
-        $this->model = $car->car_Model;
-        $this->year = $car->car_Year;
-        $this->color = $car->color;
-        $this->price = $car->car_Price;
-        $this->city = $car->city;
-        $this->country = $car->country;
-        $this->description = $car->car_Description;
-        $this->isModalOpen = true;
-    }
-
-    public function store()
-    {
-        $this->validate();
-        Car::updateOrCreate(['car_Id' => $this->carId], [
-					 'Brand' => $this->brand, 
-					 'user_Id' => 1, 
-					 'car_Model'=>$this->model,
-					 'car_Year'=>$this->year,
-					 'car_Price' => $this->price,
-					 'city'=>$this->city,
-					 'country'=>$this->country,
-					 'color'=>$this->color,
-					 'car_Description'=>$this->description]
-			);
-        $this->closeModal();
-        $this->resetForm();
     }
 
     public function delete($id)
@@ -136,11 +94,6 @@ class Lists extends Component
         Car::find($id)->delete();
     }
 
-    public function closeModal()
-    {
-        $this->isModalOpen = false;
-        $this->isViewModalOpen = false;
-    }
 	
 	public function goToCreateCar()
 	{

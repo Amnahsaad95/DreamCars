@@ -19,13 +19,7 @@ class CarsMarket extends Component
         'sortBy' => ['except' => ''],
     ];
 
-	protected $listeners = ['languageChanged' => 'updateLanguage'];
 
-    public function updateLanguage($language)
-    {
-        app()->setLocale($language);  // تحديث اللغة في المكون
-    }
-	
     public function render()
     {
 		
@@ -71,14 +65,14 @@ class CarsMarket extends Component
         return view('livewire.cars-market', [
             'cars' => $cars,
             'filterOptions' => [
-                'Brand' => 'Brand',
-                'car_Model' => 'Model',
-                'car_Year' => 'Year',
-                'color' => 'Color',
-                'country' => 'Country',
-                'city' => 'City',
-                'isSold' => 'Sold',
-                'car_Price' => 'Price',
+                'Brand' => __('dashboard.brand'),
+                'car_Model' => __('dashboard.model'),
+                'car_Year' => __('dashboard.year'),
+                'color' => __('dashboard.color'),
+                'country' => __('dashboard.country'),
+                'city' => __('dashboard.city'),
+                'isSold' => __('dashboard.sold'),
+                'car_Price' => __('dashboard.price'),
             ]
         ]);
     }
