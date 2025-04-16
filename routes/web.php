@@ -94,7 +94,9 @@ Route::post('/locale', LocaleController::class)->name('locale.change');
 
 
 Livewire::setUpdateRoute(function ($handle) {
-    return Route::post('/DreamCars/public/livewire/update', $handle);
+	$locale = app()->getLocale();
+	return Route::post('/DreamCars/public/livewire/update', $handle);
+	//return Route::post(url("/{$locale}/livewire/update"), $handle);
 });
 
 

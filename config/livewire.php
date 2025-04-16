@@ -157,5 +157,6 @@ return [
     */
 
     'pagination_theme' => 'tailwind',	
-	'asset_url' => config('app.url').'/public/vendor/livewire/livewire.js',
+	'asset_url' => env('APP_URL').'/public/vendor/livewire/livewire.js',
+	//'asset_url' => config('app.url').'/public/vendor/livewire/livewire.js',
 ];

@@ -13,7 +13,10 @@ class NewCars extends Component
 		return Car::inRandomOrder()->take(3)->get();
 	}
 	public function show($id){
-		return redirect()->route('CarDetail',$id);
+		return redirect()->route('CarDetail',[
+        'locale' => app()->getLocale(),
+        'id' => $id
+    ]);
 	}
 
 	

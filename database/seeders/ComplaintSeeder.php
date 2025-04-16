@@ -32,7 +32,7 @@ class ComplaintSeeder extends Seeder
 				'status'      => 'accepted',
 				'type'        => 'suggestion',
 				'user_Id'     => 8,
-				'car_Id'      => 14,
+				'car_Id'      => 10,
 			],
 			[
 				'name'        => 'علي أحمد',

@@ -98,6 +98,10 @@ return [
 	'end_date_format' => 'dd-----yyyy',
 	'create_advertisement' => 'Create Advertisement',
 	'preview' => 'Preview',
+	'views' => 'Views:',
+    'sponsored_ad' => 'Sponsored Ad',
+    'learn_more' => 'Learn More',
+    'advertisement_from' => 'Advertisement from',
 	
 	///carousel 
 	'start_search' => 'Start Searching',

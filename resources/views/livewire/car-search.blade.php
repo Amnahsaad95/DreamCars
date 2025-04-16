@@ -5,9 +5,9 @@
 	<div class="max-w-4xl w-full mx-auto my-8">
 		<!-- Banner Header -->
 		<div class="flex justify-between items-center mb-2">
-			<span class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Sponsored Ad</span>
+			<span class="text-xs font-semibold text-gray-500 uppercase tracking-wide">{{ __('messages.sponsored_ad') }}</span>
 			<div class="flex items-center space-x-2">
-				<span class="text-xs text-gray-500">Views:</span>
+				<span class="text-xs text-gray-500">{{ __('messages.views') }}</span>
 				<span class="text-xs font-bold text-blue-600">{{ $randomAds->hit }}</span>
 				
 			</div>
@@ -29,14 +29,14 @@
 				<h3 class="text-xl md:text-2xl font-bold text-white mb-2">{{ $randomAds->FullName }}</h3>
 				<p class="text-sm md:text-base text-gray-200 mb-4">{{ $randomAds->location }}</p>
 				<button wire:click="recordClick({{ $randomAds->id }})" class="self-start bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-300">
-					Learn More <i class="fas fa-arrow-right ml-1"></i>
+					{{ __('messages.learn_more') }} <i class="fas fa-arrow-right ml-1"></i>
 				</button>
 			</div>
 		</div>
 		
 		<!-- Ad Info Footer -->
 		<div class="flex justify-between items-center mt-2">
-			<span class="text-xs text-gray-500">Advertisement from {{ $randomAds->FullName }}</span>
+			<span class="text-xs text-gray-500">{{ __('messages.advertisement_from') }} {{ $randomAds->FullName }}</span>
 		</div>
 	</div></div>
 

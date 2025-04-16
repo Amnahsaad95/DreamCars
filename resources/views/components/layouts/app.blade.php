@@ -87,10 +87,10 @@
 						<div x-show="profileDropdown" @click.away="profileDropdown = false" 
 							 class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 border border-gray-200"
 							 :class="{ 'right-auto left-0': isArabic }">
-							<a href="{{route('dashboard')}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Dashboard</a>
-							<a href="{{ route('carlists') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">My Cars</a>
-							<a href="{{route('Settings')}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Settings</a>
-							<a href="{{route('logout')}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
+							<a href="{{route('dashboard',['locale' => app()->getLocale()])}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{ __('dashboard.dashboard') }} </a>
+							<a href="{{ route('carlists',['locale' => app()->getLocale()]) }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{ __('dashboard.Cars') }}</a>
+							<a href="{{route('Settings',['locale' => app()->getLocale()])}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{ __('dashboard.Settings') }} </a>
+							<a href="{{route('logout',['locale' => app()->getLocale()])}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">{{ __('auth.logout') }}</a>
 						</div>
 					</div>
                 @else	

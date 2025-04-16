@@ -107,6 +107,10 @@ return [
 	'end_date_format' => 'يوم-----سنة',
 	'create_advertisement' => 'إنشاء الإعلان',
 	'preview' => 'معاينة',
+	'views' => 'المشاهدات:',
+    'sponsored_ad' => 'إعلان برعاية',
+    'learn_more' => 'اعرف المزيد',
+    'advertisement_from' => 'إعلان من',
 	
 	/////carousel 
 	'start_search' => 'ابدأ البحث',
