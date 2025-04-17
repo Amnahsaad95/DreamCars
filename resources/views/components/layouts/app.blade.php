@@ -195,7 +195,7 @@
                 <div class="text-center px-8">
                     <h2 class="text-4xl font-bold mb-4">{{app()->getLocale() == 'ar' ? $settings->intro_title_1_Ar : $settings->intro_title_1}}</h2>
                     <p class="text-xl mb-6">{{app()->getLocale() == 'ar' ? $settings->intro_text_1_Ar : $settings->intro_text_1}}</p>
-                    <button onclick="scrollToSearchSection('search-section','{{config('app.url')}}')" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
+                    <button onclick="scrollToSearchSection('search-section', '{{ route('Home',['locale' => app()->getLocale()]) }}')" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
                         {{ __('messages.start_search') }}
                     </button>
                 </div>
