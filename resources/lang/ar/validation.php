@@ -150,6 +150,7 @@ return [
 	'end_date'   => 'تاريخ الانتهاء',
 	'start_date' => 'تاريخ البدء',
 	'location'   => 'الموقع',
+	'content'   => 'محتوى ',
 
 	
 	],

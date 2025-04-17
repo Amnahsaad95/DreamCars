@@ -127,6 +127,8 @@ return [
 	
 	'current_password_incorrect' => 'Current password is incorrect.',
 	'new_password_same_as_current' => 'New password must be different from current password.',
+	'complaint' => 'complaint',
+	'suggestion' => 'Suggestion',
 
 
 	

@@ -135,5 +135,8 @@ return [
 	'site_info' => 'معلومات الموقع',
 	'current_password_incorrect' => 'كلمة المرور الحالية غير صحيحة.',
 	'new_password_same_as_current' => 'يجب أن تكون كلمة المرور الجديدة مختلفة عن الحالية.',
+	'complaint' => 'شكوى',
+	'suggestion' => 'اقتراح',
+
 
 ];

@@ -12,7 +12,7 @@
             this.currentSlide = (this.currentSlide + 1) % 3;
         }, 5000);
         setInterval(() => {
-            this.currentBanner = (this.currentBanner + 1) % this.banners.length;
+            this.currentBanner = (this.currentBanner + 1) % 3;
         }, 8000);
     }
 	,
@@ -99,7 +99,7 @@
 						<!-- Styled User Button -->
 						<button 
 							@click="open = !open"
-							class="relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 shadow-lg hover:shadow-xl transition-all duration-300 group"
+							class="relative flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 shadow-lg hover:shadow-xl transition-all duration-300 group"
 						>
 							<!-- User Icon -->
 							<i class="fas fa-user text-white text-xl"></i>
@@ -175,15 +175,13 @@
         
         <!-- Mobile Navigation -->
         <div x-show="navOpen" class="md:hidden bg-white py-2 px-4 border-t">
-            <a href="{{ url('/') }}" class="block py-2 text-gray-700">Home</a>
-            <a href="{{ route('AllCar') }}" class="block py-2 text-gray-700">Cars</a>
-            <a href="{{ route('aboutUs') }}" class="block py-2 text-gray-700">About Us</a>
+            <a href="{{ route('Home',['locale' => app()->getLocale()]) }}" class="block py-2 text-gray-700">Home</a>
+            <a href="{{ route('AllCar',['locale' => app()->getLocale()]) }}" class="block py-2 text-gray-700">Cars</a>
+            <a href="{{ route('aboutUs',['locale' => app()->getLocale()]) }}" class="block py-2 text-gray-700">About Us</a>
             <a href="{{ route('ComplaintSuggestionForm') }}" class="block py-2 text-gray-700">Contact</a>
             <div class="pt-2 border-t mt-2">
-                <button @click="isArabic = !isArabic" class="px-3 py-1 bg-gray-100 rounded-full text-sm">
-                    <span wire:click="changeLanguage('ar')" x-show="!isArabic">العربية</span>
-                    <span wire:click="changeLanguage('en')" x-show="isArabic">English</span>
-                </button>
+                <livewire:language-switcher :currentRouteName="Route::currentRouteName()" 
+											:currentRouteParams="request()->route()->parameters()" />
             </div>
 			
         </div>
@@ -197,7 +195,7 @@
                 <div class="text-center px-8">
                     <h2 class="text-4xl font-bold mb-4">{{app()->getLocale() == 'ar' ? $settings->intro_title_1_Ar : $settings->intro_title_1}}</h2>
                     <p class="text-xl mb-6">{{app()->getLocale() == 'ar' ? $settings->intro_text_1_Ar : $settings->intro_text_1}}</p>
-                    <button onclick="scrollToSearchSection('search-section','/')" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
+                    <button onclick="scrollToSearchSection('search-section','{{config('app.url')}}')" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
                         {{ __('messages.start_search') }}
                     </button>
                 </div>
@@ -206,7 +204,7 @@
                 <div class="text-center px-8">
                     <h2 class="text-4xl font-bold mb-4">{{app()->getLocale() == 'ar' ? $settings->intro_title_2_Ar : $settings->intro_title_2}}</h2>
                     <p class="text-xl mb-6">{{app()->getLocale() == 'ar' ? $settings->intro_text_2_Ar : $settings->intro_text_2}}</p>
-                    <button class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
+                    <button onclick="window.location.href='{{ route('AllCar',['locale' => app()->getLocale()]) }}'" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
                         {{ __('messages.explore_cars') }}
                     </button>
                 </div>
@@ -215,7 +213,7 @@
                 <div class="text-center px-8">
                     <h2 class="text-4xl font-bold mb-4">{{app()->getLocale() == 'ar' ? $settings->intro_title_3_Ar : $settings->intro_title_3}}</h2>
                     <p class="text-xl mb-6">{{app()->getLocale() == 'ar' ? $settings->intro_text_3_Ar : $settings->intro_text_3}}</p>
-                    <button onclick="window.location.href='{{ url('/addNewAds') }}'" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
+                    <button onclick="window.location.href='{{ route('addNewAds',['locale' => app()->getLocale()]) }}'" class="bg-white text-primary px-6 py-2 rounded-full font-semibold hover:bg-gray-100">
                        {{ __('messages.post_Ads') }}
                     </button>
                 </div>
