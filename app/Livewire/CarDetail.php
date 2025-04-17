@@ -79,6 +79,7 @@ class CarDetail extends Component
     {
 		$comment = complaintsSuggestions::query()
 										->where('type', 'suggestion')
+										->where('status', 'accepted')
 										->where('car_Id', $this->car->car_Id)
 										->paginate(10);
 		//dd($comment->count());

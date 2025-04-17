@@ -83,7 +83,7 @@
         </div>-->
         
         <div class="mt-6 text-center text-sm text-gray-600">
-            {{ __('auth.have_Account') }} <a href="{{ route('login') }}" class="font-medium text-blue-600 hover:text-blue-500">{{ __('auth.signin') }}</a>
+            {{ __('auth.have_Account') }} <a href="{{ route('login',['locale' => app()->getLocale()]) }}" class="font-medium text-blue-600 hover:text-blue-500">{{ __('auth.signin') }}</a>
         </div>
     </div>
 </div>
