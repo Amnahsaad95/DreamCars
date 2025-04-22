@@ -102,13 +102,17 @@
                                 <div class="text-sm text-gray-900">{{ $car->car_Year }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center space-x-2">
-									<div class="w-4 h-4 rounded-full border" style="background-color: #{{ ltrim($car->color, '#')}} !important;"></div>
-									<span class="text-sm text-gray-700">{{ $car->color }}</span>
+                                <div class="flex text-sm items-center space-x-2">
+									<div class="inline-flex items-center gap-2 px-2 py-1 rounded-md" style="background-color: {{ $car->color }}20"> <!-- 20 = 12.5% opacity -->
+										<span class="w-4 h-4 rounded-full border border-gray-300" style="background-color: {{ $car->color }}"></span>
+										<span class="font-medium" style="color: {{ $car->color }}">
+											{{ $car->color }}
+										</span>
+									</div>
 								</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">${{ number_format($car->car_Price, 2) }}</div>
+                                <div class="text-sm text-gray-900">{{$car->formattedPrice()}}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-900">
@@ -129,15 +133,19 @@
                                 <div class="text-sm text-gray-900">{{ $car->car_Description }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+							
                                 <button wire:click="View({{ $car->car_Id }},'false')" class="text-blue-600 hover:text-blue-900 mr-3">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button wire:click="View({{ $car->car_Id }},'true')" class="text-yellow-600 hover:text-yellow-900 mr-3 px-2">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button wire:click="delete({{ $car->car_Id }})" wire:confirm="{{ __('messages.are_you_sure') }}" class="text-red-600 hover:text-red-900 px-2">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+								
+								@if(auth()->user()->Role == 1)
+									<button wire:click="View({{ $car->car_Id }},'true')" class="text-yellow-600 hover:text-yellow-900 mr-3 px-2">
+										<i class="fas fa-edit"></i>
+									</button>
+									<button wire:click="delete({{ $car->car_Id }})" wire:confirm="{{ __('messages.are_you_sure') }}" class="text-red-600 hover:text-red-900 px-2">
+										<i class="fas fa-trash"></i>
+									</button>
+								@endif
                             </td>
                         </tr>
                     @empty

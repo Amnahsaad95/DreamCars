@@ -3,9 +3,12 @@
     @if(!$editMode)	
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-gray-800">{{ __('dashboard.detail') }}</h1>
+			
+					@if(auth()->user()->Role == 1)
             <button wire:click="toggleEdit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center">
                 <i class="fas fa-edit mr-2 px-2"></i> {{ __('dashboard.Edit') }}
             </button>
+			@endif
         </div>
 
         <div class="bg-white rounded-xl shadow-md overflow-hidden">
@@ -55,17 +58,19 @@
                             
                             <div>
                                 <p class="text-gray-500 text-sm">{{ __('dashboard.price') }}</p>
-                                <p class="font-medium text-blue-600">${{ number_format($car->car_Price, 2) }}</p>
+                                <p class="font-medium text-blue-600">{{$car->formattedPrice()}}</p>
                             </div>
                             <div>
                                 <p class="text-gray-500 text-sm">{{ __('dashboard.sold') }} </p>
                                 <p class="font-medium">{{ $car->isSold == 0 ? __('dashboard.no') : __('dashboard.yes') }}</p>
                             </div>
 							<div>
-                                <p class="text-gray-500 text-sm">{{ __('dashboard.color') }} </p>
-                                <div class="flex items-center space-x-2">
-									<div class="w-4 h-4 rounded-full border" style="background-color: #{{ ltrim($car->color, '#')}} !important;"></div>
-									<span class="text-sm text-gray-700">{{ $car->color }}</span>
+                                <p class="text-gray-500 text-sm py-2">{{ __('dashboard.color') }} </p>
+								<div class="inline-flex items-center gap-2 px-2 py-2 rounded-md" style="background-color: {{ $car->color }}20"> <!-- 20 = 12.5% opacity -->
+									<span class="w-4 h-4 rounded-full border border-gray-300" style="background-color: {{ $car->color }}"></span>
+									<span class="font-medium" style="color: {{ $car->color }}">
+										{{ $car->color }}
+									</span>
 								</div>
                             </div>
                             
@@ -179,7 +184,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-end space-x-4">
+            <div class="flex justify-end gap-2">
                 <button type="button" wire:click="toggleEdit" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600">
                     {{ __('dashboard.cancel') }} 
                 </button>

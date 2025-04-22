@@ -57,8 +57,8 @@ class ComplaintSuggestionForm extends Component
 	public function updatedCarName()
 	{
 		$this->results = \App\Models\Car::query()
-										->where('Brand', 'like', '%' . $this->user_name . '%')
-										->where('car_Model', 'like', '%' . $this->user_name . '%')
+										->where('Brand', 'like', '%' . $this->car_name . '%')
+										->orwhere('car_Model', 'like', '%' . $this->car_name . '%')
 										->get();		
 	}
 

@@ -98,7 +98,16 @@ return [
 	'no_unpublished_ads'=> 'No unpublished ads found',
 	'no_published_ads'  => 'No published ads found',
 	'no_ads'            => 'No ads found',
-
+	
+    'search_placeholder_ads' => 'Search ...',
+	///charts
+	
+	'car_data_analytics' => 'Car Data Analytics',
+    'cars_by_brand' => 'Cars by Brand',
+    'price_by_year' => 'Price by Year',
+    'sales_status' => 'Sales Status',
+    'cars_by_country' => 'Cars by Country',
+    'avg_price' => 'Avg Price',
 
 	
 	

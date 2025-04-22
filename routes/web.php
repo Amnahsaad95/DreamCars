@@ -88,7 +88,6 @@ Route::get('lang/{lang}', function ($lang) {
     return redirect()->back();
 })->name('change.lang');
 
-//Route::get('lang/{lang}', [LanguageController::class, 'changeLanguage'])->name('change.language');
 
 Route::post('/locale', LocaleController::class)->name('locale.change');
 
@@ -96,7 +95,6 @@ Route::post('/locale', LocaleController::class)->name('locale.change');
 Livewire::setUpdateRoute(function ($handle) {
 	$locale = app()->getLocale();
 	return Route::post('/DreamCars/public/livewire/update', $handle);
-	//return Route::post(url("/{$locale}/livewire/update"), $handle);
 });
 
 

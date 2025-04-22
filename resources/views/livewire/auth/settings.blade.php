@@ -422,7 +422,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-end space-x-4">
+            <div class="flex justify-end gap-2">
                 <button type="button" wire:click="cancelSiteEdit" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
                     {{ __('dashboard.cancel') }}
                 </button>
@@ -553,7 +553,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-end space-x-4">
+            <div class="flex justify-end gap-2">
                 <button type="button" wire:click="cancelProfileEdit" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
                     {{ __('dashboard.cancel') }}
                 </button>
@@ -606,7 +606,7 @@
 							@error('new_password_confirmation') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 						</div>
 					</div>
-					<div class="flex justify-end space-x-4">
+					<div class="flex justify-end gap-2">
 						<button type="button" wire:click="cancelPasswordEdit" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
 							{{ __('dashboard.cancel') }}
 						</button>

@@ -14,7 +14,7 @@
                     <div class="p-4">
                         <h3 class="font-semibold text-lg" >{{ $car->Brand }}  {{ $car->car_Model }}</h3>
                         <div class="flex justify-between items-center mt-2">
-                            <span class="text-primary font-bold" >$  {{ $car->car_Price }}</span>
+                            <span class="text-primary font-bold" >{{$car->formattedPrice()}}</span>
                             <button class="text-gray-500 hover:text-primary">
                                 <i class="far fa-heart"></i>
                             </button>
@@ -40,9 +40,9 @@
                     <div class="p-4">
                         <h3 class="font-semibold text-lg" >{{ $car->Brand }}  {{ $car->car_Model }}</h3>
                         <div class="flex justify-between items-center mt-2">
-                            <span class="text-primary font-bold" >${{ $car->car_Price }}</span>
-                            <button class="px-3 py-1 bg-primary text-white text-sm rounded hover:bg-secondary">
-                                View Details
+                            <span class="text-primary font-bold" >{{$car->formattedPrice()}}</span>
+                            <button class="text-gray-500 hover:text-primary">
+                                <i class="far fa-heart"></i>
                             </button>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                     <div class="h-32 bg-gray-200 relative">
                         <img src="{{ asset('storage/'.explode(',', $car->car_Image)[0] ) }}" alt="{{ $car->Brand }}" class="h-full w-full object-cover">
                         <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                            <span class="text-white font-bold text-lg">SOLD</span>
+                            <span class="text-white font-bold text-lg">{{ __('dashboard.sold') }}</span>
                         </div>
                     </div>
                     <div class="p-3">

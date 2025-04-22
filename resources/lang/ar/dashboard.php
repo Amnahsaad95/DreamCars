@@ -92,8 +92,15 @@ return [
 	'no_unpublished_ads'=> 'لا توجد إعلانات غير منشورة',
 	'no_published_ads'  => 'لا توجد إعلانات منشورة',
 	'no_ads'            => 'لا توجد إعلانات',
-
-
+	
+    'search_placeholder_ads' => 'ابحث ....',
+	////charts
+	'car_data_analytics' => 'تحليلات بيانات السيارات',
+    'cars_by_brand' => 'السيارات حسب الماركة',
+    'price_by_year' => 'السعر حسب السنة',
+    'sales_status' => 'حالة المبيعات',
+    'cars_by_country' => 'السيارات حسب البلد',
+    'avg_price' => 'متوسط السعر',
 
 
 

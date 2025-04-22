@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	
+	
 	<link rel="stylesheet" href="{{ asset('font/stylesheet.css') }}" >
 	<script>
         tailwind.config = {
@@ -44,7 +45,7 @@
         <div class="hidden md:flex md:flex-shrink-0">
             <div class="flex flex-col w-64 bg-indigo-800 text-white">
                 <div class="flex items-center justify-center h-16 px-4 bg-indigo-900">
-                    <a href="{{ route('Home',['locale' => app()->getLocale()]) }}"><span class="logo text-xl font-bold">Draem Cars</span></a>
+                    <a href="{{ route('Home',['locale' => app()->getLocale()]) }}"><span class="logo text-xl font-bold">{{app()->getLocale() == 'ar' ? $settings->site_name_Ar : $settings->site_name}}</span></a>
                 </div>
                 <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto">
                     <nav class="flex-1 space-y-2">
@@ -80,7 +81,10 @@
                             <img class="h-8 w-8 rounded-full" src="{{ asset('storage/' . Auth::user()->profile_Image) }}" alt="User avatar">
                             <div class="ml-3 px-2">
                                 <p class="text-sm font-medium">{{ Auth::user()->name }}</p>
-                                <p class="text-xs text-indigo-200">{{ __('auth.admin') }}</p>
+								
+								@if(auth()->user()->Role == 1)
+									<p class="text-xs text-indigo-200">{{ __('auth.admin') }}</p>
+								@endif
                             </div>
                         </div>
 					</div>

@@ -31,7 +31,7 @@ class ComplaintSuggestionManagement extends Component
     }
 	public function unpublishComplaint($complaintId)
     {
-        complaintsSuggestions::find($complaintId)->update(['status' => 'accepted']);
+        complaintsSuggestions::find($complaintId)->update(['is_public' => 0,'status' => 'accepted']);
 		session()->flash('message', __('messages.action_message', ['action' => __('messages.unpublished')]));
     }
 	

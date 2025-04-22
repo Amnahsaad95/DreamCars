@@ -83,16 +83,7 @@
                             <input type="number" step="0.01" wire:model="car_Price" class="w-full p-2 border rounded">
                             @error('car_Price') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
-                        <div class="mb-4">
-                            <label class="block text-gray-700 mb-2">{{ __('dashboard.available') }} </label>
-							<label class="relative inline-flex items-center cursor-pointer">
-								<input type="checkbox" wire:model="isSold" class="sr-only peer" @checked(!$isSold)>
-								<div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-red-500 transition-all"></div>
-								<div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full peer-checked:translate-x-full transition-all"></div>
-							</label>
-							
-                            @error('isSold') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
+                       
                         <div class="mb-4">
                             <label class="block text-gray-700 mb-2">{{ __('dashboard.color') }} </label>
                             <input type="color" wire:model="color" class="w-full p-2 h-10 border rounded">

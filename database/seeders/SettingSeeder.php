@@ -16,6 +16,7 @@ class SettingSeeder extends Seeder
     {
         $setting= [
 					'site_name'=>'Dream Cars',
+					'site_name_Ar'=>'دريم كارز',
 					'sitemail' => 'contact@dreamcars.com',
 					'site_icon' => 'Icon_1744269375_67f7703f50533.png',
 					'facebook_url' => 'https://facebook.com/',

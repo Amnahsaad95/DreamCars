@@ -26,6 +26,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!--<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('font/stylesheet.css') }}" >
 	<link rel="shortcut icon" sizes="114x114" href="{{ asset('storage/' . $settings->site_icon) }}">
     <script>
@@ -60,7 +61,7 @@
             <!-- Logo -->
             <div class="flex items-center">
                 <!--<img src="https://via.placeholder.com/50" alt="AutoMarket Logo" class="h-10 mr-3">-->
-                <span class="logo text-xl font-bold text-primary">{{$settings->site_name}}</span>
+                <span class="logo text-xl font-bold text-primary">{{app()->getLocale() == 'ar' ? $settings->site_name_Ar : $settings->site_name}}</span>
             </div>
             
             <!-- Mobile Menu Button -->
@@ -113,6 +114,7 @@
 						<div 
 							x-show="open"
 							@click.away="open = false"
+							x-cloak
 							x-transition:enter="transition ease-out duration-200"
 							x-transition:enter-start="opacity-0 scale-95"
 							x-transition:enter-end="opacity-100 scale-100"
@@ -175,11 +177,26 @@
         
         <!-- Mobile Navigation -->
         <div x-show="navOpen" class="md:hidden bg-white py-2 px-4 border-t">
-            <a href="{{ route('Home',['locale' => app()->getLocale()]) }}" class="block py-2 text-gray-700">Home</a>
-            <a href="{{ route('AllCar',['locale' => app()->getLocale()]) }}" class="block py-2 text-gray-700">Cars</a>
-            <a href="{{ route('aboutUs',['locale' => app()->getLocale()]) }}" class="block py-2 text-gray-700">About Us</a>
-            <a href="{{ route('ComplaintSuggestionForm') }}" class="block py-2 text-gray-700">Contact</a>
-            <div class="pt-2 border-t mt-2">
+            <a href="{{ route('Home',['locale' => app()->getLocale()]) }}" class="block py-2 text-gray-700">{{ __('messages.Home') }}</a>
+            <a href="{{ route('AllCar',['locale' => app()->getLocale()]) }}" class="block py-2 text-gray-700">{{ __('messages.Cars') }}</a>
+            <a href="{{ route('aboutUs',['locale' => app()->getLocale()]) }}" class="block py-2 text-gray-700">{{ __('messages.AboutUs') }}</a>
+            <a href="{{ route('ComplaintSuggestionForm') }}" class="block py-2 text-gray-700">{{ __('messages.ContactUs') }}</a>
+            @auth
+        <!-- Mobile Account Links for Authenticated Users -->
+        <div class="pt-2 border-t mt-2">
+            <a href="{{route('dashboard',['locale' => app()->getLocale()])}}" class="block py-2 text-gray-700">{{ __('dashboard.dashboard') }}</a>
+            <a href="{{ route('carlists',['locale' => app()->getLocale()]) }}" class="block py-2 text-gray-700">{{ __('dashboard.Cars') }}</a>
+            <a href="{{route('Settings',['locale' => app()->getLocale()])}}" class="block py-2 text-gray-700">{{ __('dashboard.Settings') }}</a>
+            <a href="{{route('logout',['locale' => app()->getLocale()])}}" class="block py-2 text-gray-700">{{ __('auth.logout') }}</a>
+        </div>
+    @else
+        <!-- Mobile Login & Register Links for Non-Authenticated Users -->
+        <div class="pt-2 border-t mt-2">
+            <a href="{{route('login')}}" class="block py-2 text-gray-700">{{ __('auth.login') }}</a>
+            <a href="{{ route('register') }}" class="block py-2 text-gray-700">{{ __('auth.register') }}</a>
+        </div>
+    @endauth
+			<div class="pt-2 border-t mt-2">
                 <livewire:language-switcher :currentRouteName="Route::currentRouteName()" 
 											:currentRouteParams="request()->route()->parameters()" />
             </div>
@@ -238,7 +255,7 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="logo text-xl font-bold mb-4">{{$settings->site_name}}</h3>
+                    <h3 class="logo text-xl font-bold mb-4">{{app()->getLocale() == 'ar' ? $settings->site_name_Ar : $settings->site_name}}</h3>
                     <p class="text-gray-400">{{app()->getLocale() == 'ar' ? $settings->siteDescriptionAr : $settings->siteDescription}}</p>
                 </div>
                 <div>
@@ -265,16 +282,20 @@
                         <a href="https://wa.me/{{ $settings->whatsapp_number }}" class="text-gray-400 hover:text-white px-2"><i class="fab fa-whatsapp text-xl"></i></a>
                         <a href="{{$settings->instagram_url}}" class="text-gray-400 hover:text-white px-2"><i class="fab fa-instagram text-xl"></i></a>
                     </div>
-                    <div class="mt-4">
-                        <button @click="isArabic = !isArabic" class="px-4 py-2 bg-gray-700 rounded-md text-sm">
-                            <span x-show="!isArabic">العربية</span>
-                            <span x-show="isArabic">English</span>
-                        </button>
+                    <div class="mt-4 text-blue-400">
+                         <!-- Language Toggle -->
+						<livewire:language-switcher :currentRouteName="Route::currentRouteName()" 
+											:currentRouteParams="request()->route()->parameters()" /> 
                     </div>
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 {{$settings->site_name}} . All rights reserved.</p>
+                <p>{{ __('messages.rights_reserved', [
+									'year' => date('Y'),
+									'name' => app()->getLocale() == 'ar' ? $settings->site_name_Ar : $settings->site_name
+								]) 
+					}}
+				</p>
             </div>
         </div>
     </footer>

@@ -31,7 +31,13 @@ return [
 	'SoldCars' => 'السيارات المباعة',
 	'FeatureCars' => 'السيارات المميزة',
 	'AllCars' => 'جميع السيارات',
-	'SearchInput' => 'ابحث عن سيارتك ',
+	'SearchInput' => 'ابحث، قارن، واعثر على الخيار الأنسب لاحتياجاتك ',
+	
+	'compare'     => 'مقارنة السيارات',
+	'feature'     => 'المميرات',	
+	'close' => 'إغلاق',
+	'rights_reserved' => '© :year :name جميع الحقوق محفوظة.',
+	'selected_for_comp' => 'تم اختياره للمقارنة',
 	
 	'ConnectWithUs' => 'اتصل بنا',
 	'QuickLink' => 'الروابط السريعة',
@@ -100,7 +106,7 @@ return [
 	'ad_image' => 'صورة الإعلان*',
 	'select_image' => 'اختر صورة',
 	'target_url' => 'رابط الإعلان المستهدف*',
-	'location' => 'الموقع*',
+	'location' => 'الموقع',
 	'start_date' => 'تاريخ البدء*',
 	'start_date_format' => 'يوم-----سنة',
 	'end_date' => 'تاريخ الانتهاء*',
@@ -137,6 +143,9 @@ return [
 	'new_password_same_as_current' => 'يجب أن تكون كلمة المرور الجديدة مختلفة عن الحالية.',
 	'complaint' => 'شكوى',
 	'suggestion' => 'اقتراح',
+	
+	'no_Cars_Found' => 'لا توجد سيارات تطابق المواصفات التي حددتها',
+
 
 
 ];

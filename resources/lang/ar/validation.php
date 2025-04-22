@@ -126,7 +126,8 @@ return [
     */
 
     'attributes' => [
-    'commentPhone' => 'التلفون',
+    'commentPhone' => 'رقم الهاتف',
+    'phone' => 'رقم الهاتف',
     'name' => 'الاسم',
     'newComment' => 'التعليق',
     'email' => 'الايميل',

@@ -13,7 +13,7 @@ return [
 	'SoldCars' => 'Recently Sold',
 	'FeatureCars' => 'Featured Listings',
 	'AllCars' => 'Car Marketplace',
-	'SearchInput' => 'Find Your Perfect Car ',
+	'SearchInput' => 'Search, compare, and find the perfect match for your needs ',
 	'ConnectWithUs' => 'Connect With Us',
 	'QuickLink' => 'Quick Link',
 	'Lang' => 'English',
@@ -24,7 +24,14 @@ return [
 	'already_have_account'=> 'Already have an account',
 	'create_account'      => 'Create Account',
 	'new_to_platform'     => 'New to our car marketplace?',
-
+	
+	'compare'     => 'Compare Cars',
+	'feature'     => 'Feature',
+	'selected_for_comp'     => 'Selected for Comparison ',
+		
+	'close' => 'Close',
+	'rights_reserved' => '© :year :name. All rights reserved.',
+	///////////////////////////
 	
 	'filter' => 'Filter',
 	'sortBy' => 'Sort By',
@@ -115,7 +122,7 @@ return [
     'ad_created' => 'Ad created successfully!',
     'are_you_sure' => 'Are you sure?',
 	'action_message' => ':action successfully!',
-	'Ads_action_message' => '|Ads :action successfully!',
+	'Ads_action_message' => 'Ads :action successfully!',
 	'published' => 'Published',
 	'unpublished' => 'Unpublished',
 	'rejected' => 'Rejected',
@@ -124,6 +131,8 @@ return [
 	'password' => 'Password',
 	'profile' => 'Profile',
 	'site_info' => 'Site information',
+	
+	'no_Cars_Found' => 'No cars found matching your criteria',
 	
 	'current_password_incorrect' => 'Current password is incorrect.',
 	'new_password_same_as_current' => 'New password must be different from current password.',

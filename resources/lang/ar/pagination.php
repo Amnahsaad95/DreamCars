@@ -15,6 +15,6 @@ return [
 
     'previous' => '&laquo; السابق',
     'next' => 'التالي &raquo;',
-	'showing' => 'عرض :first إلى :last من أصل :total نتيجة',
+	'showing_results' => 'عرض :from إلى :to من أصل :total نتيجة',
 
 ];

@@ -5,8 +5,8 @@
             
             <li aria-current="page">
                 <div class="flex items-center">
-                    <i class="fas fa-chevron-right text-gray-400"></i>
-                    <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">{{ __('messages.car_Detail') }}</span>
+                    <i class="fas fa-chevron-{{app()->getLocale() == 'ar' ? 'left' : 'right'}} text-gray-400"></i>
+                    <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 px-2">{{ __('messages.car_Detail') }}</span>
                 </div>
             </li>
         </ol>
@@ -51,10 +51,10 @@
                 <div class="bg-blue-50 p-4 rounded-lg mb-6">
                     <div class="flex justify-between items-center">
                         <div>
-                            <span class="text-2xl font-bold text-primary">${{ number_format($car->car_Price) }}</span>
+                            <span class="text-2xl font-bold text-primary">{{$car->formattedPrice()}}</span>
                         </div>
                         @if($car->isSold)
-                            <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded">SOLD</span>
+                            <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ __('dashboard.sold') }}</span>
                         @endif
                     </div>
                 </div>
@@ -63,19 +63,24 @@
                     <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ __('messages.details') }}</h3>
                     <div class="grid grid-cols-2 gap-3">
                         <div class="flex items-center">
-                            <i class="fas fa-calendar-alt text-blue-500 mr-2"></i>
+                            <i class="fas fa-calendar-alt text-blue-500 mr-2 px-2"></i>
                             <span class="text-gray-700">{{ __('messages.year') }} : {{ $car->car_Year }}</span>
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-palette text-blue-500 mr-2"></i>
-                            <span class="text-gray-700">{{ __('messages.color') }} : {{ $car->color }}</span>
-                        </div>
+                            <i class="fas fa-palette text-blue-500 mr-2 px-2"></i>
+							 <div class="inline-flex items-center gap-2 px-2 py-1 rounded-md" style="background-color: {{ $car->color }}20"> <!-- 20 = 12.5% opacity -->
+								<span class="w-4 h-4 rounded-full border border-gray-300" style="background-color: {{ $car->color }}"></span>
+								<span class="font-medium" style="color: {{ $car->color }}">
+									{{ $car->color }}
+								</span>
+							</div>
+						</div>
                         <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
+                            <i class="fas fa-map-marker-alt text-blue-500 mr-2 px-2"></i>
                             <span class="text-gray-700">{{ __('messages.location') }} : {{ $car->city }}, {{ $car->country }}</span>
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-user text-blue-500 mr-2"></i>
+                            <i class="fas fa-user text-blue-500 mr-2 px-2"></i>
                             <span class="text-gray-700">{{ __('messages.seller') }} : {{ $car->user->name }}</span>
                         </div>
                     </div>
@@ -89,23 +94,22 @@
                 </div>
                 
                 @if(!$car->sold)
-                <div class="flex space-x-3">
+                <div class="flex gap-4">
 					
                     <button wire:click="addComplaint({{$car->car_Id}})" class="bg-primary hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg flex items-center transition duration-200">
-                        <i class="fas fa-star mr-2"></i> {{ __('messages.add_complaint') }}
+                        <i class="fas fa-star mr-2 px-2"></i> {{ __('messages.add_complaint') }}
                     </button>
 					<div x-data="{ 
-    callSeller() {
-        
-            window.location.href = 'tel:' + @entangle('phone').initialValue;
-        
-    }
-}">	<button 
+							callSeller() {								
+									window.location.href = 'tel:' + @entangle('phone').initialValue;								
+							}
+						}">	
+						<button 
 							@if($isSold) disabled @endif 
 							wire:click="callSeller" 
 							class="border border-primary text-primary hover:bg-blue-50 font-bold py-3 px-6 @if($isSold) disabled-button @endif rounded-lg flex items-center transition duration-200"
 							>
-							<i class="fas fa-phone mr-2"></i> {{ __('messages.contact_seller') }}
+							<i class="fas fa-phone{{app()->getLocale() == 'ar' ? '-alt' : '' }} px-2"></i> {{ __('messages.contact_seller') }}
 						</button>
 					</div>
                 </div>

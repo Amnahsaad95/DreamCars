@@ -13,4 +13,15 @@
 
 .logo{
 font-family: 'Sakana', sans-serif;
+font-weight: bold;
+    text-rendering: geometricPrecision;
+}
+
+html[lang="ar"] .logo {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 900; /* Heaviest weight */
+    font-style: normal;
+    letter-spacing: 0.5px; /* Makes it sharper */
+    text-align: right;
+    line-height: 1.2;
 }

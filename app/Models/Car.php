@@ -21,4 +21,16 @@ class Car extends Model
     {
         return $this->belongsTo(User::class,'user_Id');
     }
+	public function formattedPrice()
+	{
+		$price = number_format($this->car_Price, 0, '.', app()->getLocale() === 'ar' ? '٬' : ',');
+		
+		if (app()->getLocale() === 'ar') {
+			$arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+			$price = str_replace(range(0, 9), $arabicNumerals, $price);
+			return $price . ' ل.س';
+		}
+		
+		return $price . ' SYP';
+	}
 }

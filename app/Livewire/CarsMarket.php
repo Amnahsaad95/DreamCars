@@ -10,6 +10,7 @@ class CarsMarket extends Component
 	public $search = '';
     public $sortBy = '';
     public $activeFilters = [];
+	public $colorTolerance = 80;
     public $priceCondition = 'greater';
     public $priceValue = '';
     public $priceValue2 = '';
@@ -42,7 +43,24 @@ class CarsMarket extends Component
                         } elseif ($this->priceCondition === 'between') {
                             $query->whereBetween('car_Price', [$this->priceValue, $this->priceValue2]);
                         }
-					}                    
+					}
+					elseif($filter === 'color'){
+						if (!empty($value)) {
+							// Convert selected color to RGB
+							list($r, $g, $b) = sscanf($value, "#%02x%02x%02x");							
+							$query->where(function($q) use ($r, $g, $b) {
+								   $q->whereRaw("
+									ABS(CAST(CONV(SUBSTRING(color, 2, 2), 16, 10) AS SIGNED) - ?) <= ?
+									AND ABS(CAST(CONV(SUBSTRING(color, 4, 2), 16, 10) AS SIGNED) - ?) <= ?
+									AND ABS(CAST(CONV(SUBSTRING(color, 6, 2), 16, 10) AS SIGNED) - ?) <= ?
+								", [
+									$r, $this->colorTolerance,
+									$g, $this->colorTolerance,
+									$b, $this->colorTolerance
+								]);
+							});
+						}
+					}
 					else {
 						//dd($value);
                         $query->where($filter, 'like', '%'.$value.'%');

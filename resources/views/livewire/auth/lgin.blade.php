@@ -1,7 +1,7 @@
 <div class="flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div class="flex justify-center mb-6">
-            <a href="{{ route('Home',['locale' => app()->getLocale()])  }}" class="logo text-2xl font-bold text-gray-800">Dream Cars</a>
+            <a href="{{ route('Home',['locale' => app()->getLocale()])  }}" class="logo text-2xl font-bold text-gray-800">{{app()->getLocale() == 'ar' ? $settings->site_name_Ar : $settings->site_name}}</a>
         </div>
         
         <h2 class="text-xl font-semibold text-gray-700 mb-6">{{ __('auth.login_msg') }}</h2>

@@ -15,6 +15,52 @@ class CarSearch extends Component
 	public $search = '';
     public $searchResults = [];
     public $showDropdown = false;
+	
+	
+	//////////////////
+	
+    public $selectedCars = [];
+    public $showComparisonModal = false;
+    public $detailedView = null;
+    
+    public $comparisonFeatures = ['Brand', 'Model', 'Year', 'Price' ,'Avaliable','Location'];
+    public $comparisonFeatures1 = [];
+	
+	public function mount()
+	{
+		$this->comparisonFeatures1 = [
+			'Brand' => __('dashboard.brand'),
+			'car_Model' => __('dashboard.model'), 
+			'car_Year' => __('dashboard.year'),
+			'car_Price' => __('dashboard.price'),
+			'color' => __('dashboard.color'),
+			'isSold' => __('dashboard.status'),
+		];
+	}
+
+    public function selectResult($result)
+    {
+        $this->showResults = false;
+        $this->viewDetails($result);
+    }
+	public function toggleSelection($carId)
+    {
+        if (in_array($carId, $this->selectedCars)) {
+            $this->selectedCars = array_diff($this->selectedCars, [$carId]);
+        } else {
+            $this->selectedCars[] = $carId;
+        }
+    }
+
+    public function removeSelected($index)
+    {
+        unset($this->selectedCars[$index]);
+        $this->selectedCars = array_values($this->selectedCars);
+    }
+	
+	
+	/////////////////////////
+	
 
     protected $queryString = ['search'];
 
@@ -27,6 +73,11 @@ class CarSearch extends Component
                 ->orWhere('car_Model', 'like', '%'.$value.'%')
                 ->limit(5)
                 ->get()
+				 ->map(function ($car) {
+					$carArray = $car->toArray();
+					$carArray['formatted_price'] = $car->formattedPrice();
+					return $carArray;
+				})
                 ->toArray();
             
             $this->showDropdown = count($this->searchResults) > 0;

@@ -65,7 +65,9 @@
 				<div>
 					<label for="end_date" class="block text-sm font-medium text-gray-700">{{ __('messages.end_date') }}</label>
 					<input type="date" id="end_date" wire:model="end_date" 
-						   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+						   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
+						   
+						   >
 					@error('end_date') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
 				</div>
 			</div>

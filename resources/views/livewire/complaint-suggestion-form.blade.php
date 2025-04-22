@@ -10,15 +10,15 @@
     <form wire:submit.prevent="submit">
         <!-- Type Selection -->
         <div class="mb-4">
-            <label class="block text-gray-700 mb-2">{{ __('messages.type') }}</label>
+            <label class="block text-gray-700 mb-2 ">{{ __('messages.type') }}</label>
             <div class="flex space-x-4">
                 <label class="inline-flex items-center">
                     <input type="radio" wire:model.live="type" value="complaint" class="form-radio" {{ $isDisabled ? 'disabled' : '' }}>
-                    <span class="ml-2">{{ __('messages.complaint') }}</span>
+                    <span class="ml-2 px-2">{{ __('messages.complaint') }}</span>
                 </label>
                 <label class="inline-flex items-center">
                     <input type="radio" wire:model.live="type" value="suggestion" class="form-radio" {{ $isDisabled ? 'disabled' : '' }}>
-                    <span class="ml-2">{{ __('messages.suggestion') }}</span>
+                    <span class="ml-2 px-2">{{ __('messages.suggestion') }}</span>
                 </label>
             </div>
         </div>
@@ -30,11 +30,11 @@
                 <div class="flex space-x-4">
                     <label class="inline-flex items-center">
                         <input type="radio" wire:model.live="about_type" value="user" class="form-radio" {{ $isDisabled ? 'disabled' : '' }}>
-                        <span class="ml-2">{{ __('messages.user') }}</span>
+                        <span class="ml-2 px-2">{{ __('messages.user') }}</span>
                     </label>
                     <label class="inline-flex items-center">
                         <input type="radio" wire:model.live="about_type" value="car" class="form-radio" {{ $isDisabled ? 'disabled' : '' }}>
-                        <span class="ml-2">{{ __('messages.car') }}</span>
+                        <span class="ml-2 px-2">{{ __('messages.car') }}</span>
                     </label>
                 </div>
             </div>
@@ -100,7 +100,7 @@
         <div class="mb-4">
             <label class="inline-flex items-center">
                 <input type="checkbox" wire:model="is_public" class="form-checkbox">
-                <span class="ml-2 px2">{{ __('messages.make') }} @if($type === 'complaint') {{ __('messages.complaint') }} @else {{ __('messages.suggestion') }} @endif {{ __('messages.public') }}</span>
+                <span class="ml-2 px2 px-2">{{ __('messages.make') }} @if($type === 'complaint') {{ __('messages.complaint') }} @else {{ __('messages.suggestion') }} @endif {{ __('messages.public') }}</span>
             </label>
         </div>
 
