@@ -41,18 +41,19 @@ Whether you’re a seller or a buyer, we provide everything you need in one plac
 `git clone https://github.com/Amnahsaad95/DreamCars.git`
 `cd DreamCars`
 
-2. Install Dependencies
-
-`composer install`
-
-3. Environment Configuration
+2. Environment Configuration
 
 `cp .env.example .env`
-`php artisan key:generate`
 
 Update .env file with your database information.
 
-4. Database Migration
+3. Install Dependencies
+
+`composer install`
+
+4. `php artisan key:generate`
+
+5. Database Migration
 
 `php artisan migrate`
 
@@ -60,7 +61,7 @@ Seed Dummy Data:
 
 `php artisan db:seed`
 
-5. Storage
+6. Storage
 
 After cloning the project and setting up, you need to create a symbolic link to access uploaded files.
 
@@ -68,7 +69,7 @@ Run the following command in your terminal:
 
 `php artisan storage:link`
 
-6. Run the Project
+7. Run the Project
 
 `php artisan serve`
 
@@ -76,7 +77,7 @@ Visit the website:
 
 `http://localhost:8000`
 
-7. For Login as Admin
+8. For Login as Admin
 
 Email `admin@dreamcar.com`
 Password `password123`
