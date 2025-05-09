@@ -89,8 +89,8 @@
 				@elseif($filter === 'isSold')
 					<select wire:model.live.debounce.300ms="activeFilters.{{ $filter }}"  class="text-sm border rounded focus:outline-none focus:border-blue-500 px-1 py-1 mr-1">
                         <option value="" selected disabled>Choose Option</option>
-						<option value="0">__('dashboard.available') </option>
-                        <option value="1">__('dashboard.sold')</option>
+						<option value="0">{{__('dashboard.available')}} </option>
+                        <option value="1">{{__('dashboard.sold')}}</option>
                     </select>
                 @else
                     <input type="{{ $filter === 'car_Year' ? 'number' : ($filter === 'color' ? 'color' :'text' )}}" 
